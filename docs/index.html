@@ -7,75 +7,113 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <div class="hero-card">
-        <h1 class="hero-title">KuranguPedalFC.ai</h1>
-        <p class="hero-subtitle">Your fantasy football buddy for squad picks, captain calls, and weekly decisions.</p>
-        <div class="pills">
-          <span class="pill">Planner</span>
-          <span class="pill">Medical Review</span>
-          <span class="pill">Fixture Review</span>
-          <span class="pill">Scout Review</span>
-          <span class="pill">Final Review</span>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">⚽</div>
+        <div>
+          <div class="brand-name">KuranguPedalFC.ai</div>
+          <div class="brand-sub">AI-Powered FPL Manager</div>
         </div>
       </div>
 
-      <div class="hero-side">
-        <div class="card side-card">
-          <h3>Next best move</h3>
-          <p>Hold transfer this week. Reassess after fresh updates.</p>
-        </div>
-        <div class="card side-card">
-          <h3>Status</h3>
-          <p>Planner: Ready<br>Medical: Ready<br>Fixture: Ready<br>Scout: Ready</p>
-        </div>
-      </div>
-    </div>
+      <nav class="nav">
+        <a class="nav-item active">Dashboard</a>
+        <a class="nav-item">My Squad</a>
+        <a class="nav-item">Weekly Plan</a>
+        <a class="nav-item">Insights</a>
+        <a class="nav-item">History</a>
+        <a class="nav-item">Settings</a>
+      </nav>
 
-    <div class="kpis" id="kpis"></div>
+      <div class="gw-pill">Gameweek 1</div>
+    </header>
 
-    <div class="grid-2">
-      <div class="card">
-        <div class="section-title">
+    <div class="content-grid">
+      <aside class="left-rail">
+        <section class="panel overview">
+          <h2>Team Overview</h2>
+          <div class="overview-list">
+            <div><span>Team Value</span><strong id="teamValue">£88.0m</strong></div>
+            <div><span>Bank</span><strong id="bankValue">£12.0m</strong></div>
+            <div><span>Free Transfers</span><strong>1</strong></div>
+            <div><span>Rank</span><strong id="rankValue">-</strong></div>
+          </div>
+        </section>
+
+        <section class="panel mini-card">
+          <h3>Captain</h3>
+          <div class="big-name" id="captainName">Thiago</div>
+          <div class="subtext" id="captainMeta">Brentford • FWD</div>
+          <div class="badge-circle">C</div>
+        </section>
+
+        <section class="panel mini-card">
+          <h3>Vice Captain</h3>
+          <div class="big-name" id="viceCaptainName">Guéhi</div>
+          <div class="subtext" id="viceCaptainMeta">Crystal Palace • DEF</div>
+          <div class="badge-circle">VC</div>
+        </section>
+
+        <section class="panel notes">
           <h2>Weekly Notes</h2>
-          <span class="section-badge">From services</span>
-        </div>
-        <div id="insights"></div>
-      </div>
+          <div id="notesList" class="notes-list"></div>
+        </section>
+      </aside>
 
-      <div class="card">
-        <div class="section-title">
-          <h2>Dream Team</h2>
-          <span class="section-badge">Gameweek view</span>
-        </div>
-        <div id="squad" class="squad-grid"></div>
-      </div>
-    </div>
+      <main class="center-col">
+        <section class="panel pitch-panel">
+          <div class="section-head">
+            <div>
+              <h1>Your Gameweek 1 Squad</h1>
+              <span class="formation-pill">3-4-3</span>
+            </div>
+          </div>
 
-    <div class="grid-2">
-      <div class="card">
-        <div class="section-title">
-          <h2>Why these picks?</h2>
-          <span class="section-badge">Planner + Final Review</span>
-        </div>
-        <div id="reasoning"></div>
-      </div>
+          <div class="pitch" id="pitchArea"></div>
+        </section>
 
-      <div class="card">
-        <div class="section-title">
-          <h2>Architecture</h2>
-          <span class="section-badge">How it works</span>
-        </div>
-        <div class="arch">
-          <div class="arch-step">1. User asks for a squad or transfer decision</div>
-          <div class="arch-step">2. Planner breaks the request into football tasks</div>
-          <div class="arch-step">3. Medical, Fixture, Scout, and News services gather evidence</div>
-          <div class="arch-step">4. Final Review checks whether the recommendation makes sense</div>
-          <div class="arch-step">5. The result is written to dashboard.json</div>
-          <div class="arch-step">6. The website reads dashboard.json and displays the result</div>
-        </div>
-      </div>
+        <section class="panel subs-panel">
+          <h2>Substitutes</h2>
+          <div class="subs-row" id="subsRow"></div>
+        </section>
+      </main>
+
+      <aside class="right-rail">
+        <section class="panel move-panel">
+          <div class="panel-icon">✈</div>
+          <h2>Next Best Move</h2>
+          <p id="nextMoveText">Hold transfer this week. Reassess after fresh updates and press conferences.</p>
+        </section>
+
+        <section class="panel status-panel">
+          <h2>Team Status</h2>
+          <div class="status-list" id="statusList"></div>
+        </section>
+
+        <section class="panel why-panel">
+          <div class="section-head small">
+            <h2>Why these picks?</h2>
+            <span class="view-details">View Details</span>
+          </div>
+          <div id="reasoningList" class="reasoning-list"></div>
+        </section>
+
+        <section class="panel architecture-panel">
+          <div class="section-head small">
+            <h2>Architecture</h2>
+            <span class="view-details">How it works</span>
+          </div>
+          <div class="arch-list">
+            <div>1. User asks for a squad or transfer decision</div>
+            <div>2. Planner breaks the request into tasks</div>
+            <div>3. Medical, Fixture, Scout, News gather evidence</div>
+            <div>4. Final Review checks the recommendation</div>
+            <div>5. Result written to dashboard.json</div>
+            <div>6. Website reads dashboard.json and displays it</div>
+          </div>
+        </section>
+      </aside>
     </div>
   </div>
 
