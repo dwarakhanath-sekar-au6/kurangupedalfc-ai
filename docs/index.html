@@ -21,7 +21,7 @@
         <a class="nav-item active">Dashboard</a>
         <a class="nav-item">My Squad</a>
         <a class="nav-item">Match Plan</a>
-        <a class="nav-item">Insights</a>
+        <a class="nav-item">Notes</a>
         <a class="nav-item">History</a>
         <a class="nav-item">Settings</a>
       </nav>
@@ -36,6 +36,7 @@
       <aside class="left-rail">
         <section class="panel overview">
           <h2>Team Overview</h2>
+          <div class="panel-subtext">Budget, bank, and squad status at a glance.</div>
           <div class="overview-list">
             <div><span>Team Value</span><strong id="teamValue">£88.0m</strong></div>
             <div><span>Bank</span><strong id="bankValue">£12.0m</strong></div>
@@ -60,6 +61,7 @@
 
         <section class="panel notes">
           <h2>Match Notes</h2>
+          <div class="panel-subtext">What changed and why it matters.</div>
           <div id="notesList" class="notes-list"></div>
         </section>
       </aside>
@@ -72,12 +74,13 @@
               <span class="formation-pill">3-4-3</span>
             </div>
           </div>
-
+          <div class="panel-subtext pitch-caption">Balanced setup with the strongest starters in front of the bench.</div>
           <div class="pitch" id="pitchArea"></div>
         </section>
 
         <section class="panel subs-panel">
           <h2>Substitutes</h2>
+          <div class="panel-subtext">Bench order and cover options.</div>
           <div class="subs-row" id="subsRow"></div>
         </section>
       </main>
@@ -86,19 +89,22 @@
         <section class="panel move-panel">
           <div class="panel-icon">✈</div>
           <h2>Next Best Move</h2>
+          <div class="panel-subtext">The immediate call for this week.</div>
           <p id="nextMoveText">Hold transfer this week. Reassess after fresh updates and press conferences.</p>
         </section>
 
         <section class="panel status-panel">
           <h2>Team Status</h2>
+          <div class="panel-subtext">Checks that fed the final call.</div>
           <div class="status-list" id="statusList"></div>
         </section>
 
         <section class="panel why-panel">
           <div class="section-head small">
             <h2>Why this squad?</h2>
-            <span class="view-details">View Details</span>
+            <span class="view-details">View details</span>
           </div>
+          <div class="panel-subtext">Budget use, strength, and the thinking behind the picks.</div>
           <div id="reasoningList" class="reasoning-list"></div>
         </section>
 
@@ -107,10 +113,11 @@
             <h2>How it works</h2>
             <span class="view-details">Weekly flow</span>
           </div>
+          <div class="panel-subtext">The behind-the-scenes path from request to squad.</div>
           <div class="arch-list">
             <div>1. You ask for a squad or transfer decision</div>
             <div>2. The planner breaks the request into football tasks</div>
-            <div>3. Fitness, fixtures, form and news are checked</div>
+            <div>3. Fitness, fixtures, form, and news are checked</div>
             <div>4. Final review checks the recommendation</div>
             <div>5. The result is written to dashboard.json</div>
             <div>6. The website reads dashboard.json and displays it</div>
