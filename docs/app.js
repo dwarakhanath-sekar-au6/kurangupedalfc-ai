@@ -1,19 +1,52 @@
 fetch('dashboard.json')
   .then(res => res.json())
   .then(data => {
-    document.getElementById('kpis').innerHTML = `
-      <div class="grid">
-        <div class="card">Gameweek: ${data.gameweek}</div>
-        <div class="card">Team Value: ${data.team_value}</div>
-        <div class="card">Rank: ${data.rank}</div>
+    const kpis = document.getElementById('kpis');
+
+    kpis.innerHTML = `
+      <div class="card kpi">
+        <div class="label">Gameweek</div>
+        <div class="value">${data.gameweek}</div>
+        <div class="sub">Auto-refresh on Tuesday night</div>
+      </div>
+      <div class="card kpi">
+        <div class="label">Team Value</div>
+        <div class="value">${data.team_value}</div>
+        <div class="sub">Current squad valuation</div>
+      </div>
+      <div class="card kpi">
+        <div class="label">Rank</div>
+        <div class="value">${data.rank}</div>
+        <div class="sub">Overall ranking snapshot</div>
+      </div>
+      <div class="card kpi">
+        <div class="label">Top Captain Pick</div>
+        <div class="value">${data.squad.sort((a, b) => b.score - a.score)[0].name}</div>
+        <div class="sub">Highest confidence recommendation</div>
       </div>
     `;
 
     document.getElementById('insights').innerHTML = data.insights
-      .map(i => `<div class="card"><b>${i.title}</b><br>${i.text}</div>`)
+      .map(i => `
+        <div class="insight">
+          <strong>${i.title}</strong>
+          <div>${i.text}</div>
+        </div>
+      `)
       .join('');
 
     document.getElementById('squad').innerHTML = data.squad
-      .map(p => `<div class="card">${p.name} - ${p.team} - ${p.position} - ${p.score}</div>`)
+      .sort((a, b) => b.score - a.score)
+      .map(p => `
+        <div class="player">
+          <div class="name">${p.name}</div>
+          <div class="meta">${p.team} • ${p.position}</div>
+          <div class="score">AI score: ${p.score.toFixed(2)}</div>
+        </div>
+      `)
       .join('');
+  })
+  .catch(err => {
+    console.error(err);
+    document.body.innerHTML = '<div style="padding:40px;color:white;font-family:Arial">Failed to load dashboard.json</div>';
   });
