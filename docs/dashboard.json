@@ -1,38 +1,146 @@
 {
-  "gameweek": 29,
-  "team_value": "£101.2m",
+  "gameweek": 1,
+  "team_value": "\u00a3101.2m",
   "rank": "12,345",
+  "plan": {
+    "goal": "Recommend my best FPL move for this week",
+    "tasks": [
+      "Check injuries and doubts",
+      "Check fixtures and form",
+      "Check recent news",
+      "Check transfer options",
+      "Judge final recommendation"
+    ]
+  },
   "insights": [
-    {
-      "title": "Transfer Alert",
-      "text": "Salah has a doubt flag. Consider a safe bench or backup captain."
-    },
     {
       "title": "Injury Update",
       "text": "Trippier is out for 2 weeks. Keep him on the watchlist."
+    },
+    {
+      "title": "Doubt Flag",
+      "text": "Salah has a doubt flag. Consider a safe bench or backup captain."
     },
     {
       "title": "Hot Form",
       "text": "Watkins has 5 goals in the last 4 matches."
     },
     {
-      "title": "Chip Suggestion",
+      "title": "Fixture Alert",
+      "text": "Best fixture run appears for GW31 to GW32."
+    },
+    {
+      "title": "Press Room",
+      "text": "Watkins has strong momentum after scoring in consecutive matches."
+    },
+    {
+      "title": "News Feed",
+      "text": "One key fixture swing is expected next week for attacking assets."
+    },
+    {
+      "title": "Transfer Alert",
+      "text": "A safe move is to hold and reassess after press conferences."
+    },
+    {
+      "title": "Wildcard Window",
       "text": "Best time for a Wildcard appears to be GW32."
     }
   ],
+  "judge": {
+    "verdict": "High confidence",
+    "action": "Proceed with safe transfer and captain plan."
+  },
   "squad": [
-    { "name": "Martinez", "team": "AVL", "position": "GK", "score": 0.63 },
-    { "name": "Mings", "team": "AVL", "position": "DEF", "score": 0.61 },
-    { "name": "Cresswell", "team": "WHU", "position": "DEF", "score": 0.57 },
-    { "name": "Diop", "team": "FUL", "position": "DEF", "score": 0.45 },
-    { "name": "Targett", "team": "NEW", "position": "DEF", "score": 0.45 },
-    { "name": "Bale", "team": "TOT", "position": "MID", "score": 0.70 },
-    { "name": "Aubameyang", "team": "ARS", "position": "MID", "score": 0.68 },
-    { "name": "Son", "team": "TOT", "position": "MID", "score": 0.59 },
-    { "name": "Soucek", "team": "WHU", "position": "MID", "score": 0.57 },
-    { "name": "Lingard", "team": "WHU", "position": "MID", "score": 0.57 },
-    { "name": "Kane", "team": "TOT", "position": "FWD", "score": 0.81 },
-    { "name": "Watkins", "team": "AVL", "position": "FWD", "score": 0.75 },
-    { "name": "Antonio", "team": "WHU", "position": "FWD", "score": 0.70 }
+    {
+      "name": "Martinez",
+      "team": "AVL",
+      "position": "GK",
+      "score": 0.63,
+      "shirt": "#7a1f4e"
+    },
+    {
+      "name": "Mings",
+      "team": "AVL",
+      "position": "DEF",
+      "score": 0.61,
+      "shirt": "#7a1f4e"
+    },
+    {
+      "name": "Cresswell",
+      "team": "WHU",
+      "position": "DEF",
+      "score": 0.57,
+      "shirt": "#8b1e3f"
+    },
+    {
+      "name": "Diop",
+      "team": "FUL",
+      "position": "DEF",
+      "score": 0.45,
+      "shirt": "#f5f5f5"
+    },
+    {
+      "name": "Targett",
+      "team": "NEW",
+      "position": "DEF",
+      "score": 0.45,
+      "shirt": "#0b5cb8"
+    },
+    {
+      "name": "Bale",
+      "team": "TOT",
+      "position": "MID",
+      "score": 0.7,
+      "shirt": "#f5f5f5"
+    },
+    {
+      "name": "Aubameyang",
+      "team": "ARS",
+      "position": "MID",
+      "score": 0.68,
+      "shirt": "#d61f26"
+    },
+    {
+      "name": "Son",
+      "team": "TOT",
+      "position": "MID",
+      "score": 0.59,
+      "shirt": "#f5f5f5"
+    },
+    {
+      "name": "Soucek",
+      "team": "WHU",
+      "position": "MID",
+      "score": 0.57,
+      "shirt": "#8b1e3f"
+    },
+    {
+      "name": "Lingard",
+      "team": "WHU",
+      "position": "MID",
+      "score": 0.57,
+      "shirt": "#8b1e3f"
+    },
+    {
+      "name": "Kane",
+      "team": "TOT",
+      "position": "FWD",
+      "score": 0.81,
+      "shirt": "#f5f5f5"
+    },
+    {
+      "name": "Watkins",
+      "team": "AVL",
+      "position": "FWD",
+      "score": 0.75,
+      "shirt": "#7a1f4e"
+    },
+    {
+      "name": "Antonio",
+      "team": "WHU",
+      "position": "FWD",
+      "score": 0.7,
+      "shirt": "#8b1e3f"
+    }
   ]
 }
