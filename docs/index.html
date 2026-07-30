@@ -13,20 +13,23 @@
         <div class="logo">⚽</div>
         <div>
           <div class="brand-name">KuranguPedalFC.ai</div>
-          <div class="brand-sub">AI-Powered FPL Manager</div>
+          <div class="brand-sub">Fantasy Premier League Manager</div>
         </div>
       </div>
 
       <nav class="nav">
         <a class="nav-item active">Dashboard</a>
         <a class="nav-item">My Squad</a>
-        <a class="nav-item">Weekly Plan</a>
+        <a class="nav-item">Match Plan</a>
         <a class="nav-item">Insights</a>
         <a class="nav-item">History</a>
         <a class="nav-item">Settings</a>
       </nav>
 
-      <div class="gw-pill">Gameweek 1</div>
+      <div class="top-right">
+        <div class="gw-pill">Gameweek 1</div>
+        <div class="updated" id="updatedText">Last updated: just now</div>
+      </div>
     </header>
 
     <div class="content-grid">
@@ -56,7 +59,7 @@
         </section>
 
         <section class="panel notes">
-          <h2>Weekly Notes</h2>
+          <h2>Match Notes</h2>
           <div id="notesList" class="notes-list"></div>
         </section>
       </aside>
@@ -93,7 +96,7 @@
 
         <section class="panel why-panel">
           <div class="section-head small">
-            <h2>Why these picks?</h2>
+            <h2>Why this squad?</h2>
             <span class="view-details">View Details</span>
           </div>
           <div id="reasoningList" class="reasoning-list"></div>
@@ -101,16 +104,16 @@
 
         <section class="panel architecture-panel">
           <div class="section-head small">
-            <h2>Architecture</h2>
-            <span class="view-details">How it works</span>
+            <h2>How it works</h2>
+            <span class="view-details">Weekly flow</span>
           </div>
           <div class="arch-list">
-            <div>1. User asks for a squad or transfer decision</div>
-            <div>2. Planner breaks the request into tasks</div>
-            <div>3. Medical, Fixture, Scout, News gather evidence</div>
-            <div>4. Final Review checks the recommendation</div>
-            <div>5. Result written to dashboard.json</div>
-            <div>6. Website reads dashboard.json and displays it</div>
+            <div>1. You ask for a squad or transfer decision</div>
+            <div>2. The planner breaks the request into football tasks</div>
+            <div>3. Fitness, fixtures, form and news are checked</div>
+            <div>4. Final review checks the recommendation</div>
+            <div>5. The result is written to dashboard.json</div>
+            <div>6. The website reads dashboard.json and displays it</div>
           </div>
         </section>
       </aside>
