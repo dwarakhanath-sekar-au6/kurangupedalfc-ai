@@ -4,37 +4,83 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KuranguPedalFC.ai</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; background:#0f172a; color:#e2e8f0; }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 32px; }
-    .card { background:#1e293b; border:1px solid #334155; border-radius:16px; padding:20px; margin:16px 0; }
-    .grid { display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    h1 { margin: 0 0 8px; }
-    .muted { color:#94a3b8; }
-    .pill { display:inline-block; padding:6px 10px; border-radius:999px; background:#4f46e5; color:white; font-size:12px; margin-right:8px; }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="wrap">
-    <h1>KuranguPedalFC.ai</h1>
-    <p class="muted">Your fantasy football AI manager</p>
+    <div class="hero">
+      <div class="hero-card">
+        <h1 class="hero-title">KuranguPedalFC.ai</h1>
+        <p class="hero-subtitle">Your fantasy football AI manager powered by agents, memory, RAG, and judge logic.</p>
+        <div class="pills">
+          <span class="pill">Planner Agent</span>
+          <span class="pill">Injury Agent</span>
+          <span class="pill">News Agent</span>
+          <span class="pill">Transfer Agent</span>
+          <span class="pill">Judge Agent</span>
+        </div>
+      </div>
 
-    <div>
-      <span class="pill">Planner Agent</span>
-      <span class="pill">Injury Agent</span>
-      <span class="pill">Judge Agent</span>
+      <div class="hero-side">
+        <div class="card side-card">
+          <h3>Next best move</h3>
+          <p>Hold transfer this week. Reassess after press conferences.</p>
+        </div>
+        <div class="card side-card">
+          <h3>Agent status</h3>
+          <p>Planner: Active<br>Injury: Active<br>Transfer: Active<br>Judge: Active</p>
+        </div>
+      </div>
     </div>
 
-    <div class="grid" id="kpis"></div>
+    <div class="kpis" id="kpis"></div>
 
-    <div class="card">
-      <h2>AI Insights</h2>
-      <div id="insights"></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="section-title">
+          <h2>AI Insights</h2>
+          <span class="section-badge">Reasoned by agents</span>
+        </div>
+        <div id="insights"></div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">
+          <h2>Dream Team</h2>
+          <span class="section-badge">Gameweek 29</span>
+        </div>
+        <div id="squad" class="squad-grid"></div>
+      </div>
     </div>
 
-    <div class="card">
-      <h2>Dream Team</h2>
-      <div id="squad"></div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="section-title">
+          <h2>Agent Architecture</h2>
+          <span class="section-badge">How it works</span>
+        </div>
+        <div class="arch">
+          <div class="arch-step">1. User asks for a transfer or captain recommendation</div>
+          <div class="arch-step">2. Planner Agent breaks the goal into subtasks</div>
+          <div class="arch-step">3. Injury / News / Fixture Agents gather evidence</div>
+          <div class="arch-step">4. Judge Agent checks consistency and safety</div>
+          <div class="arch-step">5. Human-in-the-loop approves critical actions later</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-title">
+          <h2>Why this is useful</h2>
+          <span class="section-badge">TED ready</span>
+        </div>
+        <p class="small">
+          This MVP demonstrates the core ideas behind modern AI systems: tokens, embeddings, RAG, planning,
+          judge agents, memory, tool calling, and multi-agent orchestration.
+        </p>
+        <div class="footer-note">
+          Tuesday night refresh will update the dashboard automatically.
+        </div>
+      </div>
     </div>
   </div>
 
