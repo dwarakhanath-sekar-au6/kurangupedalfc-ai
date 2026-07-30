@@ -120,58 +120,69 @@ fetch('./dashboard.json', { cache: 'no-store' })
     const currentGw = metadata.gameweek || 1;
     const formation = recommendation.formation || `${starting.filter(p => p.position === 'DEF').length}-${starting.filter(p => p.position === 'MID').length}-${starting.filter(p => p.position === 'FWD').length}`;
 
-    const buildReason = (player, role = 'Start') => {
-      const exp = Math.round(num(player.expected_points, 0));
-      const ppg = num(player.ppg, 0);
-      const price = num(player.price, 0);
-      const ownership = num(player.ownership, 0);
-      const points = num(player.points, 0);
-      const minutes = num(player.minutes, 0);
-      const starts = num(player.starts, 0);
+    const shortReason = (player, role = 'Start') => {
+      const pos = String(player.position || '').toUpperCase();
+      const own = num(player.ownership, 0);
       const goals = num(player.goals, 0);
       const assists = num(player.assists, 0);
-      const cleans = num(player.clean_sheets, 0);
-      const med = String(player.medical || '').toLowerCase();
-      const pos = player.position;
+      const cs = num(player.clean_sheets, 0);
+      const ppg = num(player.ppg, 0);
+      const price = num(player.price, 0);
+      const exp = Math.round(num(player.expected_points, 0));
 
-      if (role === 'Captain') {
-        return `Chosen for the armband because he gives the best weekly upside in this XI. He has the clearest path to a big return, and the rest of the squad can still stay balanced around him.`;
-      }
-
-      if (role === 'Vice captain') {
-        return `Chosen as the fallback captain because he is dependable, involved enough every week, and still gives a strong return if the main captain does not start.`;
-      }
-
-      if (role === 'Bench') {
-        return `Bench cover only. Useful depth if needed, but the starting XI has the stronger weekly point options.`;
-      }
+      if (role === 'Captain') return 'Best captain option • Highest weekly upside';
+      if (role === 'Vice captain') return 'Reliable fallback • Safe captain cover';
+      if (role === 'Bench') return 'Squad depth • Rotation cover';
 
       if (pos === 'GK') {
-        return `I kept him in goal because he is the cleanest balance of price and reliability for this squad. ${points} total points, ${minutes} minutes played, and enough stability to avoid wasting budget.`;
+        const parts = [];
+        parts.push('Safe goalkeeping slot');
+        if (num(player.points, 0)) parts.push(`${Math.round(num(player.points, 0))} points`);
+        if (num(player.starts, 0)) parts.push(`${Math.round(num(player.starts, 0))} starts`);
+        return parts.slice(0, 3).join(' • ');
       }
 
       if (pos === 'DEF') {
-        return `I picked him in defence because he gives real weekly output from a slot that also protects the structure of the team. ${points} total points, ${cleans} clean sheets, ${starts} starts, and enough value to justify the place.`;
+        const parts = [];
+        if (cs >= 12) parts.push('Clean-sheet threat');
+        if (goals >= 2) parts.push('Set-piece threat');
+        if (own >= 20) parts.push('Trusted pick');
+        if (price <= 6) parts.push('Strong value');
+        if (!parts.length) parts.push('Defensive value');
+        return parts.slice(0, 3).join(' • ');
       }
 
       if (pos === 'MID') {
-        return `I picked him in midfield because he adds steady weekly returns and keeps the squad balanced. ${points} total points, ${ppg.toFixed(1)} points per game, ${starts} starts, and enough involvement to matter every week.`;
+        const parts = [];
+        if (goals >= 8) parts.push('Goal involvement');
+        if (assists >= 6) parts.push('Creative outlet');
+        if (ppg >= 5) parts.push('Consistent returns');
+        if (own >= 25) parts.push('Highly owned');
+        if (!parts.length) parts.push('Midfield output');
+        return parts.slice(0, 3).join(' • ');
       }
 
       if (pos === 'FWD') {
-        return `I picked him up front because he is the clearest goal threat in this price bracket for this team. ${goals} goals, ${assists} assists, ${points} total points, and the minutes to keep threatening every week.`;
+        const parts = [];
+        if (goals >= 12) parts.push('Proven scorer');
+        if (goals >= 6) parts.push('Goal threat');
+        if (ppg >= 5) parts.push('Consistent returns');
+        if (price <= 8) parts.push('Strong value');
+        if (!parts.length) parts.push('Forward threat');
+        return parts.slice(0, 3).join(' • ');
       }
 
-      const details = [];
-      if (exp >= 8) details.push(`the weekly projection is strong at ${exp} points`);
-      else if (exp >= 6) details.push(`the weekly projection is solid at ${exp} points`);
-      if (ownership >= 20) details.push(`he is backed by ${ownership.toFixed(1)}% of managers`);
-      else if (ownership <= 10) details.push('he gives you some differential upside');
-      if (price <= 6.0) details.push(`the price stays tidy at £${price.toFixed(1)}m`);
-      else if (price >= 8.0) details.push(`the price is premium, so the output has to earn it`);
-      if (med === 'available') details.push('he is available');
-      else if (med === 'doubtful') details.push('fitness needs a closer look');
-      return details.length ? details.slice(0, 2).join('. ') + '.' : 'He fits the squad balance well.';
+      if (exp >= 8) return `Projected ${exp} points • Strong weekly output`;
+      if (exp >= 6) return `Projected ${exp} points • Solid weekly output`;
+      return 'Balanced pick';
+    };
+
+    const displayReason = (player, role = 'Start') => {
+      const raw = String(player.reason || '').trim();
+      if (!raw) return shortReason(player, role);
+      if (raw.length > 95) return shortReason(player, role);
+      if (/because/i.test(raw)) return shortReason(player, role);
+      return raw;
     };
 
     const getLayout = (form) => {
@@ -248,12 +259,12 @@ fetch('./dashboard.json', { cache: 'no-store' })
               <div class="report-name">${esc(player.player)}</div>
               <div class="report-meta">${esc(player.team)} &middot; ${esc(player.position)}${isBench ? ' &middot; Squad depth' : ''}</div>
             </div>
-            <div class="report-price">${'£'}${num(player.price, 0).toFixed(1)}m</div>
+            <div class="report-price">£${num(player.price, 0).toFixed(1)}m</div>
           </div>
 
           ${roleChip}
           <div class="expected-points">Projected points ${Math.round(num(player.expected_points, 0))}</div>
-          <div class="report-reason">${esc(player.reason || buildReason(player, rec))}</div>
+          <div class="report-reason">${esc(displayReason(player, rec))}</div>
 
           <div class="report-tags">${tags.join('')}</div>
         </article>
@@ -266,80 +277,11 @@ fetch('./dashboard.json', { cache: 'no-store' })
         <div>
           <div style="font-weight:800;">${esc(player.player)}</div>
           <div class="meta">${esc(player.team)} &middot; ${esc(player.position)}${isBench ? ' &middot; Bench' : ''}</div>
-          <div class="meta">${esc(player.reason || buildReason(player, player.recommendation))}</div>
+          <div class="meta">${esc(displayReason(player, player.recommendation))}</div>
         </div>
         <div class="pts">Pts ${Math.round(num(player.expected_points, 0))}</div>
       </div>
     `;
-
-    const renderMobilePanel = () => {
-      const mobilePanelEl = document.getElementById('mobileSquadPanel');
-      if (!mobilePanelEl) return;
-
-      const whySummary = managerNotes.summary || `This is a ${formation} built around the best weekly return options, with captaincy on the strongest attacking pick and a bench that stays usable.`;
-      const whyBullets = (managerNotes.bullets && managerNotes.bullets.length)
-        ? managerNotes.bullets
-        : [
-            `${'£'}${squadValue.toFixed(1)}m spent, ${'£'}${bankValue.toFixed(1)}m left.`,
-            `Formation: ${formation}.`,
-            `Captain: ${captainName}. Vice captain: ${viceCaptainName}.`
-          ];
-
-      const mobileSnapshotCards = [
-        { label: 'Team Value', value: teamValueText, sub: 'Current squad spend' },
-        { label: 'Bank', value: `${'£'}${bankValue.toFixed(1)}m`, sub: 'Available for transfers' },
-        { label: 'Formation', value: formation, sub: 'Best shape for this squad' },
-        { label: 'Verdict', value: text(judge.verdict, 'High confidence'), sub: `Confidence: ${text(judge.confidence, 'High')}` }
-      ];
-
-      mobilePanelEl.innerHTML = `
-        <div class="mobile-stack">
-          <div class="mobile-card">
-            <h2>Next Best Move</h2>
-            <p>${esc(text(judge.final_call, `Captain ${captainName} and keep ${viceCaptainName} as vice captain.`))}</p>
-          </div>
-
-          <div class="mobile-card">
-            <h2>Why this squad works</h2>
-            <p>${esc(whySummary)}</p>
-            <ul class="check-list" style="margin-top:12px;">${whyBullets.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
-          </div>
-
-          <div class="mobile-card">
-            <h2>Team Snapshot</h2>
-            <div class="mobile-snapshot-grid">
-              ${mobileSnapshotCards.map(card => `
-                <div class="metric-card">
-                  <div class="metric-label">${esc(card.label)}</div>
-                  <div class="metric-value">${esc(card.value)}</div>
-                  <div class="metric-sub">${esc(card.sub)}</div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-
-          <div class="mobile-card">
-            <h2>Captain</h2>
-            <div class="mobile-player-list">${renderMobilePlayer(normalizePlayer(captain), false)}</div>
-          </div>
-
-          <div class="mobile-card">
-            <h2>Vice Captain</h2>
-            <div class="mobile-player-list">${renderMobilePlayer(normalizePlayer(viceCaptain), false)}</div>
-          </div>
-
-          <div class="mobile-card">
-            <h2>Starting XI</h2>
-            <div class="mobile-player-list">${starting.map(p => renderMobilePlayer(p, false)).join('')}</div>
-          </div>
-
-          <div class="mobile-card">
-            <h2>Bench</h2>
-            <div class="mobile-player-list">${bench.map(p => renderMobilePlayer(p, true)).join('')}</div>
-          </div>
-        </div>
-      `;
-    };
 
     const startingXIEl = document.getElementById('startingReports');
     const benchEl = document.getElementById('benchReports');
@@ -348,11 +290,12 @@ fetch('./dashboard.json', { cache: 'no-store' })
     const whySummaryEl = document.getElementById('whySummary');
     const whyBulletsEl = document.getElementById('whyBullets');
     const snapshotGridEl = document.getElementById('snapshotGrid');
+    const mobilePanelEl = document.getElementById('mobileSquadPanel');
 
     document.getElementById('gwPill').textContent = `Gameweek ${currentGw}`;
     document.getElementById('updatedText').textContent = `Last updated: ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
     document.getElementById('teamValue').textContent = teamValueText;
-    document.getElementById('bankValue').textContent = `${'£'}${bankValue.toFixed(1)}m`;
+    document.getElementById('bankValue').textContent = `£${bankValue.toFixed(1)}m`;
     document.getElementById('rankValue').textContent = metadata.rank || '-';
 
     document.getElementById('captainName').textContent = captainName;
@@ -375,7 +318,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
     const whyBullets = (managerNotes.bullets && managerNotes.bullets.length)
       ? managerNotes.bullets
       : [
-          `${'£'}${squadValue.toFixed(1)}m spent, ${'£'}${bankValue.toFixed(1)}m left.`,
+          `£${squadValue.toFixed(1)}m spent, £${bankValue.toFixed(1)}m left.`,
           `Formation: ${formationLabel}.`,
           `Captain: ${captainName}. Vice captain: ${viceCaptainName}.`
         ];
@@ -385,7 +328,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
 
     const snapshotCards = [
       { label: 'Team Value', value: teamValueText, sub: 'Current squad spend' },
-      { label: 'Bank', value: `${'£'}${bankValue.toFixed(1)}m`, sub: 'Available for transfers' },
+      { label: 'Bank', value: `£${bankValue.toFixed(1)}m`, sub: 'Available for transfers' },
       { label: 'Formation', value: formationLabel, sub: 'Best shape for this squad' },
       { label: 'Verdict', value: judgeVerdict, sub: `Confidence: ${judgeConfidence}` }
     ];
@@ -434,7 +377,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
             <div class="pitch-card">
               <div class="pitch-name">${esc(player.player)}</div>
               <div class="pitch-meta">${esc(player.team)} &middot; ${esc(player.position)}</div>
-              <div class="pitch-price">${'£'}${num(player.price, 0).toFixed(1)}m</div>
+              <div class="pitch-price">£${num(player.price, 0).toFixed(1)}m</div>
               <div class="pitch-exp">Exp. pts ${Math.round(num(player.expected_points, 0))}</div>
             </div>
           </div>
@@ -448,7 +391,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
           ${renderShirt(player, false, false)}
           <div class="pitch-name">${esc(player.player)}</div>
           <div class="pitch-meta">${esc(player.team)} &middot; ${esc(player.position)}</div>
-          <div class="pitch-price">${'£'}${num(player.price, 0).toFixed(1)}m</div>
+          <div class="pitch-price">£${num(player.price, 0).toFixed(1)}m</div>
           <div class="pitch-exp">Exp. pts ${Math.round(num(player.expected_points, 0))}</div>
           <div class="subtext">${idx + 1}. Squad depth</div>
         </div>
@@ -458,7 +401,57 @@ fetch('./dashboard.json', { cache: 'no-store' })
     if (startingXIEl) startingXIEl.innerHTML = starting.map(p => renderReportCard(p, false)).join('');
     if (benchEl) benchEl.innerHTML = bench.map(p => renderReportCard(p, true)).join('');
 
-    renderMobilePanel();
+    if (mobilePanelEl) {
+      mobilePanelEl.innerHTML = `
+        <div class="mobile-stack">
+          <div class="mobile-card">
+            <h2>Next Best Move</h2>
+            <p>${esc(judgeCall)}</p>
+          </div>
+
+          <div class="mobile-card">
+            <h2>Why this squad works</h2>
+            <p>${esc(whySummary)}</p>
+            <ul class="check-list" style="margin-top:12px;">
+              ${whyBullets.map(x => `<li>${esc(x)}</li>`).join('')}
+            </ul>
+          </div>
+
+          <div class="mobile-card">
+            <h2>Team Snapshot</h2>
+            <div class="mobile-snapshot-grid">
+              ${snapshotCards.map(card => `
+                <div class="metric-card">
+                  <div class="metric-label">${esc(card.label)}</div>
+                  <div class="metric-value">${esc(card.value)}</div>
+                  <div class="metric-sub">${esc(card.sub)}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="mobile-card">
+            <h2>Captain</h2>
+            <div class="mobile-player-list">${renderMobilePlayer(normalizePlayer(captain), false)}</div>
+          </div>
+
+          <div class="mobile-card">
+            <h2>Vice Captain</h2>
+            <div class="mobile-player-list">${renderMobilePlayer(normalizePlayer(viceCaptain), false)}</div>
+          </div>
+
+          <div class="mobile-card">
+            <h2>Starting XI</h2>
+            <div class="mobile-player-list">${starting.map(p => renderMobilePlayer(p, false)).join('')}</div>
+          </div>
+
+          <div class="mobile-card">
+            <h2>Bench</h2>
+            <div class="mobile-player-list">${bench.map(p => renderMobilePlayer(p, true)).join('')}</div>
+          </div>
+        </div>
+      `;
+    }
   })
   .catch(err => {
     console.error(err);
