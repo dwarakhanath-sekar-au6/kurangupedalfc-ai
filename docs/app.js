@@ -32,7 +32,6 @@ fetch('./dashboard.json', { cache: 'no-store' })
       "Watford": "#FBEE23",
       "Coventry City": "#5B9BD5",
       "Ipswich": "#0053A0",
-      "Brentford": "#C62D2D",
       "BHA": "#0057B8",
       "BRE": "#E30613",
       "CRY": "#1B458F",
@@ -41,7 +40,10 @@ fetch('./dashboard.json', { cache: 'no-store' })
       "CHE": "#034694",
       "NEW": "#241F20",
       "TOT": "#FFFFFF",
-      "LIV": "#C8102E"
+      "LIV": "#C8102E",
+      "FUL": "#FFFFFF",
+      "MCI": "#6CABDD",
+      "MID": "#6d4aff"
     };
 
     const noteMeta = {
@@ -141,7 +143,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
       <div class="reason-item">
         <div class="reason-icon">⭐</div>
         <div>
-          <div class="reason-title">Captain / Vice</div>
+          <div class="reason-title">Captain / vice</div>
           <div class="reason-text">${captainText}<br>${viceText}</div>
         </div>
       </div>
@@ -165,6 +167,26 @@ fetch('./dashboard.json', { cache: 'no-store' })
       FWD: [{ x: 27, y: 82 }, { x: 50, y: 82 }, { x: 73, y: 82 }]
     };
 
+    const shirtMarkup = (player, isCaptain = false, isVice = false) => {
+      const shirt = teamColors[player.team] || player.shirt || "#6d4aff";
+      return `
+        <div class="shirt-wrap">
+          <svg class="shirt-svg" viewBox="0 0 72 78" aria-hidden="true">
+            <path
+              d="M22 6h28l8 6 11 8-6 18-8-4v36H17V34l-8 4-6-18 11-8 8-6z"
+              fill="${shirt}"
+              stroke="rgba(255,255,255,0.18)"
+              stroke-width="2"
+            />
+            <path d="M28 6h16l4 8H24z" fill="rgba(255,255,255,0.16)" />
+            <path d="M27 15h18l-2 8H29z" fill="rgba(0,0,0,0.12)" />
+          </svg>
+          ${isCaptain ? '<span class="badge badge-c">C</span>' : ''}
+          ${isVice ? '<span class="badge badge-vc">VC</span>' : ''}
+        </div>
+      `;
+    };
+
     const lineup = [];
     ['GK', 'DEF', 'MID', 'FWD'].forEach(pos => {
       (groups[pos] || []).forEach((player, idx) => {
@@ -176,22 +198,12 @@ fetch('./dashboard.json', { cache: 'no-store' })
       });
     });
 
-    const shirtFor = player => {
-      if (player.shirt && player.shirt !== '#4f46e5') return player.shirt;
-      return teamColors[player.team] || '#6d4aff';
-    };
-
     document.getElementById('pitchArea').innerHTML = lineup.map(player => {
       const isCaptain = player.name === data.captain?.name;
       const isVice = player.name === data.vice_captain?.name;
-      const shirt = shirtFor(player);
-
       return `
         <div class="slot" style="left:${player.coord.x}%; top:${player.coord.y}%;">
-          <div class="shirt" style="--shirt:${shirt}">
-            ${isCaptain ? '<div class="badge badge-c">C</div>' : ''}
-            ${isVice ? '<div class="badge badge-vc">VC</div>' : ''}
-          </div>
+          ${shirtMarkup(player, isCaptain, isVice)}
           <div class="player-card">
             <div class="player-name">${player.name || 'Unknown'}</div>
             <div class="player-team">${player.team || '—'}</div>
@@ -202,10 +214,9 @@ fetch('./dashboard.json', { cache: 'no-store' })
     }).join('');
 
     document.getElementById('subsRow').innerHTML = bench.slice(0, 4).map((player, idx) => {
-      const shirt = shirtFor(player);
       return `
         <div class="sub-card">
-          <div class="shirt" style="--shirt:${shirt}"></div>
+          ${shirtMarkup(player, false, false)}
           <div class="player-name">${player.name || 'Unknown'}</div>
           <div class="player-team">${player.team || '—'}</div>
           <div class="player-price">£${Number(player.score || 0).toFixed(2)}</div>
