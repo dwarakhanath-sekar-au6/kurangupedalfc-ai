@@ -94,8 +94,8 @@ fetch('./dashboard.json', { cache: 'no-store' })
     document.getElementById('formationValue').textContent = formation;
     document.getElementById('projectedPoints').textContent = projectedTeamPoints.toString();
     document.getElementById('nextMoveText').textContent = weeklyCall;
-    document.getElementById('heroSub').textContent = `Base squad locked. Weekly advice updates only.`;
-    document.getElementById('callMeta').textContent = `Captain: ${captain.player || '—'} • Vice: ${viceCaptain.player || '—'} • No nav, no noise.`;
+    document.getElementById('heroSub').textContent = `Base squad locked for the season. Weekly advice updates only.`;
+    document.getElementById('callMeta').textContent = `Captain: ${captain.player || '—'} • Vice: ${viceCaptain.player || '—'}`;
 
     const renderShirt = (team) => {
       const colors = {
@@ -110,12 +110,9 @@ fetch('./dashboard.json', { cache: 'no-store' })
     };
 
     const shortSummary = (p) => {
-      const parts = [];
-      if (p.expected_points >= 8) parts.push(`Projected ${Math.round(p.expected_points)} pts`);
-      else if (p.expected_points >= 6) parts.push(`Projected ${Math.round(p.expected_points)} pts`);
-      else parts.push(`Projected ${Math.round(p.expected_points)} pts`);
-      if (p.summary) parts.push(p.summary);
-      return parts.join(' • ').replace(/\s+/g, ' ').trim();
+      const raw = p.summary || '';
+      if (raw) return raw;
+      return `Projected ${Math.round(p.expected_points)} pts`;
     };
 
     const getLayout = (form) => {
@@ -155,10 +152,12 @@ fetch('./dashboard.json', { cache: 'no-store' })
     };
 
     const layout = getLayout(formation);
+
     const grouped = { GK: [], DEF: [], MID: [], FWD: [] };
     starting.forEach(p => {
       if (grouped[p.position]) grouped[p.position].push(p);
     });
+
     Object.keys(grouped).forEach(pos => {
       grouped[pos].sort((a, b) => b.expected_points - a.expected_points || b.ownership - a.ownership);
     });
@@ -195,6 +194,27 @@ fetch('./dashboard.json', { cache: 'no-store' })
       `;
     }).join('');
 
+    const subsRow = document.getElementById('subsRow');
+    if (bench.length) {
+      subsRow.innerHTML = bench.map((p, idx) => `
+        <div class="sub-card">
+          <div class="shirt-wrap">
+            <svg class="shirt-svg" viewBox="0 0 72 78" aria-hidden="true">
+              <path d="M22 6h28l8 6 11 8-6 18-8-4v36H17V34l-8 4-6-18 11-8 8-6z" fill="${renderShirt(p.team)}" stroke="rgba(255,255,255,0.65)" stroke-width="2" />
+              <path d="M28 6h16l4 8H24z" fill="rgba(255,255,255,0.18)" />
+              <path d="M27 15h18l-2 8H29z" fill="rgba(0,0,0,0.10)" />
+            </svg>
+          </div>
+          <div class="pitch-name">${esc(p.player)}</div>
+          <div class="pitch-subline">${esc(p.team)} • ${esc(p.position)}</div>
+          <div class="pitch-points">${Math.round(p.expected_points)} pts</div>
+          <div class="pitch-subline">${idx + 1}. Bench order</div>
+        </div>
+      `).join('');
+    } else {
+      subsRow.innerHTML = `<div class="empty-state">No bench players found in the JSON.</div>`;
+    }
+
     const transferWatchEl = document.getElementById('transferWatch');
     if (transferWatch.length) {
       transferWatchEl.innerHTML = transferWatch.map(item => `
@@ -228,6 +248,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
       ['Wildcard', chipWatch.free_hit],
       ['Free Hit', chipWatch.free_hit]
     ];
+
     chipWatchEl.innerHTML = chipItems.map(([name, obj]) => {
       const status = text(obj?.status, 'wait');
       const reason = text(obj?.reason, '');
@@ -246,13 +267,13 @@ fetch('./dashboard.json', { cache: 'no-store' })
       {
         role: 'Captain',
         name: captain.player || '—',
-        summary: captain.summary || 'Armband pick',
+        summary: shortSummary(captain),
         meta: `${captain.team || '—'} • ${Math.round(num(captain.expected_points, 0))} pts`
       },
       {
         role: 'Vice captain',
         name: viceCaptain.player || '—',
-        summary: viceCaptain.summary || 'Backup armband',
+        summary: shortSummary(viceCaptain),
         meta: `${viceCaptain.team || '—'} • ${Math.round(num(viceCaptain.expected_points, 0))} pts`
       }
     ];
