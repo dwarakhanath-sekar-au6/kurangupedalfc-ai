@@ -28,49 +28,52 @@ fetch('./dashboard.json', { cache: 'no-store' })
       .replace(/'/g, '&#39;');
 
     const teamColors = {
-      "Arsenal": "#EF0107",
-      "Aston Villa": "#7B0033",
-      "Bournemouth": "#DA291C",
-      "Brentford": "#E30613",
-      "Brighton": "#0057B8",
-      "Burnley": "#6C1D45",
-      "Chelsea": "#034694",
-      "Crystal Palace": "#1B458F",
-      "Everton": "#003399",
-      "Fulham": "#FFFFFF",
-      "Liverpool": "#C8102E",
-      "Luton": "#F78F1E",
-      "Man City": "#6CABDD",
-      "Man Utd": "#DA291C",
-      "Newcastle": "#241F20",
-      "Nott'm Forest": "#DA291C",
-      "Spurs": "#FFFFFF",
-      "West Ham": "#7A263A",
-      "Wolves": "#FDB913",
-      "Leeds": "#FFCD00",
-      "Leicester": "#003090",
-      "Southampton": "#D71920",
-      "Watford": "#FBEE23",
-      "Coventry City": "#5B9BD5",
-      "Ipswich": "#0053A0",
-      "BHA": "#0057B8",
-      "BRE": "#E30613",
-      "CRY": "#1B458F",
-      "ARS": "#EF0107",
-      "AVL": "#7B0033",
-      "CHE": "#034694",
-      "NEW": "#241F20",
-      "TOT": "#FFFFFF",
-      "LIV": "#C8102E",
-      "FUL": "#FFFFFF",
-      "MCI": "#6CABDD"
+      Arsenal: '#EF0107',
+      'Aston Villa': '#7B0033',
+      Bournemouth: '#DA291C',
+      Brentford: '#E30613',
+      Brighton: '#0057B8',
+      Burnley: '#6C1D45',
+      Chelsea: '#034694',
+      'Crystal Palace': '#1B458F',
+      Everton: '#003399',
+      Fulham: '#FFFFFF',
+      Liverpool: '#C8102E',
+      Luton: '#F78F1E',
+      'Man City': '#6CABDD',
+      'Man Utd': '#DA291C',
+      Newcastle: '#241F20',
+      "Nott'm Forest": '#DA291C',
+      Spurs: '#FFFFFF',
+      'West Ham': '#7A263A',
+      Wolves: '#FDB913',
+      Leeds: '#FFCD00',
+      Leicester: '#003090',
+      Southampton: '#D71920',
+      Watford: '#FBEE23',
+      'Coventry City': '#5B9BD5',
+      Ipswich: '#0053A0',
+      BHA: '#0057B8',
+      BRE: '#E30613',
+      CRY: '#1B458F',
+      ARS: '#EF0107',
+      AVL: '#7B0033',
+      CHE: '#034694',
+      NEW: '#241F20',
+      TOT: '#FFFFFF',
+      LIV: '#C8102E',
+      FUL: '#FFFFFF',
+      MCI: '#6CABDD',
+      SUN: '#FFCD00'
     };
 
     const metadata = isObj(data.metadata) ? data.metadata : {};
-    const recommendation = isObj(data.recommendation) ? data.recommendation : {};
+    const planner = isObj(data.planner) ? data.planner : {};
     const services = isObj(data.services) ? data.services : {};
     const judge = isObj(data.judge) ? data.judge : {};
+    const recommendation = isObj(data.recommendation) ? data.recommendation : {};
     const squadTrace = isObj(data.squad_trace) ? data.squad_trace : {};
+    const playerCards = toArray(data.player_cards);
 
     const captain = isObj(recommendation.captain) ? recommendation.captain : (isObj(squadTrace.captain) ? squadTrace.captain : {});
     const viceCaptain = isObj(recommendation.vice_captain) ? recommendation.vice_captain : (isObj(squadTrace.vice_captain) ? squadTrace.vice_captain : {});
@@ -82,24 +85,32 @@ fetch('./dashboard.json', { cache: 'no-store' })
     const squadValue = parseMoney(teamValueText);
     const bankValue = Number.isFinite(squadValue) ? Math.max(0, 100 - squadValue) : 0;
 
-    const starting = toArray(recommendation.starting_xi).length
+    const startingRaw = toArray(recommendation.starting_xi).length
       ? toArray(recommendation.starting_xi)
-      : (toArray(squadTrace.starting_xi).length ? toArray(squadTrace.starting_xi) : toArray(data.player_cards));
+      : (toArray(squadTrace.starting_xi).length ? toArray(squadTrace.starting_xi) : playerCards.slice(0, 11));
 
-    const bench = toArray(recommendation.bench).length
+    const benchRaw = toArray(recommendation.bench).length
       ? toArray(recommendation.bench)
-      : toArray(squadTrace.bench);
+      : (toArray(squadTrace.bench).length ? toArray(squadTrace.bench) : playerCards.slice(11, 15));
 
-    const normalizedPlayers = (items) => toArray(items).map(p => ({
+    const normalizePlayer = (p) => ({
       player: p.player || p.name || p.Player || 'Unknown',
       team: p.team || p.Team || '—',
       position: p.position || p.Position || '—',
       price: safeNum(p.price ?? p.Price ?? 0, 0),
       recommendation: p.recommendation || p.status || 'Keep',
-      reason: p.reason || '',
+      reason: p.reason || 'No extra note available.',
       medical: p.medical || p.MedicalStatus || '',
-      fixture_difficulty: p.fixture_difficulty ?? p.Next3FixtureDifficulty ?? null
-    }));
+      fixture_difficulty: p.fixture_difficulty ?? p.Next3FixtureDifficulty ?? null,
+      selection_rating: safeNum(p.selection_rating ?? p.SelectionRating ?? p.score ?? p.FinalRating ?? 0, 0),
+      form: safeNum(p.form ?? p.Form ?? 0, 0),
+      ppg: safeNum(p.ppg ?? p.PPG ?? 0, 0),
+      ownership: safeNum(p.ownership ?? p.Ownership ?? 0, 0),
+      news: p.news || ''
+    });
+
+    const starting = toArray(startingRaw).map(normalizePlayer);
+    const bench = toArray(benchRaw).map(normalizePlayer);
 
     const tone = (rec) => {
       const r = String(rec || '').toLowerCase();
@@ -109,7 +120,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
     };
 
     const renderShirt = (player, isCaptain = false, isVice = false) => {
-      const team = player.team || player.Team || '';
+      const team = player.team || '';
       const shirt = player.shirt || teamColors[team] || '#6d4aff';
 
       return `
@@ -131,109 +142,87 @@ fetch('./dashboard.json', { cache: 'no-store' })
     };
 
     const renderPitchPlayer = (player, isCaptain = false, isVice = false) => {
-      const name = escapeHtml(player.name || player.player || player.Player || 'Unknown');
-      const team = escapeHtml(player.team || player.Team || '—');
-      const position = escapeHtml(player.position || player.Position || '—');
-      const price = safeNum(player.price ?? player.Price ?? 0, 0);
-
       return `
-        <div class="pitch-slot">
+        <div class="slot">
           ${renderShirt(player, isCaptain, isVice)}
           <div class="pitch-card">
-            <div class="pitch-name">${name}</div>
-            <div class="pitch-meta">${team} • ${position}</div>
-            <div class="pitch-price">£${price.toFixed(1)}m</div>
+            <div class="pitch-name">${escapeHtml(player.player)}</div>
+            <div class="pitch-meta">${escapeHtml(player.team)} • ${escapeHtml(player.position)}</div>
+            <div class="pitch-price">£${player.price.toFixed(1)}m</div>
           </div>
         </div>
       `;
     };
 
     const renderReportCard = (player, isBench = false) => {
-      const name = escapeHtml(player.player);
-      const team = escapeHtml(player.team);
-      const position = escapeHtml(player.position);
-      const price = safeNum(player.price, 0);
-      const rec = escapeHtml(player.recommendation || 'Keep');
-      const reason = escapeHtml(player.reason || 'No extra note available.');
-      const medical = escapeHtml(player.medical || '');
-      const fixture = player.fixture_difficulty != null && Number.isFinite(Number(player.fixture_difficulty))
-        ? `Fixture ${Number(player.fixture_difficulty).toFixed(1)}`
-        : '';
+      const rec = String(player.recommendation || 'Keep');
+      const cardClass = tone(rec);
+
+      const tags = [];
+      if (player.medical) tags.push(`<span class="tag tag-soft">${escapeHtml(player.medical)}</span>`);
+      if (player.fixture_difficulty != null && Number.isFinite(Number(player.fixture_difficulty))) {
+        tags.push(`<span class="tag tag-accent">Fixture ${Number(player.fixture_difficulty).toFixed(1)}</span>`);
+      }
 
       return `
-        <article class="report-card ${tone(player.recommendation)}">
+        <article class="report-card ${cardClass}">
           <div class="report-head">
             <div>
-              <div class="report-name">${name}</div>
-              <div class="report-meta">${team} • ${position}${isBench ? ' • Bench' : ''}</div>
+              <div class="report-name">${escapeHtml(player.player)}</div>
+              <div class="report-meta">${escapeHtml(player.team)} • ${escapeHtml(player.position)}${isBench ? ' • Bench' : ''}</div>
             </div>
-            <div class="report-price">£${price.toFixed(1)}m</div>
+            <div class="report-price">£${player.price.toFixed(1)}m</div>
           </div>
 
-          <div class="report-reco">${rec}</div>
-          <div class="report-reason">${reason}</div>
+          <div class="report-reco">${escapeHtml(rec)}</div>
+          <div class="report-reason">${escapeHtml(player.reason)}</div>
 
           <div class="report-tags">
-            ${medical ? `<span class="tag tag-soft">${medical}</span>` : ''}
-            ${fixture ? `<span class="tag tag-accent">${fixture}</span>` : ''}
+            ${tags.join('')}
           </div>
         </article>
       `;
     };
 
-    const teamValueEl = document.getElementById('teamValue');
-    const bankValueEl = document.getElementById('bankValue');
-    const rankValueEl = document.getElementById('rankValue');
-    const captainNameEl = document.getElementById('captainName');
-    const captainMetaEl = document.getElementById('captainMeta');
-    const viceCaptainNameEl = document.getElementById('viceCaptainName');
-    const viceCaptainMetaEl = document.getElementById('viceCaptainMeta');
-    const nextMoveTextEl = document.getElementById('nextMoveText');
+    const currentGw = metadata.gameweek || data.gameweek || 1;
+
+    const startingXIEl = document.getElementById('startingReports');
+    const benchEl = document.getElementById('benchReports');
+    const pitchAreaEl = document.getElementById('pitchArea');
+    const subsRowEl = document.getElementById('subsRow');
     const whySummaryEl = document.getElementById('whySummary');
     const whyBulletsEl = document.getElementById('whyBullets');
     const snapshotGridEl = document.getElementById('snapshotGrid');
-    const startingReportsEl = document.getElementById('startingReports');
-    const benchReportsEl = document.getElementById('benchReports');
-    const pitchAreaEl = document.getElementById('pitchArea');
-    const subsRowEl = document.getElementById('subsRow');
-    const gwPillEl = document.getElementById('gwPill');
-    const confidencePillEl = document.getElementById('confidencePill');
 
-    const now = new Date();
+    document.getElementById('gwPill').textContent = `Gameweek ${currentGw}`;
     document.getElementById('updatedText').textContent =
-      `Last updated: ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+      `Last updated: ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
 
-    const gameweek = metadata.gameweek || data.gameweek || 1;
-    if (gwPillEl) gwPillEl.textContent = `Gameweek ${gameweek}`;
+    document.getElementById('teamValue').textContent = teamValueText;
+    document.getElementById('bankValue').textContent = `£${bankValue.toFixed(1)}m`;
+    document.getElementById('rankValue').textContent = metadata.rank || data.rank || '-';
 
-    if (teamValueEl) teamValueEl.textContent = teamValueText;
-    if (bankValueEl) bankValueEl.textContent = `£${bankValue.toFixed(1)}m`;
-    if (rankValueEl) rankValueEl.textContent = metadata.rank || data.rank || '-';
+    document.getElementById('captainName').textContent = captainName;
+    document.getElementById('captainMeta').textContent = `${captain.team || captain.Team || 'Brentford'} • ${captain.position || captain.Position || 'FWD'}`;
 
-    if (captainNameEl) captainNameEl.textContent = captainName;
-    if (captainMetaEl) captainMetaEl.textContent = `${captain.team || captain.Team || 'Brentford'} • ${captain.position || captain.Position || 'FWD'}`;
+    document.getElementById('viceCaptainName').textContent = viceCaptainName;
+    document.getElementById('viceCaptainMeta').textContent = `${viceCaptain.team || viceCaptain.Team || 'Crystal Palace'} • ${viceCaptain.position || viceCaptain.Position || 'DEF'}`;
 
-    if (viceCaptainNameEl) viceCaptainNameEl.textContent = viceCaptainName;
-    if (viceCaptainMetaEl) viceCaptainMetaEl.textContent = `${viceCaptain.team || viceCaptain.Team || 'Crystal Palace'} • ${viceCaptain.position || viceCaptain.Position || 'DEF'}`;
+    const judgeVerdict = firstText(judge.verdict, 'High confidence');
+    const judgeConfidence = firstText(judge.confidence, 'High');
+    const judgeReason = firstText(judge.reason, 'Final recommendation produced.');
+    const judgeCall = firstText(judge.final_call, judge.action, `Captain ${captainName} and keep ${viceCaptainName} as vice captain.`);
 
-    const finalCall = firstText(
-      judge.final_call,
-      judge.action,
-      recommendation.captain ? `Captain ${captainName} and keep ${viceCaptainName} as vice captain.` : '',
-      'Hold transfer this week.'
-    );
-
-    if (nextMoveTextEl) nextMoveTextEl.textContent = finalCall;
-    if (confidencePillEl) confidencePillEl.textContent = judge.confidence || 'High confidence';
+    document.getElementById('nextMoveText').textContent = judgeCall;
 
     const whySummary = firstText(
-      'A balanced opening squad with captaincy set, bench cover in place, and budget still available for a quick move if needed.'
+      `This squad was built from the current pool, keeping the team within budget and setting the captaincy in place.`
     );
 
     const whyBullets = [
       `Team value: ${teamValueText} • Bank: £${bankValue.toFixed(1)}m.`,
       `Captain: ${captainName} • Vice captain: ${viceCaptainName}.`,
-      'The squad was built after checking fitness, fixtures, form, and news.'
+      `Final verdict: ${judgeVerdict} (${judgeConfidence}).`
     ];
 
     if (whySummaryEl) whySummaryEl.textContent = whySummary;
@@ -242,27 +231,24 @@ fetch('./dashboard.json', { cache: 'no-store' })
     const snapshotCards = [
       { label: 'Team Value', value: teamValueText, sub: 'Current squad spend' },
       { label: 'Bank', value: `£${bankValue.toFixed(1)}m`, sub: 'Available for transfers' },
-      { label: 'Confidence', value: escapeHtml(judge.confidence || 'High'), sub: 'Current recommendation' },
-      { label: 'Verdict', value: escapeHtml(judge.verdict || 'Proceed'), sub: 'Final call status' }
+      { label: 'Confidence', value: judgeConfidence, sub: 'Current recommendation' },
+      { label: 'Verdict', value: judgeVerdict, sub: 'Final call status' }
     ];
 
     if (snapshotGridEl) {
       snapshotGridEl.innerHTML = snapshotCards.map(card => `
         <div class="metric-card">
           <div class="metric-label">${card.label}</div>
-          <div class="metric-value">${card.value}</div>
-          <div class="metric-sub">${card.sub}</div>
+          <div class="metric-value">${escapeHtml(card.value)}</div>
+          <div class="metric-sub">${escapeHtml(card.sub)}</div>
         </div>
       `).join('');
     }
 
-    const startingPlayers = normalizedPlayers(starting);
-    const benchPlayers = normalizedPlayers(bench);
-
-    const grouped = { GK: [], DEF: [], MID: [], FWD: [] };
-    startingPlayers.forEach(player => {
-      const pos = player.position;
-      if (grouped[pos]) grouped[pos].push(player);
+    // Build pitch
+    const groups = { GK: [], DEF: [], MID: [], FWD: [] };
+    starting.forEach(player => {
+      if (groups[player.position]) groups[player.position].push(player);
     });
 
     const positions = {
@@ -272,13 +258,12 @@ fetch('./dashboard.json', { cache: 'no-store' })
       FWD: [{ x: 26, y: 82 }, { x: 50, y: 82 }, { x: 74, y: 82 }]
     };
 
-    const formation = `${grouped.DEF.length}-${grouped.MID.length}-${grouped.FWD.length}`;
-    const formationPill = document.getElementById('formationPill');
-    if (formationPill) formationPill.textContent = formation;
+    const formation = `${groups.DEF.length}-${groups.MID.length}-${groups.FWD.length}`;
+    document.getElementById('formationPill').textContent = formation;
 
     const lineup = [];
     ['GK', 'DEF', 'MID', 'FWD'].forEach(pos => {
-      grouped[pos].forEach((player, idx) => {
+      groups[pos].forEach((player, idx) => {
         lineup.push({
           ...player,
           coord: positions[pos][idx]
@@ -305,7 +290,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
     }
 
     if (subsRowEl) {
-      subsRowEl.innerHTML = benchPlayers.slice(0, 4).map((player, idx) => `
+      subsRowEl.innerHTML = bench.slice(0, 4).map((player, idx) => `
         <div class="sub-card">
           ${renderShirt(player, false, false)}
           <div class="pitch-name">${escapeHtml(player.player)}</div>
@@ -316,44 +301,41 @@ fetch('./dashboard.json', { cache: 'no-store' })
       `).join('');
     }
 
-    const renderPlayerReport = (player) => {
-      const rec = String(player.recommendation || 'Keep').toLowerCase();
-      const cardClass = rec.includes('avoid') ? 'bad' : rec.includes('monitor') ? 'warn' : 'good';
+    // Player report panels
+    const buildReportHtml = (player, isBench = false) => {
       const tags = [];
-
-      if (player.medical) tags.push(player.medical);
+      if (player.medical) tags.push(`<span class="tag tag-soft">${escapeHtml(player.medical)}</span>`);
       if (player.fixture_difficulty != null && Number.isFinite(Number(player.fixture_difficulty))) {
-        tags.push(`Fixture ${Number(player.fixture_difficulty).toFixed(1)}`);
+        tags.push(`<span class="tag tag-accent">Fixture ${Number(player.fixture_difficulty).toFixed(1)}</span>`);
       }
 
       return `
-        <article class="report-card ${cardClass}">
+        <article class="report-card ${tone(player.recommendation)}">
           <div class="report-head">
             <div>
               <div class="report-name">${escapeHtml(player.player)}</div>
-              <div class="report-meta">${escapeHtml(player.team)} • ${escapeHtml(player.position)}</div>
+              <div class="report-meta">${escapeHtml(player.team)} • ${escapeHtml(player.position)}${isBench ? ' • Bench' : ''}</div>
             </div>
             <div class="report-price">£${player.price.toFixed(1)}m</div>
           </div>
 
-          <div class="report-reco">${escapeHtml(player.recommendation || 'Keep')}</div>
-          <div class="report-reason">${escapeHtml(player.reason || 'No extra note available.')}</div>
+          <div class="report-reco">${escapeHtml(player.recommendation)}</div>
+          <div class="report-reason">${escapeHtml(player.reason)}</div>
 
           <div class="report-tags">
-            ${tags.map(tag => `<span class="tag ${tag === player.medical ? 'tag-soft' : 'tag-accent'}">${escapeHtml(tag)}</span>`).join('')}
+            ${tags.join('')}
           </div>
         </article>
       `;
     };
 
-    const startingReportsHtml = startingPlayers.map(renderPlayerReport).join('');
-    const benchReportsHtml = benchPlayers.map(renderPlayerReport).join('');
+    if (startingXIEl) {
+      startingXIEl.innerHTML = starting.map(p => buildReportHtml(p, false)).join('');
+    }
 
-    if (startingReportsEl) startingReportsEl.innerHTML = startingReportsHtml;
-    if (benchReportsEl) benchReportsEl.innerHTML = benchReportsHtml;
-
-    // Keep the page professional: only show end-user content.
-    // Internal decision trace stays in the JSON and backend, not on the main dashboard.
+    if (benchEl) {
+      benchEl.innerHTML = bench.map(p => buildReportHtml(p, true)).join('');
+    }
   })
   .catch(err => {
     console.error(err);
