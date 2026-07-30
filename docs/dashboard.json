@@ -39,106 +39,121 @@
       "name": "Gu\u00e9hi",
       "team": "Man City",
       "position": "DEF",
-      "score": 81.73,
-      "shirt": "#4f46e5"
+      "price": 6.0,
+      "selection_rating": 81.73,
+      "shirt": "#6CABDD"
     },
     {
       "name": "Senesi",
       "team": "Spurs",
       "position": "DEF",
-      "score": 79.79,
-      "shirt": "#4f46e5"
+      "price": 6.0,
+      "selection_rating": 79.79,
+      "shirt": "#FFFFFF"
     },
     {
       "name": "Truffert",
       "team": "Bournemouth",
       "position": "DEF",
-      "score": 75.42,
-      "shirt": "#4f46e5"
+      "price": 5.5,
+      "selection_rating": 75.42,
+      "shirt": "#DA291C"
     },
     {
       "name": "Van Hecke",
       "team": "Spurs",
       "position": "DEF",
-      "score": 68.69,
-      "shirt": "#4f46e5"
+      "price": 5.0,
+      "selection_rating": 68.69,
+      "shirt": "#FFFFFF"
     },
     {
       "name": "Mitchell",
       "team": "Crystal Palace",
       "position": "DEF",
-      "score": 62.68,
-      "shirt": "#4f46e5"
+      "price": 4.5,
+      "selection_rating": 62.68,
+      "shirt": "#1B458F"
     },
     {
       "name": "Thiago",
       "team": "Brentford",
       "position": "FWD",
-      "score": 81.95,
-      "shirt": "#4f46e5"
+      "price": 8.0,
+      "selection_rating": 81.95,
+      "shirt": "#E30613"
     },
     {
       "name": "Jo\u00e3o Pedro",
       "team": "Chelsea",
       "position": "FWD",
-      "score": 79.58,
-      "shirt": "#4f46e5"
+      "price": 7.5,
+      "selection_rating": 79.58,
+      "shirt": "#034694"
     },
     {
       "name": "Calvert-Lewin",
       "team": "Leeds",
       "position": "FWD",
-      "score": 66.1,
-      "shirt": "#4f46e5"
+      "price": 6.0,
+      "selection_rating": 66.1,
+      "shirt": "#FFCD00"
     },
     {
       "name": "Kelleher",
       "team": "Brentford",
       "position": "GK",
-      "score": 66.47,
-      "shirt": "#4f46e5"
+      "price": 5.0,
+      "selection_rating": 66.47,
+      "shirt": "#E30613"
     },
     {
       "name": "Verbruggen",
       "team": "Brighton",
       "position": "GK",
-      "score": 59.86,
-      "shirt": "#4f46e5"
+      "price": 4.5,
+      "selection_rating": 59.86,
+      "shirt": "#0057B8"
     },
     {
       "name": "Anderson",
       "team": "Man City",
       "position": "MID",
-      "score": 81.5,
-      "shirt": "#4f46e5"
+      "price": 6.5,
+      "selection_rating": 81.5,
+      "shirt": "#6CABDD"
     },
     {
       "name": "Wilson",
       "team": "Leeds",
       "position": "MID",
-      "score": 77.46,
-      "shirt": "#4f46e5"
+      "price": 6.5,
+      "selection_rating": 77.46,
+      "shirt": "#FFCD00"
     },
     {
       "name": "E.Le F\u00e9e",
       "team": "Sunderland",
       "position": "MID",
-      "score": 68.22,
-      "shirt": "#4f46e5"
+      "price": 6.0,
+      "selection_rating": 68.22,
+      "shirt": "#6d4aff"
     },
     {
       "name": "Ampadu",
       "team": "Leeds",
       "position": "MID",
-      "score": 63.23,
-      "shirt": "#4f46e5"
+      "price": 5.5,
+      "selection_rating": 63.23,
+      "shirt": "#FFCD00"
     },
     {
       "name": "Zubimendi",
       "team": "Arsenal",
       "position": "MID",
-      "score": 61.97,
-      "shirt": "#4f46e5"
+      "price": 5.5,
+      "selection_rating": 61.97,
+      "shirt": "#EF0107"
     }
   ],
   "captain": {
@@ -156,78 +171,89 @@
       "name": "Kelleher",
       "team": "Brentford",
       "position": "GK",
-      "score": 66.47,
-      "shirt": "#4f46e5"
+      "price": 5.0,
+      "selection_rating": 66.47,
+      "shirt": "#E30613"
     },
     {
       "name": "Gu\u00e9hi",
       "team": "Man City",
       "position": "DEF",
-      "score": 81.73,
-      "shirt": "#4f46e5"
+      "price": 6.0,
+      "selection_rating": 81.73,
+      "shirt": "#6CABDD"
     },
     {
       "name": "Senesi",
       "team": "Spurs",
       "position": "DEF",
-      "score": 79.79,
-      "shirt": "#4f46e5"
+      "price": 6.0,
+      "selection_rating": 79.79,
+      "shirt": "#FFFFFF"
     },
     {
       "name": "Truffert",
       "team": "Bournemouth",
       "position": "DEF",
-      "score": 75.42,
-      "shirt": "#4f46e5"
+      "price": 5.5,
+      "selection_rating": 75.42,
+      "shirt": "#DA291C"
     },
     {
       "name": "Anderson",
       "team": "Man City",
       "position": "MID",
-      "score": 81.5,
-      "shirt": "#4f46e5"
+      "price": 6.5,
+      "selection_rating": 81.5,
+      "shirt": "#6CABDD"
     },
     {
       "name": "Wilson",
       "team": "Leeds",
       "position": "MID",
-      "score": 77.46,
-      "shirt": "#4f46e5"
+      "price": 6.5,
+      "selection_rating": 77.46,
+      "shirt": "#FFCD00"
     },
     {
       "name": "E.Le F\u00e9e",
       "team": "Sunderland",
       "position": "MID",
-      "score": 68.22,
-      "shirt": "#4f46e5"
+      "price": 6.0,
+      "selection_rating": 68.22,
+      "shirt": "#6d4aff"
     },
     {
       "name": "Ampadu",
       "team": "Leeds",
       "position": "MID",
-      "score": 63.23,
-      "shirt": "#4f46e5"
+      "price": 5.5,
+      "selection_rating": 63.23,
+      "shirt": "#FFCD00"
     },
     {
       "name": "Thiago",
       "team": "Brentford",
       "position": "FWD",
-      "score": 81.95,
-      "shirt": "#4f46e5"
+      "price": 8.0,
+      "selection_rating": 81.95,
+      "shirt": "#E30613"
     },
     {
       "name": "Jo\u00e3o Pedro",
       "team": "Chelsea",
       "position": "FWD",
-      "score": 79.58,
-      "shirt": "#4f46e5"
+      "price": 7.5,
+      "selection_rating": 79.58,
+      "shirt": "#034694"
     },
     {
       "name": "Calvert-Lewin",
       "team": "Leeds",
       "position": "FWD",
-      "score": 66.1,
-      "shirt": "#4f46e5"
+      "price": 6.0,
+      "selection_rating": 66.1,
+      "shirt": "#FFCD00"
     }
   ],
   "bench": [
@@ -235,29 +261,33 @@
       "name": "Verbruggen",
       "team": "Brighton",
       "position": "GK",
-      "score": 59.86,
-      "shirt": "#4f46e5"
+      "price": 4.5,
+      "selection_rating": 59.86,
+      "shirt": "#0057B8"
     },
     {
       "name": "Van Hecke",
       "team": "Spurs",
       "position": "DEF",
-      "score": 68.69,
-      "shirt": "#4f46e5"
+      "price": 5.0,
+      "selection_rating": 68.69,
+      "shirt": "#FFFFFF"
     },
     {
       "name": "Mitchell",
       "team": "Crystal Palace",
       "position": "DEF",
-      "score": 62.68,
-      "shirt": "#4f46e5"
+      "price": 4.5,
+      "selection_rating": 62.68,
+      "shirt": "#1B458F"
     },
     {
       "name": "Zubimendi",
       "team": "Arsenal",
       "position": "MID",
-      "score": 61.97,
-      "shirt": "#4f46e5"
+      "price": 5.5,
+      "selection_rating": 61.97,
+      "shirt": "#EF0107"
     }
   ]
 }
