@@ -7,13 +7,11 @@
   --muted: #94a3b8;
   --accent: #7c3aed;
   --accent-2: #4f46e5;
-  --good: #22c55e;
-  --warn: #f59e0b;
-  --danger: #ef4444;
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+
 body {
   font-family: Inter, Arial, sans-serif;
   background:
@@ -22,8 +20,6 @@ body {
     var(--bg);
   color: var(--text);
 }
-
-a { color: inherit; }
 
 .wrap {
   max-width: 1320px;
