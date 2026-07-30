@@ -1,146 +1,263 @@
 {
-  "gameweek": 29,
-  "team_value": "\u00a3101.2m",
-  "rank": "12,345",
+  "gameweek": 1,
+  "team_value": "\u00a388.0m",
+  "rank": "-",
   "plan": {
-    "goal": "Recommend my best FPL move for this week",
+    "goal": "Build the best opening squad",
     "tasks": [
-      "Check injuries and doubts",
-      "Check fixtures and form",
-      "Check recent news",
-      "Check transfer options",
-      "Judge final recommendation"
+      "Medical Review",
+      "Fixture Review",
+      "Scout Review",
+      "News Review",
+      "Final Review"
     ]
+  },
+  "judge": {
+    "verdict": "High Confidence",
+    "action": "Captain Thiago and keep Gu\u00e9hi as vice captain."
   },
   "insights": [
     {
-      "title": "Injury Update",
-      "text": "Trippier is out for 2 weeks. Keep him on the watchlist."
+      "title": "Medical Review",
+      "text": "Players were filtered by availability before the squad was built."
     },
     {
-      "title": "Doubt Flag",
-      "text": "Salah has a doubt flag. Consider a safe bench or backup captain."
+      "title": "Fixture Review",
+      "text": "The squad leans toward players with stronger opening fixture profiles."
     },
     {
-      "title": "Hot Form",
-      "text": "Watkins has 5 goals in the last 4 matches."
+      "title": "Scout Review",
+      "text": "Selections prioritize current form, points per game, and value."
     },
     {
-      "title": "Fixture Alert",
-      "text": "Best fixture run appears for GW31 to GW32."
-    },
-    {
-      "title": "Press Room",
-      "text": "Watkins has strong momentum after scoring in consecutive matches."
-    },
-    {
-      "title": "News Feed",
-      "text": "One key fixture swing is expected next week for attacking assets."
-    },
-    {
-      "title": "Transfer Alert",
-      "text": "A safe move is to hold and reassess after press conferences."
-    },
-    {
-      "title": "Wildcard Window",
-      "text": "Best time for a Wildcard appears to be GW32."
+      "title": "Final Review",
+      "text": "The squad is ready for a first-pass opening-week setup."
     }
   ],
-  "judge": {
-    "verdict": "High confidence",
-    "action": "Proceed with safe transfer and captain plan."
-  },
   "squad": [
     {
-      "name": "Martinez",
-      "team": "AVL",
+      "name": "Gu\u00e9hi",
+      "team": "Man City",
+      "position": "DEF",
+      "score": 81.73,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Senesi",
+      "team": "Spurs",
+      "position": "DEF",
+      "score": 79.79,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Truffert",
+      "team": "Bournemouth",
+      "position": "DEF",
+      "score": 75.42,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Van Hecke",
+      "team": "Spurs",
+      "position": "DEF",
+      "score": 68.69,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Mitchell",
+      "team": "Crystal Palace",
+      "position": "DEF",
+      "score": 62.68,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Thiago",
+      "team": "Brentford",
+      "position": "FWD",
+      "score": 81.95,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Jo\u00e3o Pedro",
+      "team": "Chelsea",
+      "position": "FWD",
+      "score": 79.58,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Calvert-Lewin",
+      "team": "Leeds",
+      "position": "FWD",
+      "score": 66.1,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Kelleher",
+      "team": "Brentford",
       "position": "GK",
-      "score": 0.63,
-      "shirt": "#7a1f4e"
+      "score": 66.47,
+      "shirt": "#4f46e5"
     },
     {
-      "name": "Mings",
-      "team": "AVL",
+      "name": "Verbruggen",
+      "team": "Brighton",
+      "position": "GK",
+      "score": 59.86,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Anderson",
+      "team": "Man City",
+      "position": "MID",
+      "score": 81.5,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Wilson",
+      "team": "Leeds",
+      "position": "MID",
+      "score": 77.46,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "E.Le F\u00e9e",
+      "team": "Sunderland",
+      "position": "MID",
+      "score": 68.22,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Ampadu",
+      "team": "Leeds",
+      "position": "MID",
+      "score": 63.23,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Zubimendi",
+      "team": "Arsenal",
+      "position": "MID",
+      "score": 61.97,
+      "shirt": "#4f46e5"
+    }
+  ],
+  "captain": {
+    "name": "Thiago",
+    "team": "Brentford",
+    "position": "FWD"
+  },
+  "vice_captain": {
+    "name": "Gu\u00e9hi",
+    "team": "Man City",
+    "position": "DEF"
+  },
+  "starting_xi": [
+    {
+      "name": "Kelleher",
+      "team": "Brentford",
+      "position": "GK",
+      "score": 66.47,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Gu\u00e9hi",
+      "team": "Man City",
       "position": "DEF",
-      "score": 0.61,
-      "shirt": "#7a1f4e"
+      "score": 81.73,
+      "shirt": "#4f46e5"
     },
     {
-      "name": "Cresswell",
-      "team": "WHU",
+      "name": "Senesi",
+      "team": "Spurs",
       "position": "DEF",
-      "score": 0.57,
-      "shirt": "#8b1e3f"
+      "score": 79.79,
+      "shirt": "#4f46e5"
     },
     {
-      "name": "Diop",
-      "team": "FUL",
+      "name": "Truffert",
+      "team": "Bournemouth",
       "position": "DEF",
-      "score": 0.45,
-      "shirt": "#f5f5f5"
+      "score": 75.42,
+      "shirt": "#4f46e5"
     },
     {
-      "name": "Targett",
-      "team": "NEW",
-      "position": "DEF",
-      "score": 0.45,
-      "shirt": "#0b5cb8"
-    },
-    {
-      "name": "Bale",
-      "team": "TOT",
+      "name": "Anderson",
+      "team": "Man City",
       "position": "MID",
-      "score": 0.7,
-      "shirt": "#f5f5f5"
+      "score": 81.5,
+      "shirt": "#4f46e5"
     },
     {
-      "name": "Aubameyang",
-      "team": "ARS",
+      "name": "Wilson",
+      "team": "Leeds",
       "position": "MID",
-      "score": 0.68,
-      "shirt": "#d61f26"
+      "score": 77.46,
+      "shirt": "#4f46e5"
     },
     {
-      "name": "Son",
-      "team": "TOT",
+      "name": "E.Le F\u00e9e",
+      "team": "Sunderland",
       "position": "MID",
-      "score": 0.59,
-      "shirt": "#f5f5f5"
+      "score": 68.22,
+      "shirt": "#4f46e5"
     },
     {
-      "name": "Soucek",
-      "team": "WHU",
+      "name": "Ampadu",
+      "team": "Leeds",
       "position": "MID",
-      "score": 0.57,
-      "shirt": "#8b1e3f"
+      "score": 63.23,
+      "shirt": "#4f46e5"
     },
     {
-      "name": "Lingard",
-      "team": "WHU",
-      "position": "MID",
-      "score": 0.57,
-      "shirt": "#8b1e3f"
-    },
-    {
-      "name": "Kane",
-      "team": "TOT",
+      "name": "Thiago",
+      "team": "Brentford",
       "position": "FWD",
-      "score": 0.81,
-      "shirt": "#f5f5f5"
+      "score": 81.95,
+      "shirt": "#4f46e5"
     },
     {
-      "name": "Watkins",
-      "team": "AVL",
+      "name": "Jo\u00e3o Pedro",
+      "team": "Chelsea",
       "position": "FWD",
-      "score": 0.75,
-      "shirt": "#7a1f4e"
+      "score": 79.58,
+      "shirt": "#4f46e5"
     },
     {
-      "name": "Antonio",
-      "team": "WHU",
+      "name": "Calvert-Lewin",
+      "team": "Leeds",
       "position": "FWD",
-      "score": 0.7,
-      "shirt": "#8b1e3f"
+      "score": 66.1,
+      "shirt": "#4f46e5"
+    }
+  ],
+  "bench": [
+    {
+      "name": "Verbruggen",
+      "team": "Brighton",
+      "position": "GK",
+      "score": 59.86,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Van Hecke",
+      "team": "Spurs",
+      "position": "DEF",
+      "score": 68.69,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Mitchell",
+      "team": "Crystal Palace",
+      "position": "DEF",
+      "score": 62.68,
+      "shirt": "#4f46e5"
+    },
+    {
+      "name": "Zubimendi",
+      "team": "Arsenal",
+      "position": "MID",
+      "score": 61.97,
+      "shirt": "#4f46e5"
     }
   ]
 }
