@@ -1,293 +1,1005 @@
 {
-  "gameweek": 1,
-  "team_value": "\u00a388.0m",
-  "rank": "-",
-  "plan": {
-    "goal": "Build the best opening squad",
-    "tasks": [
-      "Medical Review",
-      "Fixture Review",
-      "Scout Review",
-      "News Review",
-      "Final Review"
-    ]
+  "metadata": {
+    "gameweek": 1,
+    "team_value": "\u00a388.0m",
+    "rank": "-"
+  },
+  "planner": {
+    "goal": "Build the best GW1 team",
+    "questions": [
+      "Who is fit?",
+      "Who has the best fixtures?",
+      "Who is in good form?",
+      "Who gives the best value?",
+      "Who should be captain and vice-captain?"
+    ],
+    "recommendation": "Use the specialist reports below to decide the final squad."
+  },
+  "services": {
+    "medical": {
+      "summary": "528 available, 0 doubtful, 36 unavailable.",
+      "watchlist": [
+        {
+          "player": "Garner",
+          "team": "Everton",
+          "position": "MID",
+          "availability": "Unavailable",
+          "points": 159
+        },
+        {
+          "player": "J.Timber",
+          "team": "Arsenal",
+          "position": "DEF",
+          "availability": "Unavailable",
+          "points": 149
+        },
+        {
+          "player": "Saliba",
+          "team": "Arsenal",
+          "position": "DEF",
+          "availability": "Unavailable",
+          "points": 137
+        },
+        {
+          "player": "Ekitik\u00e9",
+          "team": "Liverpool",
+          "position": "FWD",
+          "availability": "Unavailable",
+          "points": 125
+        },
+        {
+          "player": "Andersen",
+          "team": "Fulham",
+          "position": "DEF",
+          "availability": "Unavailable",
+          "points": 123
+        }
+      ],
+      "recommendation": "Avoid risky picks if there is a safer alternative with similar upside."
+    },
+    "fixture": {
+      "best_runs": [
+        {
+          "player": "B.Fernandes",
+          "team": "Man Utd",
+          "position": "MID",
+          "difficulty": 2.33
+        },
+        {
+          "player": "Mukiele",
+          "team": "Sunderland",
+          "position": "DEF",
+          "difficulty": 2.33
+        },
+        {
+          "player": "Mbeumo",
+          "team": "Man Utd",
+          "position": "MID",
+          "difficulty": 2.33
+        },
+        {
+          "player": "E.Le F\u00e9e",
+          "team": "Sunderland",
+          "position": "MID",
+          "difficulty": 2.33
+        },
+        {
+          "player": "Cunha",
+          "team": "Man Utd",
+          "position": "MID",
+          "difficulty": 2.33
+        }
+      ],
+      "worst_runs": [
+        {
+          "player": "Wilson",
+          "team": "Leeds",
+          "position": "MID",
+          "difficulty": 4.0
+        },
+        {
+          "player": "Onyeka",
+          "team": "Coventry City",
+          "position": "MID",
+          "difficulty": 4.0
+        },
+        {
+          "player": "Dasilva",
+          "team": "Brentford",
+          "position": "MID",
+          "difficulty": 4.0
+        },
+        {
+          "player": "Eccles",
+          "team": "Coventry City",
+          "position": "MID",
+          "difficulty": 4.0
+        },
+        {
+          "player": "Markelo",
+          "team": "Coventry City",
+          "position": "FWD",
+          "difficulty": 4.0
+        }
+      ],
+      "recommendation": "Lean toward players with easier opening runs when two picks are otherwise close."
+    },
+    "scout": {
+      "best_players": [
+        {
+          "player": "Haaland",
+          "team": "Man City",
+          "position": "FWD",
+          "price": 15.5,
+          "rating": 105.28499999999998
+        },
+        {
+          "player": "B.Fernandes",
+          "team": "Man Utd",
+          "position": "MID",
+          "price": 12.0,
+          "rating": 104.91
+        },
+        {
+          "player": "Gabriel",
+          "team": "Arsenal",
+          "position": "DEF",
+          "price": 8.0,
+          "rating": 96.38
+        },
+        {
+          "player": "Semenyo",
+          "team": "Man City",
+          "position": "MID",
+          "price": 8.5,
+          "rating": 91.17499999999998
+        },
+        {
+          "player": "Gibbs-White",
+          "team": "Nott'm Forest",
+          "position": "MID",
+          "price": 8.0,
+          "rating": 85.485
+        }
+      ],
+      "best_value": [
+        {
+          "player": "Mitchell",
+          "team": "Crystal Palace",
+          "position": "DEF",
+          "price": 4.5,
+          "rating": 62.684999999999995,
+          "value_score": 13.93
+        },
+        {
+          "player": "Van Hecke",
+          "team": "Spurs",
+          "position": "DEF",
+          "price": 5.0,
+          "rating": 68.695,
+          "value_score": 13.738999999999999
+        },
+        {
+          "player": "Truffert",
+          "team": "Bournemouth",
+          "position": "DEF",
+          "price": 5.5,
+          "rating": 75.41999999999999,
+          "value_score": 13.712727272727271
+        },
+        {
+          "player": "Gu\u00e9hi",
+          "team": "Man City",
+          "position": "DEF",
+          "price": 6.0,
+          "rating": 81.73,
+          "value_score": 13.621666666666668
+        },
+        {
+          "player": "Verbruggen",
+          "team": "Brighton",
+          "position": "GK",
+          "price": 4.5,
+          "rating": 59.86,
+          "value_score": 13.302222222222222
+        }
+      ],
+      "recommendation": "Prefer players who combine form, value, and ownership upside."
+    },
+    "news": {
+      "headline": "55 players have news notes or flags.",
+      "mentions": [
+        {
+          "player": "J.Timber",
+          "team": "Arsenal",
+          "position": "DEF",
+          "note": "Groin injury - Expected back 21 Aug"
+        },
+        {
+          "player": "Saliba",
+          "team": "Arsenal",
+          "position": "DEF",
+          "note": "Back injury - Unknown return date"
+        },
+        {
+          "player": "White",
+          "team": "Arsenal",
+          "position": "DEF",
+          "note": "Knee injury - Expected back 21 Aug"
+        },
+        {
+          "player": "Kamara",
+          "team": "Aston Villa",
+          "position": "MID",
+          "note": "Knee injury - 75% chance of playing"
+        },
+        {
+          "player": "Onana",
+          "team": "Aston Villa",
+          "position": "MID",
+          "note": "Knee injury - Unknown return date"
+        },
+        {
+          "player": "Abraham",
+          "team": "Aston Villa",
+          "position": "FWD",
+          "note": "Shoulder injury - Expected back 23 Aug"
+        },
+        {
+          "player": "Christie",
+          "team": "Bournemouth",
+          "position": "MID",
+          "note": "Suspended until 29 Aug"
+        },
+        {
+          "player": "Kroupi.Jr",
+          "team": "Bournemouth",
+          "position": "MID",
+          "note": "Foot injury - Unknown return date"
+        }
+      ],
+      "recommendation": "Check flagged players before locking the final XI."
+    }
   },
   "judge": {
-    "verdict": "High Confidence",
-    "action": "Captain Thiago and keep Gu\u00e9hi as vice captain."
+    "verdict": "Review the risk",
+    "confidence": "Medium",
+    "reason": "Planner completed 6 tasks. Medical risk count in the pool is 36. The starting XI average rating is 74.68. The final squad stays within budget.",
+    "final_call": "Captain Thiago and keep Gu\u00e9hi as vice captain."
   },
-  "insights": [
-    {
-      "title": "Medical Review",
-      "text": "Players were filtered by availability before the squad was built."
-    },
-    {
-      "title": "Fixture Review",
-      "text": "The squad leans toward players with stronger opening fixture profiles."
-    },
-    {
-      "title": "Scout Review",
-      "text": "Selections prioritize current form, points per game, and value."
-    },
-    {
-      "title": "Final Review",
-      "text": "The squad is ready for a first-pass opening-week setup."
-    }
-  ],
-  "squad": [
-    {
-      "name": "Gu\u00e9hi",
-      "team": "Man City",
-      "position": "DEF",
-      "price": 6.0,
-      "selection_rating": 81.73,
-      "shirt": "#6CABDD"
-    },
-    {
-      "name": "Senesi",
-      "team": "Spurs",
-      "position": "DEF",
-      "price": 6.0,
-      "selection_rating": 79.79,
-      "shirt": "#FFFFFF"
-    },
-    {
-      "name": "Truffert",
-      "team": "Bournemouth",
-      "position": "DEF",
-      "price": 5.5,
-      "selection_rating": 75.42,
-      "shirt": "#DA291C"
-    },
-    {
-      "name": "Van Hecke",
-      "team": "Spurs",
-      "position": "DEF",
-      "price": 5.0,
-      "selection_rating": 68.69,
-      "shirt": "#FFFFFF"
-    },
-    {
-      "name": "Mitchell",
-      "team": "Crystal Palace",
-      "position": "DEF",
-      "price": 4.5,
-      "selection_rating": 62.68,
-      "shirt": "#1B458F"
-    },
-    {
-      "name": "Thiago",
+  "recommendation": {
+    "starting_xi": [
+      {
+        "player": "Kelleher",
+        "team": "Brentford",
+        "position": "GK",
+        "price": 5.0,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 2.67,
+        "form": 0.0,
+        "ppg": 3.9,
+        "ownership": 5.5,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Gu\u00e9hi",
+        "team": "Man City",
+        "position": "DEF",
+        "price": 6.0,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 2.67,
+        "form": 0.0,
+        "ppg": 5.1,
+        "ownership": 24.4,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Senesi",
+        "team": "Spurs",
+        "position": "DEF",
+        "price": 6.0,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 2.67,
+        "form": 0.0,
+        "ppg": 4.7,
+        "ownership": 11.1,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Truffert",
+        "team": "Bournemouth",
+        "position": "DEF",
+        "price": 5.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.67,
+        "form": 0.0,
+        "ppg": 4.3,
+        "ownership": 4.6,
+        "news": "",
+        "recommendation": "Keep only if no better options",
+        "reason": "Fixtures are less attractive."
+      },
+      {
+        "player": "Anderson",
+        "team": "Man City",
+        "position": "MID",
+        "price": 6.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 2.67,
+        "form": 0.0,
+        "ppg": 4.7,
+        "ownership": 11.9,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Wilson",
+        "team": "Leeds",
+        "position": "MID",
+        "price": 6.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.0,
+        "form": 0.0,
+        "ppg": 4.7,
+        "ownership": 8.9,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "E.Le F\u00e9e",
+        "team": "Sunderland",
+        "position": "MID",
+        "price": 6.0,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 2.33,
+        "form": 0.0,
+        "ppg": 4.1,
+        "ownership": 10.6,
+        "news": "",
+        "recommendation": "Strong keep",
+        "reason": "Good fitness and favorable fixtures."
+      },
+      {
+        "player": "Ampadu",
+        "team": "Leeds",
+        "position": "MID",
+        "price": 5.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.0,
+        "form": 0.0,
+        "ppg": 3.8,
+        "ownership": 1.3,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Thiago",
+        "team": "Brentford",
+        "position": "FWD",
+        "price": 8.0,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 2.67,
+        "form": 0.0,
+        "ppg": 4.8,
+        "ownership": 15.9,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Jo\u00e3o Pedro",
+        "team": "Chelsea",
+        "position": "FWD",
+        "price": 7.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.33,
+        "form": 0.0,
+        "ppg": 5.1,
+        "ownership": 53.4,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Calvert-Lewin",
+        "team": "Leeds",
+        "position": "FWD",
+        "price": 6.0,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.0,
+        "form": 0.0,
+        "ppg": 4.1,
+        "ownership": 17.9,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      }
+    ],
+    "bench": [
+      {
+        "player": "Verbruggen",
+        "team": "Brighton",
+        "position": "GK",
+        "price": 4.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.0,
+        "form": 0.0,
+        "ppg": 3.4,
+        "ownership": 16.8,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Van Hecke",
+        "team": "Spurs",
+        "position": "DEF",
+        "price": 5.0,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 2.67,
+        "form": 0.0,
+        "ppg": 4.1,
+        "ownership": 8.1,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Mitchell",
+        "team": "Crystal Palace",
+        "position": "DEF",
+        "price": 4.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.33,
+        "form": 0.0,
+        "ppg": 3.6,
+        "ownership": 7.3,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Zubimendi",
+        "team": "Arsenal",
+        "position": "MID",
+        "price": 5.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.33,
+        "form": 0.0,
+        "ppg": 3.5,
+        "ownership": 1.5,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      }
+    ],
+    "captain": {
+      "player": "Thiago",
       "team": "Brentford",
       "position": "FWD",
       "price": 8.0,
-      "selection_rating": 81.95,
-      "shirt": "#E30613"
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 2.67,
+      "form": 0.0,
+      "ppg": 4.8,
+      "ownership": 15.9,
+      "news": "",
+      "recommendation": "Keep",
+      "reason": "Acceptable fitness and reasonable fixtures."
     },
-    {
-      "name": "Jo\u00e3o Pedro",
-      "team": "Chelsea",
-      "position": "FWD",
-      "price": 7.5,
-      "selection_rating": 79.58,
-      "shirt": "#034694"
-    },
-    {
-      "name": "Calvert-Lewin",
-      "team": "Leeds",
-      "position": "FWD",
-      "price": 6.0,
-      "selection_rating": 66.1,
-      "shirt": "#FFCD00"
-    },
-    {
-      "name": "Kelleher",
-      "team": "Brentford",
-      "position": "GK",
-      "price": 5.0,
-      "selection_rating": 66.47,
-      "shirt": "#E30613"
-    },
-    {
-      "name": "Verbruggen",
-      "team": "Brighton",
-      "position": "GK",
-      "price": 4.5,
-      "selection_rating": 59.86,
-      "shirt": "#0057B8"
-    },
-    {
-      "name": "Anderson",
+    "vice_captain": {
+      "player": "Gu\u00e9hi",
       "team": "Man City",
-      "position": "MID",
-      "price": 6.5,
-      "selection_rating": 81.5,
-      "shirt": "#6CABDD"
-    },
-    {
-      "name": "Wilson",
-      "team": "Leeds",
-      "position": "MID",
-      "price": 6.5,
-      "selection_rating": 77.46,
-      "shirt": "#FFCD00"
-    },
-    {
-      "name": "E.Le F\u00e9e",
-      "team": "Sunderland",
-      "position": "MID",
+      "position": "DEF",
       "price": 6.0,
-      "selection_rating": 68.22,
-      "shirt": "#6d4aff"
-    },
-    {
-      "name": "Ampadu",
-      "team": "Leeds",
-      "position": "MID",
-      "price": 5.5,
-      "selection_rating": 63.23,
-      "shirt": "#FFCD00"
-    },
-    {
-      "name": "Zubimendi",
-      "team": "Arsenal",
-      "position": "MID",
-      "price": 5.5,
-      "selection_rating": 61.97,
-      "shirt": "#EF0107"
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 2.67,
+      "form": 0.0,
+      "ppg": 5.1,
+      "ownership": 24.4,
+      "news": "",
+      "recommendation": "Keep",
+      "reason": "Acceptable fitness and reasonable fixtures."
     }
-  ],
-  "captain": {
-    "name": "Thiago",
-    "team": "Brentford",
-    "position": "FWD"
   },
-  "vice_captain": {
-    "name": "Gu\u00e9hi",
-    "team": "Man City",
-    "position": "DEF"
-  },
-  "starting_xi": [
-    {
-      "name": "Kelleher",
-      "team": "Brentford",
-      "position": "GK",
-      "price": 5.0,
-      "selection_rating": 66.47,
-      "shirt": "#E30613"
-    },
-    {
-      "name": "Gu\u00e9hi",
-      "team": "Man City",
-      "position": "DEF",
-      "price": 6.0,
-      "selection_rating": 81.73,
-      "shirt": "#6CABDD"
-    },
-    {
-      "name": "Senesi",
-      "team": "Spurs",
-      "position": "DEF",
-      "price": 6.0,
-      "selection_rating": 79.79,
-      "shirt": "#FFFFFF"
-    },
-    {
-      "name": "Truffert",
-      "team": "Bournemouth",
-      "position": "DEF",
-      "price": 5.5,
-      "selection_rating": 75.42,
-      "shirt": "#DA291C"
-    },
-    {
-      "name": "Anderson",
-      "team": "Man City",
-      "position": "MID",
-      "price": 6.5,
-      "selection_rating": 81.5,
-      "shirt": "#6CABDD"
-    },
-    {
-      "name": "Wilson",
-      "team": "Leeds",
-      "position": "MID",
-      "price": 6.5,
-      "selection_rating": 77.46,
-      "shirt": "#FFCD00"
-    },
-    {
-      "name": "E.Le F\u00e9e",
-      "team": "Sunderland",
-      "position": "MID",
-      "price": 6.0,
-      "selection_rating": 68.22,
-      "shirt": "#6d4aff"
-    },
-    {
-      "name": "Ampadu",
-      "team": "Leeds",
-      "position": "MID",
-      "price": 5.5,
-      "selection_rating": 63.23,
-      "shirt": "#FFCD00"
-    },
-    {
-      "name": "Thiago",
+  "squad_trace": {
+    "starting_xi": [
+      {
+        "player": "Kelleher",
+        "team": "Brentford",
+        "position": "GK",
+        "price": 5.0,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 2.67,
+        "form": 0.0,
+        "ppg": 3.9,
+        "ownership": 5.5,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Gu\u00e9hi",
+        "team": "Man City",
+        "position": "DEF",
+        "price": 6.0,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 2.67,
+        "form": 0.0,
+        "ppg": 5.1,
+        "ownership": 24.4,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Senesi",
+        "team": "Spurs",
+        "position": "DEF",
+        "price": 6.0,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 2.67,
+        "form": 0.0,
+        "ppg": 4.7,
+        "ownership": 11.1,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Truffert",
+        "team": "Bournemouth",
+        "position": "DEF",
+        "price": 5.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.67,
+        "form": 0.0,
+        "ppg": 4.3,
+        "ownership": 4.6,
+        "news": "",
+        "recommendation": "Keep only if no better options",
+        "reason": "Fixtures are less attractive."
+      },
+      {
+        "player": "Anderson",
+        "team": "Man City",
+        "position": "MID",
+        "price": 6.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 2.67,
+        "form": 0.0,
+        "ppg": 4.7,
+        "ownership": 11.9,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Wilson",
+        "team": "Leeds",
+        "position": "MID",
+        "price": 6.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.0,
+        "form": 0.0,
+        "ppg": 4.7,
+        "ownership": 8.9,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "E.Le F\u00e9e",
+        "team": "Sunderland",
+        "position": "MID",
+        "price": 6.0,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 2.33,
+        "form": 0.0,
+        "ppg": 4.1,
+        "ownership": 10.6,
+        "news": "",
+        "recommendation": "Strong keep",
+        "reason": "Good fitness and favorable fixtures."
+      },
+      {
+        "player": "Ampadu",
+        "team": "Leeds",
+        "position": "MID",
+        "price": 5.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.0,
+        "form": 0.0,
+        "ppg": 3.8,
+        "ownership": 1.3,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Thiago",
+        "team": "Brentford",
+        "position": "FWD",
+        "price": 8.0,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 2.67,
+        "form": 0.0,
+        "ppg": 4.8,
+        "ownership": 15.9,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Jo\u00e3o Pedro",
+        "team": "Chelsea",
+        "position": "FWD",
+        "price": 7.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.33,
+        "form": 0.0,
+        "ppg": 5.1,
+        "ownership": 53.4,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Calvert-Lewin",
+        "team": "Leeds",
+        "position": "FWD",
+        "price": 6.0,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.0,
+        "form": 0.0,
+        "ppg": 4.1,
+        "ownership": 17.9,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      }
+    ],
+    "bench": [
+      {
+        "player": "Verbruggen",
+        "team": "Brighton",
+        "position": "GK",
+        "price": 4.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.0,
+        "form": 0.0,
+        "ppg": 3.4,
+        "ownership": 16.8,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Van Hecke",
+        "team": "Spurs",
+        "position": "DEF",
+        "price": 5.0,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 2.67,
+        "form": 0.0,
+        "ppg": 4.1,
+        "ownership": 8.1,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Mitchell",
+        "team": "Crystal Palace",
+        "position": "DEF",
+        "price": 4.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.33,
+        "form": 0.0,
+        "ppg": 3.6,
+        "ownership": 7.3,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      },
+      {
+        "player": "Zubimendi",
+        "team": "Arsenal",
+        "position": "MID",
+        "price": 5.5,
+        "selection_rating": 0.0,
+        "medical": "Available",
+        "fixture_difficulty": 3.33,
+        "form": 0.0,
+        "ppg": 3.5,
+        "ownership": 1.5,
+        "news": "",
+        "recommendation": "Keep",
+        "reason": "Acceptable fitness and reasonable fixtures."
+      }
+    ],
+    "captain": {
+      "player": "Thiago",
       "team": "Brentford",
       "position": "FWD",
       "price": 8.0,
-      "selection_rating": 81.95,
-      "shirt": "#E30613"
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 2.67,
+      "form": 0.0,
+      "ppg": 4.8,
+      "ownership": 15.9,
+      "news": "",
+      "recommendation": "Keep",
+      "reason": "Acceptable fitness and reasonable fixtures."
+    },
+    "vice_captain": {
+      "player": "Gu\u00e9hi",
+      "team": "Man City",
+      "position": "DEF",
+      "price": 6.0,
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 2.67,
+      "form": 0.0,
+      "ppg": 5.1,
+      "ownership": 24.4,
+      "news": "",
+      "recommendation": "Keep",
+      "reason": "Acceptable fitness and reasonable fixtures."
+    }
+  },
+  "agent_cards": {
+    "planner": {
+      "title": "Planner",
+      "subtitle": "Breaks the request into football questions",
+      "what_it_did": "Asked for fitness, fixtures, form, news, and captaincy checks.",
+      "output": {
+        "goal": "Build the best GW1 team",
+        "tasks": [
+          "Who is fit?",
+          "Who has the best fixtures?",
+          "Who is in good form?",
+          "Who gives the best value?",
+          "Who should be captain and vice-captain?"
+        ]
+      }
+    },
+    "medical": {
+      "title": "Fitness review",
+      "subtitle": "Flags risk before the deadline",
+      "what_it_did": "528 available, 0 doubtful, 36 unavailable.",
+      "watchlist": [
+        "Garner",
+        "J.Timber",
+        "Saliba",
+        "Ekitik\u00e9",
+        "Andersen"
+      ]
+    },
+    "fixture": {
+      "title": "Fixture review",
+      "subtitle": "Looks for good and bad runs",
+      "what_it_did": "Fixture check completed",
+      "best_runs": [
+        "B.Fernandes",
+        "Mukiele",
+        "Mbeumo",
+        "E.Le F\u00e9e",
+        "Cunha"
+      ],
+      "worst_runs": [
+        "Wilson",
+        "Onyeka",
+        "Dasilva",
+        "Eccles",
+        "Markelo"
+      ]
+    },
+    "scout": {
+      "title": "Scout review",
+      "subtitle": "Balances form, value, and upside",
+      "what_it_did": "Scout check completed",
+      "best_players": [
+        "Haaland",
+        "B.Fernandes",
+        "Gabriel",
+        "Semenyo",
+        "Gibbs-White"
+      ],
+      "best_value": [
+        "Mitchell",
+        "Van Hecke",
+        "Truffert",
+        "Gu\u00e9hi",
+        "Verbruggen"
+      ]
+    },
+    "news": {
+      "title": "News review",
+      "subtitle": "Checks current notes and flags",
+      "what_it_did": "55 players have news notes or flags.",
+      "mentions": [
+        "J.Timber",
+        "Saliba",
+        "White",
+        "Kamara",
+        "Onana",
+        "Abraham",
+        "Christie",
+        "Kroupi.Jr"
+      ]
+    },
+    "judge": {
+      "title": "Judge",
+      "subtitle": "Combines the evidence into one call",
+      "what_it_did": "Captain Thiago and keep Gu\u00e9hi as vice captain.",
+      "verdict": "Review the risk",
+      "confidence": "Medium",
+      "reason": "Planner completed 6 tasks. Medical risk count in the pool is 36. The starting XI average rating is 74.68. The final squad stays within budget."
+    }
+  },
+  "player_cards": [
+    {
+      "player": "Kelleher",
+      "team": "Brentford",
+      "position": "GK",
+      "price": 5.0,
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 2.67,
+      "recommendation": "Keep",
+      "reason": "Acceptable fitness and reasonable fixtures."
     },
     {
-      "name": "Jo\u00e3o Pedro",
+      "player": "Gu\u00e9hi",
+      "team": "Man City",
+      "position": "DEF",
+      "price": 6.0,
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 2.67,
+      "recommendation": "Keep",
+      "reason": "Acceptable fitness and reasonable fixtures."
+    },
+    {
+      "player": "Senesi",
+      "team": "Spurs",
+      "position": "DEF",
+      "price": 6.0,
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 2.67,
+      "recommendation": "Keep",
+      "reason": "Acceptable fitness and reasonable fixtures."
+    },
+    {
+      "player": "Truffert",
+      "team": "Bournemouth",
+      "position": "DEF",
+      "price": 5.5,
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 3.67,
+      "recommendation": "Keep only if no better options",
+      "reason": "Fixtures are less attractive."
+    },
+    {
+      "player": "Anderson",
+      "team": "Man City",
+      "position": "MID",
+      "price": 6.5,
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 2.67,
+      "recommendation": "Keep",
+      "reason": "Acceptable fitness and reasonable fixtures."
+    },
+    {
+      "player": "Wilson",
+      "team": "Leeds",
+      "position": "MID",
+      "price": 6.5,
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 3.0,
+      "recommendation": "Keep",
+      "reason": "Acceptable fitness and reasonable fixtures."
+    },
+    {
+      "player": "E.Le F\u00e9e",
+      "team": "Sunderland",
+      "position": "MID",
+      "price": 6.0,
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 2.33,
+      "recommendation": "Strong keep",
+      "reason": "Good fitness and favorable fixtures."
+    },
+    {
+      "player": "Ampadu",
+      "team": "Leeds",
+      "position": "MID",
+      "price": 5.5,
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 3.0,
+      "recommendation": "Keep",
+      "reason": "Acceptable fitness and reasonable fixtures."
+    },
+    {
+      "player": "Thiago",
+      "team": "Brentford",
+      "position": "FWD",
+      "price": 8.0,
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 2.67,
+      "recommendation": "Keep",
+      "reason": "Acceptable fitness and reasonable fixtures."
+    },
+    {
+      "player": "Jo\u00e3o Pedro",
       "team": "Chelsea",
       "position": "FWD",
       "price": 7.5,
-      "selection_rating": 79.58,
-      "shirt": "#034694"
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 3.33,
+      "recommendation": "Keep",
+      "reason": "Acceptable fitness and reasonable fixtures."
     },
     {
-      "name": "Calvert-Lewin",
+      "player": "Calvert-Lewin",
       "team": "Leeds",
       "position": "FWD",
       "price": 6.0,
-      "selection_rating": 66.1,
-      "shirt": "#FFCD00"
-    }
-  ],
-  "bench": [
-    {
-      "name": "Verbruggen",
-      "team": "Brighton",
-      "position": "GK",
-      "price": 4.5,
-      "selection_rating": 59.86,
-      "shirt": "#0057B8"
-    },
-    {
-      "name": "Van Hecke",
-      "team": "Spurs",
-      "position": "DEF",
-      "price": 5.0,
-      "selection_rating": 68.69,
-      "shirt": "#FFFFFF"
-    },
-    {
-      "name": "Mitchell",
-      "team": "Crystal Palace",
-      "position": "DEF",
-      "price": 4.5,
-      "selection_rating": 62.68,
-      "shirt": "#1B458F"
-    },
-    {
-      "name": "Zubimendi",
-      "team": "Arsenal",
-      "position": "MID",
-      "price": 5.5,
-      "selection_rating": 61.97,
-      "shirt": "#EF0107"
+      "selection_rating": 0.0,
+      "medical": "Available",
+      "fixture_difficulty": 3.0,
+      "recommendation": "Keep",
+      "reason": "Acceptable fitness and reasonable fixtures."
     }
   ]
 }
