@@ -42,8 +42,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
       "TOT": "#FFFFFF",
       "LIV": "#C8102E",
       "FUL": "#FFFFFF",
-      "MCI": "#6CABDD",
-      "MID": "#6d4aff"
+      "MCI": "#6CABDD"
     };
 
     const noteMeta = {
@@ -113,7 +112,20 @@ fetch('./dashboard.json', { cache: 'no-store' })
     const planTasks = Array.isArray(data.plan?.tasks) ? data.plan.tasks : [];
     const captainText = data.captain?.name ?? 'Thiago';
     const viceText = data.vice_captain?.name ?? 'Guéhi';
-    const finalVerdict = data.judge?.verdict ?? 'High confidence';
+
+    const starting = Array.isArray(data.starting_xi) && data.starting_xi.length
+      ? data.starting_xi.slice()
+      : (Array.isArray(data.squad) ? data.squad.slice(0, 11) : []);
+
+    const bench = Array.isArray(data.bench) ? data.bench.slice() : (Array.isArray(data.squad) ? data.squad.slice(11, 15) : []);
+
+    const ratings = starting
+      .map(p => Number(p.selection_rating || 0))
+      .filter(n => Number.isFinite(n) && n > 0);
+
+    const avgRating = ratings.length
+      ? (ratings.reduce((a, b) => a + b, 0) / ratings.length)
+      : 0;
 
     document.getElementById('reasoningList').innerHTML = `
       <div class="reason-item">
@@ -133,15 +145,31 @@ fetch('./dashboard.json', { cache: 'no-store' })
       </div>
 
       <div class="reason-item">
-        <div class="reason-icon">🏁</div>
+        <div class="reason-icon">💷</div>
         <div>
-          <div class="reason-title">Final call</div>
-          <div class="reason-text">${finalVerdict}</div>
+          <div class="reason-title">Budget used</div>
+          <div class="reason-text">${data.team_value ?? '—'} spent<br>${bankValue.toFixed(1)}m left in the bank</div>
         </div>
       </div>
 
       <div class="reason-item">
         <div class="reason-icon">⭐</div>
+        <div>
+          <div class="reason-title">Pick strength</div>
+          <div class="reason-text">${avgRating ? avgRating.toFixed(1) : '—'} average across the starting XI</div>
+        </div>
+      </div>
+
+      <div class="reason-item">
+        <div class="reason-icon">🏁</div>
+        <div>
+          <div class="reason-title">Final call</div>
+          <div class="reason-text">${data.judge?.verdict ?? 'High confidence'}<br>${data.judge?.action ?? 'Captain Thiago and keep Guéhi as vice captain.'}</div>
+        </div>
+      </div>
+
+      <div class="reason-item">
+        <div class="reason-icon">👑</div>
         <div>
           <div class="reason-title">Captain / vice</div>
           <div class="reason-text">${captainText}<br>${viceText}</div>
@@ -149,22 +177,16 @@ fetch('./dashboard.json', { cache: 'no-store' })
       </div>
     `;
 
-    const starting = Array.isArray(data.starting_xi) && data.starting_xi.length
-      ? data.starting_xi.slice()
-      : (Array.isArray(data.squad) ? data.squad.slice(0, 11) : []);
-
-    const bench = Array.isArray(data.bench) ? data.bench.slice() : (Array.isArray(data.squad) ? data.squad.slice(11, 15) : []);
-
     const groups = { GK: [], DEF: [], MID: [], FWD: [] };
     starting.forEach(player => {
       if (groups[player.position]) groups[player.position].push(player);
     });
 
     const coords = {
-      GK: [{ x: 50, y: 16 }],
-      DEF: [{ x: 28, y: 35 }, { x: 50, y: 35 }, { x: 72, y: 35 }, { x: 39, y: 56 }, { x: 61, y: 56 }],
-      MID: [{ x: 18, y: 58 }, { x: 40, y: 58 }, { x: 60, y: 58 }, { x: 82, y: 58 }, { x: 50, y: 76 }],
-      FWD: [{ x: 27, y: 82 }, { x: 50, y: 82 }, { x: 73, y: 82 }]
+      GK: [{ x: 50, y: 14 }],
+      DEF: [{ x: 20, y: 33 }, { x: 50, y: 33 }, { x: 80, y: 33 }, { x: 38, y: 52 }, { x: 62, y: 52 }],
+      MID: [{ x: 16, y: 57 }, { x: 38, y: 57 }, { x: 62, y: 57 }, { x: 84, y: 57 }, { x: 50, y: 76 }],
+      FWD: [{ x: 26, y: 82 }, { x: 50, y: 82 }, { x: 74, y: 82 }]
     };
 
     const shirtMarkup = (player, isCaptain = false, isVice = false) => {
@@ -192,7 +214,6 @@ fetch('./dashboard.json', { cache: 'no-store' })
       (groups[pos] || []).forEach((player, idx) => {
         lineup.push({
           ...player,
-          pos,
           coord: coords[pos][idx]
         });
       });
@@ -207,7 +228,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
           <div class="player-card">
             <div class="player-name">${player.name || 'Unknown'}</div>
             <div class="player-team">${player.team || '—'}</div>
-            <div class="player-price">£${Number(player.score || 0).toFixed(2)}</div>
+            <div class="player-price">£${Number(player.price || 0).toFixed(1)}m</div>
           </div>
         </div>
       `;
@@ -219,7 +240,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
           ${shirtMarkup(player, false, false)}
           <div class="player-name">${player.name || 'Unknown'}</div>
           <div class="player-team">${player.team || '—'}</div>
-          <div class="player-price">£${Number(player.score || 0).toFixed(2)}</div>
+          <div class="player-price">£${Number(player.price || 0).toFixed(1)}m</div>
           <div class="subtext">${idx + 1}. ${player.position || '—'}</div>
         </div>
       `;
