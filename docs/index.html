@@ -3,131 +3,103 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KuranguPedalFC.ai</title>
+  <title>KuranguPedalFC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="app-shell">
     <header class="topbar">
       <div class="brand">
-        <div class="logo">KP</div>
+        <div class="brand-mark">KP</div>
         <div>
-          <div class="brand-name">KuranguPedalFC.ai</div>
-          <div class="brand-sub">Fantasy Premier League Manager</div>
+          <div class="brand-name">KuranguPedalFC</div>
+          <div class="brand-sub">Weekly FPL briefing</div>
         </div>
       </div>
 
-      <nav class="nav" aria-label="Primary">
-        <a class="nav-item active" href="#">Dashboard</a>
-        <a class="nav-item" href="#">My Squad</a>
-        <a class="nav-item" href="#">Match Plan</a>
-        <a class="nav-item" href="#">Player Notes</a>
-        <a class="nav-item" href="#">History</a>
-        <a class="nav-item" href="#">Settings</a>
-      </nav>
-
-      <div class="top-right">
+      <div class="top-meta">
         <div class="gw-pill" id="gwPill">Gameweek 1</div>
-        <div class="updated" id="updatedText">Last updated: just now</div>
+        <div class="updated" id="updatedText">Updated just now</div>
       </div>
     </header>
 
-    <div class="content-grid">
-      <aside class="left-rail">
-        <section class="panel overview">
-          <h2>Team Overview</h2>
-          <div class="panel-subtext">Budget, bank, and squad status at a glance.</div>
-          <div class="overview-list">
-            <div><span>Team Value</span><strong id="teamValue">£100.0m</strong></div>
-            <div><span>Bank</span><strong id="bankValue">£0.0m</strong></div>
-            <div><span>Free Transfers</span><strong>1</strong></div>
-            <div><span>Rank</span><strong id="rankValue">-</strong></div>
+    <section class="hero-grid">
+      <div class="panel hero-panel">
+        <div class="hero-label">Projected team points</div>
+        <div class="hero-points" id="projectedPoints">0</div>
+        <div class="hero-sub" id="heroSub">This week: no call yet.</div>
+      </div>
+
+      <div class="panel call-panel">
+        <div class="section-title">Immediate call</div>
+        <div class="call-text" id="nextMoveText">Loading...</div>
+        <div class="call-meta" id="callMeta">Base squad locked for the season.</div>
+      </div>
+
+      <div class="panel stats-panel">
+        <div class="mini-stat">
+          <span>Team value</span>
+          <strong id="teamValue">£0.0m</strong>
+        </div>
+        <div class="mini-stat">
+          <span>Bank</span>
+          <strong id="bankValue">£0.0m</strong>
+        </div>
+        <div class="mini-stat">
+          <span>Formation</span>
+          <strong id="formationValue">3-5-2</strong>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-grid">
+      <section class="panel pitch-panel">
+        <div class="section-head">
+          <div>
+            <h2>Locked squad</h2>
+            <p>Same skeleton team for the whole season. Weekly advice changes underneath.</p>
           </div>
-        </section>
+          <div class="chip soft">Base squad</div>
+        </div>
+        <div class="pitch" id="pitchArea"></div>
+      </section>
 
-        <section class="panel mini-card">
-          <h3>Captain</h3>
-          <div class="big-name" id="captainName">Gabriel</div>
-          <div class="subtext" id="captainMeta">Arsenal &middot; DEF</div>
-          <div class="badge-circle">C</div>
-        </section>
-
-        <section class="panel mini-card">
-          <h3>Vice Captain</h3>
-          <div class="big-name" id="viceCaptainName">Semenyo</div>
-          <div class="subtext" id="viceCaptainMeta">Man City &middot; MID</div>
-          <div class="badge-circle">VC</div>
-        </section>
-      </aside>
-
-      <main class="center-col">
-        <section class="panel pitch-panel">
-          <div class="section-head">
-            <div>
-              <h1>Your Gameweek 1 Squad</h1>
-              <span class="formation-pill" id="formationPill">3-5-2</span>
-            </div>
+      <section class="panel transfer-panel">
+        <div class="section-head">
+          <div>
+            <h2>Transfer watch</h2>
+            <p>Only the moves that matter this week.</p>
           </div>
-          <div class="panel-subtext pitch-caption">A clean opening XI with player-by-player notes underneath.</div>
-          <div class="pitch" id="pitchArea"></div>
-        </section>
+          <div class="chip soft">Weekly</div>
+        </div>
+        <div id="transferWatch" class="transfer-list"></div>
+      </section>
 
-        <section class="panel subs-panel">
-          <h2>Substitutes</h2>
-          <div class="panel-subtext">Bench cover for the current gameweek.</div>
-          <div class="subs-row" id="subsRow"></div>
-        </section>
-
-        <section class="panel reports-panel">
-          <div class="section-head">
-            <div>
-              <h2>Player reports</h2>
-              <div class="panel-subtext">Why each starter is in the XI and what the bench gives you.</div>
-            </div>
+      <section class="panel chip-panel">
+        <div class="section-head">
+          <div>
+            <h2>Chip watch</h2>
+            <p>Bench boost, triple captain, free hit.</p>
           </div>
+          <div class="chip soft">Decision</div>
+        </div>
+        <div id="chipWatch" class="chip-grid"></div>
+      </section>
 
-          <div class="report-columns">
-            <div class="report-section">
-              <h3>Starting XI</h3>
-              <div id="startingReports" class="report-grid"></div>
-            </div>
-
-            <div class="report-section">
-              <h3>Bench</h3>
-              <div id="benchReports" class="report-grid"></div>
-            </div>
+      <section class="panel focus-panel">
+        <div class="section-head">
+          <div>
+            <h2>Weekly focus</h2>
+            <p>Captain, vice captain, and any player that needs attention.</p>
           </div>
-        </section>
-
-        <section class="panel mobile-squad-panel" id="mobileSquadPanel"></section>
-      </main>
-
-      <aside class="right-rail">
-        <section class="panel move-panel">
-          <div class="panel-icon">➡</div>
-          <h2>Next Best Move</h2>
-          <div class="panel-subtext">The immediate call for this week.</div>
-          <p id="nextMoveText">Hold transfer this week. Reassess after fresh updates and press conferences.</p>
-        </section>
-
-        <section class="panel why-panel">
-          <div class="section-head small">
-            <h2>Why this squad works</h2>
-            <span class="view-details">Quick view</span>
-          </div>
-          <p id="whySummary" class="why-summary"></p>
-          <ul id="whyBullets" class="check-list"></ul>
-        </section>
-
-        <section class="panel snapshot-panel">
-          <div class="section-head small">
-            <h2>Squad Snapshot</h2>
-            <span class="view-details" id="confidencePill">High confidence</span>
-          </div>
-          <div id="snapshotGrid" class="snapshot-grid"></div>
-        </section>
-      </aside>
-    </div>
+          <div class="chip soft">Short notes</div>
+        </div>
+        <div id="focusCards" class="focus-grid"></div>
+      </section>
+    </main>
   </div>
 
   <script src="app.js"></script>
