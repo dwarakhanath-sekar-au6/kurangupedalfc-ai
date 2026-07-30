@@ -1,11 +1,10 @@
 :root {
-  --bg: #eef2ec;
+  --bg: #f2f5f1;
   --card: #ffffff;
   --card-2: #f8faf7;
-  --line: #e3e8e0;
+  --line: #e2e8e0;
   --text: #111827;
   --muted: #64748b;
-  --muted-2: #94a3b8;
   --accent: #0f7a54;
   --accent-2: #1d4ed8;
   --good: #15803d;
@@ -17,18 +16,19 @@
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+
 body {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--text);
   background:
     radial-gradient(circle at top left, rgba(15, 122, 84, 0.08), transparent 32%),
-    linear-gradient(180deg, #f5f7f4 0%, var(--bg) 100%);
+    linear-gradient(180deg, #f7f9f6 0%, var(--bg) 100%);
 }
 
 .app-shell {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 22px 22px 28px;
+  padding: 22px;
 }
 
 .topbar {
@@ -83,7 +83,7 @@ body {
   padding: 10px 14px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.85);
   font-size: 13px;
   font-weight: 700;
 }
@@ -109,7 +109,7 @@ body {
 }
 
 .hero-panel, .call-panel, .stats-panel,
-.pitch-panel, .transfer-panel, .chip-panel, .focus-panel {
+.pitch-panel, .subs-panel, .transfer-panel, .chip-panel, .notes-panel {
   padding: 20px;
 }
 
@@ -189,18 +189,12 @@ body {
 
 .content-grid {
   display: grid;
-  grid-template-columns: 1.45fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
 .pitch-panel {
   grid-column: 1 / -1;
-}
-
-.transfer-panel,
-.chip-panel,
-.focus-panel {
-  min-height: 220px;
 }
 
 .section-head {
@@ -247,9 +241,9 @@ body {
   border: 1px solid #d8e5d8;
   overflow: hidden;
   background:
-    linear-gradient(90deg, rgba(255,255,255,0.18) 0 50%, transparent 50% 100%),
-    linear-gradient(180deg, rgba(255,255,255,0.16) 0 50%, transparent 50% 100%),
-    radial-gradient(circle at center, rgba(255,255,255,0.26), transparent 56%),
+    linear-gradient(90deg, rgba(255,255,255,0.16) 0 50%, transparent 50% 100%),
+    linear-gradient(180deg, rgba(255,255,255,0.14) 0 50%, transparent 50% 100%),
+    radial-gradient(circle at center, rgba(255,255,255,0.24), transparent 56%),
     linear-gradient(180deg, #dff0dd 0%, #cfe3cb 100%);
 }
 
@@ -342,6 +336,33 @@ body {
   font-weight: 800;
 }
 
+.subs-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.sub-card {
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--card-2);
+  text-align: center;
+}
+
+.sub-card .pitch-card {
+  display: none;
+}
+
+.sub-card .shirt-wrap {
+  width: 52px;
+  height: 58px;
+}
+
+.sub-card .pitch-name {
+  margin-top: 2px;
+}
+
 .transfer-list {
   display: grid;
   gap: 12px;
@@ -377,12 +398,14 @@ body {
   margin-top: 4px;
   color: var(--muted);
   font-size: 12px;
+  line-height: 1.4;
 }
 
 .transfer-arrow {
   font-size: 22px;
   color: var(--accent);
   font-weight: 900;
+  text-align: center;
 }
 
 .transfer-gain {
@@ -531,7 +554,7 @@ body {
   }
 
   .hero-panel, .call-panel, .stats-panel,
-  .pitch-panel, .transfer-panel, .chip-panel, .focus-panel {
+  .pitch-panel, .subs-panel, .transfer-panel, .chip-panel, .notes-panel {
     padding: 16px;
   }
 
@@ -560,6 +583,10 @@ body {
     font-size: 12px;
   }
 
+  .subs-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .transfer-card {
     grid-template-columns: 1fr;
     gap: 8px;
@@ -567,7 +594,6 @@ body {
 
   .transfer-arrow {
     transform: rotate(90deg);
-    text-align: center;
   }
 
   .chip-grid {
