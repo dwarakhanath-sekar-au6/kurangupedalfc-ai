@@ -30,7 +30,7 @@
       <div class="panel hero-panel">
         <div class="hero-label">Projected team points</div>
         <div class="hero-points" id="projectedPoints">0</div>
-        <div class="hero-sub" id="heroSub">This week: no call yet.</div>
+        <div class="hero-sub" id="heroSub">This week: loading...</div>
       </div>
 
       <div class="panel call-panel">
@@ -60,11 +60,22 @@
         <div class="section-head">
           <div>
             <h2>Locked squad</h2>
-            <p>Same skeleton team for the whole season. Weekly advice changes underneath.</p>
+            <p>Same skeleton team for the season. Weekly advice changes underneath.</p>
           </div>
           <div class="chip soft">Base squad</div>
         </div>
         <div class="pitch" id="pitchArea"></div>
+      </section>
+
+      <section class="panel subs-panel">
+        <div class="section-head">
+          <div>
+            <h2>Substitutes</h2>
+            <p>Bench cover for this gameweek.</p>
+          </div>
+          <div class="chip soft">Subs</div>
+        </div>
+        <div id="subsRow" class="subs-row"></div>
       </section>
 
       <section class="panel transfer-panel">
@@ -89,13 +100,13 @@
         <div id="chipWatch" class="chip-grid"></div>
       </section>
 
-      <section class="panel focus-panel">
+      <section class="panel notes-panel">
         <div class="section-head">
           <div>
-            <h2>Weekly focus</h2>
-            <p>Captain, vice captain, and any player that needs attention.</p>
+            <h2>Player notes</h2>
+            <p>Short football lines only.</p>
           </div>
-          <div class="chip soft">Short notes</div>
+          <div class="chip soft">Focus</div>
         </div>
         <div id="focusCards" class="focus-grid"></div>
       </section>
