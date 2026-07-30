@@ -278,7 +278,7 @@ body {
 
 .slot {
   position: absolute;
-  width: 122px;
+  width: 104px;
   text-align: center;
   transform: translate(-50%, -50%);
 }
@@ -318,7 +318,7 @@ body {
 
 .pitch-card {
   display: inline-block;
-  min-width: 104px;
+  min-width: 92px;
   padding: 10px 10px 9px;
   background: rgba(8, 13, 26, 0.86);
   border: 1px solid rgba(255,255,255,0.08);
@@ -343,6 +343,13 @@ body {
   font-weight: 700;
   color: #ffffff;
   font-size: 13px;
+}
+
+.pitch-exp {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #d9d0ff;
+  font-weight: 700;
 }
 
 .subs-panel {
@@ -398,7 +405,7 @@ body {
   border: 1px solid var(--line);
   border-radius: 18px;
   padding: 14px;
-  min-height: 178px;
+  min-height: 160px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -433,7 +440,21 @@ body {
   white-space: nowrap;
 }
 
-.report-reco {
+.expected-points {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 6px 10px;
+  width: fit-content;
+  background: rgba(109,74,255,0.12);
+  border: 1px solid rgba(109,74,255,0.22);
+  color: #d9d0ff;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.report-role {
   font-weight: 800;
   color: #d9d0ff;
   font-size: 13px;
@@ -442,7 +463,7 @@ body {
 .report-reason {
   color: var(--muted);
   font-size: 13px;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .report-tags {
@@ -491,7 +512,7 @@ body {
 .why-summary {
   margin: 12px 0 10px;
   color: var(--text);
-  line-height: 1.5;
+  line-height: 1.55;
   font-size: 14px;
 }
 
@@ -602,11 +623,11 @@ body {
   }
 
   .slot {
-    width: 90px;
+    width: 92px;
   }
 
   .pitch-card {
-    min-width: 88px;
+    min-width: 84px;
   }
 }
 
