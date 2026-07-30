@@ -21,13 +21,13 @@
         <a class="nav-item active">Dashboard</a>
         <a class="nav-item">My Squad</a>
         <a class="nav-item">Match Plan</a>
-        <a class="nav-item">Notes</a>
+        <a class="nav-item">Player Notes</a>
         <a class="nav-item">History</a>
         <a class="nav-item">Settings</a>
       </nav>
 
       <div class="top-right">
-        <div class="gw-pill">Gameweek 1</div>
+        <div class="gw-pill" id="gwPill">Gameweek 1</div>
         <div class="updated" id="updatedText">Last updated: just now</div>
       </div>
     </header>
@@ -58,12 +58,6 @@
           <div class="subtext" id="viceCaptainMeta">Crystal Palace • DEF</div>
           <div class="badge-circle">VC</div>
         </section>
-
-        <section class="panel notes">
-          <h2>Match Notes</h2>
-          <div class="panel-subtext">What changed and why it matters.</div>
-          <div id="notesList" class="notes-list"></div>
-        </section>
       </aside>
 
       <main class="center-col">
@@ -71,17 +65,40 @@
           <div class="section-head">
             <div>
               <h1>Your Gameweek 1 Squad</h1>
-              <span class="formation-pill">3-4-3</span>
+              <span class="formation-pill" id="formationPill">3-4-3</span>
             </div>
           </div>
-          <div class="panel-subtext pitch-caption">Balanced setup with the strongest starters in front of the bench.</div>
+          <div class="panel-subtext pitch-caption">
+            A clean opening XI with player-by-player notes underneath.
+          </div>
           <div class="pitch" id="pitchArea"></div>
         </section>
 
         <section class="panel subs-panel">
           <h2>Substitutes</h2>
-          <div class="panel-subtext">Bench order and cover options.</div>
+          <div class="panel-subtext">Bench cover for the current gameweek.</div>
           <div class="subs-row" id="subsRow"></div>
+        </section>
+
+        <section class="panel reports-panel">
+          <div class="section-head">
+            <div>
+              <h2>Player reports</h2>
+              <div class="panel-subtext">Why each starter is in the XI and what the bench gives you.</div>
+            </div>
+          </div>
+
+          <div class="report-columns">
+            <div class="report-section">
+              <h3>Starting XI</h3>
+              <div id="startingReports" class="report-grid"></div>
+            </div>
+
+            <div class="report-section">
+              <h3>Bench</h3>
+              <div id="benchReports" class="report-grid"></div>
+            </div>
+          </div>
         </section>
       </main>
 
@@ -93,35 +110,21 @@
           <p id="nextMoveText">Hold transfer this week. Reassess after fresh updates and press conferences.</p>
         </section>
 
-        <section class="panel status-panel">
-          <h2>Team Status</h2>
-          <div class="panel-subtext">Checks that fed the final call.</div>
-          <div class="status-list" id="statusList"></div>
-        </section>
-
         <section class="panel why-panel">
           <div class="section-head small">
-            <h2>Why this squad?</h2>
-            <span class="view-details">View details</span>
+            <h2>Why this team?</h2>
+            <span class="view-details">Quick view</span>
           </div>
-          <div class="panel-subtext">Budget use, strength, and the thinking behind the picks.</div>
-          <div id="reasoningList" class="reasoning-list"></div>
+          <p id="whySummary" class="why-summary"></p>
+          <ul id="whyBullets" class="check-list"></ul>
         </section>
 
-        <section class="panel architecture-panel">
+        <section class="panel snapshot-panel">
           <div class="section-head small">
-            <h2>How it works</h2>
-            <span class="view-details">Weekly flow</span>
+            <h2>Squad Snapshot</h2>
+            <span class="view-details" id="confidencePill">High confidence</span>
           </div>
-          <div class="panel-subtext">The behind-the-scenes path from request to squad.</div>
-          <div class="arch-list">
-            <div>1. You ask for a squad or transfer decision</div>
-            <div>2. The planner breaks the request into football tasks</div>
-            <div>3. Fitness, fixtures, form, and news are checked</div>
-            <div>4. Final review checks the recommendation</div>
-            <div>5. The result is written to dashboard.json</div>
-            <div>6. The website reads dashboard.json and displays it</div>
-          </div>
+          <div id="snapshotGrid" class="snapshot-grid"></div>
         </section>
       </aside>
     </div>
