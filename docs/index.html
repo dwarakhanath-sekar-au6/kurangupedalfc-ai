@@ -11,24 +11,24 @@
     <div class="hero">
       <div class="hero-card">
         <h1 class="hero-title">KuranguPedalFC.ai</h1>
-        <p class="hero-subtitle">Your fantasy football AI manager powered by agents, memory, RAG, and judge logic.</p>
+        <p class="hero-subtitle">Your fantasy football buddy for squad picks, captain calls, and weekly decisions.</p>
         <div class="pills">
-          <span class="pill">Planner Agent</span>
-          <span class="pill">Injury Agent</span>
-          <span class="pill">News Agent</span>
-          <span class="pill">Transfer Agent</span>
-          <span class="pill">Judge Agent</span>
+          <span class="pill">Planner</span>
+          <span class="pill">Medical Review</span>
+          <span class="pill">Fixture Review</span>
+          <span class="pill">Scout Review</span>
+          <span class="pill">Final Review</span>
         </div>
       </div>
 
       <div class="hero-side">
         <div class="card side-card">
           <h3>Next best move</h3>
-          <p>Hold transfer this week. Reassess after press conferences.</p>
+          <p>Hold transfer this week. Reassess after fresh updates.</p>
         </div>
         <div class="card side-card">
-          <h3>Agent status</h3>
-          <p>Planner: Active<br>Injury: Active<br>Transfer: Active<br>Judge: Active</p>
+          <h3>Status</h3>
+          <p>Planner: Ready<br>Medical: Ready<br>Fixture: Ready<br>Scout: Ready</p>
         </div>
       </div>
     </div>
@@ -38,8 +38,8 @@
     <div class="grid-2">
       <div class="card">
         <div class="section-title">
-          <h2>AI Insights</h2>
-          <span class="section-badge">Reasoned by agents</span>
+          <h2>Weekly Notes</h2>
+          <span class="section-badge">From services</span>
         </div>
         <div id="insights"></div>
       </div>
@@ -47,46 +47,33 @@
       <div class="card">
         <div class="section-title">
           <h2>Dream Team</h2>
-          <span class="section-badge">Gameweek 29</span>
+          <span class="section-badge">Gameweek view</span>
         </div>
         <div id="squad" class="squad-grid"></div>
       </div>
     </div>
 
-    <div class="card">
-  <div class="section-title">
-    <h2>AI Reasoning</h2>
-    <span class="section-badge">Planner + Judge</span>
-  </div>
-  <div id="reasoning"></div>
-</div>
-
     <div class="grid-2">
       <div class="card">
         <div class="section-title">
-          <h2>Agent Architecture</h2>
-          <span class="section-badge">How it works</span>
+          <h2>Why these picks?</h2>
+          <span class="section-badge">Planner + Final Review</span>
         </div>
-        <div class="arch">
-          <div class="arch-step">1. User asks for a transfer or captain recommendation</div>
-          <div class="arch-step">2. Planner Agent breaks the goal into subtasks</div>
-          <div class="arch-step">3. Injury / News / Fixture Agents gather evidence</div>
-          <div class="arch-step">4. Judge Agent checks consistency and safety</div>
-          <div class="arch-step">5. Human-in-the-loop approves critical actions later</div>
-        </div>
+        <div id="reasoning"></div>
       </div>
 
       <div class="card">
         <div class="section-title">
-          <h2>Why this is useful</h2>
-          <span class="section-badge">TED ready</span>
+          <h2>Architecture</h2>
+          <span class="section-badge">How it works</span>
         </div>
-        <p class="small">
-          This MVP demonstrates the core ideas behind modern AI systems: tokens, embeddings, RAG, planning,
-          judge agents, memory, tool calling, and multi-agent orchestration.
-        </p>
-        <div class="footer-note">
-          Tuesday night refresh will update the dashboard automatically.
+        <div class="arch">
+          <div class="arch-step">1. User asks for a squad or transfer decision</div>
+          <div class="arch-step">2. Planner breaks the request into football tasks</div>
+          <div class="arch-step">3. Medical, Fixture, Scout, and News services gather evidence</div>
+          <div class="arch-step">4. Final Review checks whether the recommendation makes sense</div>
+          <div class="arch-step">5. The result is written to dashboard.json</div>
+          <div class="arch-step">6. The website reads dashboard.json and displays the result</div>
         </div>
       </div>
     </div>
