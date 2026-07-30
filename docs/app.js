@@ -73,15 +73,16 @@ fetch('./dashboard.json', { cache: 'no-store' })
     const judge = isObj(data.judge) ? data.judge : {};
     const recommendation = isObj(data.recommendation) ? data.recommendation : {};
     const squadTrace = isObj(data.squad_trace) ? data.squad_trace : {};
+    const managerNotes = isObj(data.manager_notes) ? data.manager_notes : {};
     const playerCards = toArray(data.player_cards);
 
     const captain = isObj(recommendation.captain) ? recommendation.captain : (isObj(squadTrace.captain) ? squadTrace.captain : {});
     const viceCaptain = isObj(recommendation.vice_captain) ? recommendation.vice_captain : (isObj(squadTrace.vice_captain) ? squadTrace.vice_captain : {});
 
-    const captainName = captain.player || captain.name || data.captain?.name || 'Thiago';
-    const viceCaptainName = viceCaptain.player || viceCaptain.name || data.vice_captain?.name || 'Guéhi';
+    const captainName = captain.player || captain.name || 'Thiago';
+    const viceCaptainName = viceCaptain.player || viceCaptain.name || 'Guéhi';
 
-    const teamValueText = metadata.team_value || data.team_value || '£88.0m';
+    const teamValueText = metadata.team_value || '£100.0m';
     const squadValue = parseMoney(teamValueText);
     const bankValue = Number.isFinite(squadValue) ? Math.max(0, 100 - squadValue) : 0;
 
@@ -141,19 +142,6 @@ fetch('./dashboard.json', { cache: 'no-store' })
       `;
     };
 
-    const renderPitchPlayer = (player, isCaptain = false, isVice = false) => {
-      return `
-        <div class="slot">
-          ${renderShirt(player, isCaptain, isVice)}
-          <div class="pitch-card">
-            <div class="pitch-name">${escapeHtml(player.player)}</div>
-            <div class="pitch-meta">${escapeHtml(player.team)} • ${escapeHtml(player.position)}</div>
-            <div class="pitch-price">£${player.price.toFixed(1)}m</div>
-          </div>
-        </div>
-      `;
-    };
-
     const renderReportCard = (player, isBench = false) => {
       const rec = String(player.recommendation || 'Keep');
       const cardClass = tone(rec);
@@ -184,7 +172,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
       `;
     };
 
-    const currentGw = metadata.gameweek || data.gameweek || 1;
+    const currentGw = metadata.gameweek || 1;
 
     const startingXIEl = document.getElementById('startingReports');
     const benchEl = document.getElementById('benchReports');
@@ -200,13 +188,13 @@ fetch('./dashboard.json', { cache: 'no-store' })
 
     document.getElementById('teamValue').textContent = teamValueText;
     document.getElementById('bankValue').textContent = `£${bankValue.toFixed(1)}m`;
-    document.getElementById('rankValue').textContent = metadata.rank || data.rank || '-';
+    document.getElementById('rankValue').textContent = metadata.rank || '-';
 
     document.getElementById('captainName').textContent = captainName;
-    document.getElementById('captainMeta').textContent = `${captain.team || captain.Team || 'Brentford'} • ${captain.position || captain.Position || 'FWD'}`;
+    document.getElementById('captainMeta').textContent = `${captain.team || 'Brentford'} • ${captain.position || 'FWD'}`;
 
     document.getElementById('viceCaptainName').textContent = viceCaptainName;
-    document.getElementById('viceCaptainMeta').textContent = `${viceCaptain.team || viceCaptain.Team || 'Crystal Palace'} • ${viceCaptain.position || viceCaptain.Position || 'DEF'}`;
+    document.getElementById('viceCaptainMeta').textContent = `${viceCaptain.team || 'Crystal Palace'} • ${viceCaptain.position || 'DEF'}`;
 
     const judgeVerdict = firstText(judge.verdict, 'High confidence');
     const judgeConfidence = firstText(judge.confidence, 'High');
@@ -214,15 +202,17 @@ fetch('./dashboard.json', { cache: 'no-store' })
     const judgeCall = firstText(judge.final_call, judge.action, `Captain ${captainName} and keep ${viceCaptainName} as vice captain.`);
 
     document.getElementById('nextMoveText').textContent = judgeCall;
+    document.getElementById('confidencePill').textContent = judgeConfidence;
 
-    const whySummary = firstText(
-      `This squad was built from the current pool, keeping the team within budget and setting the captaincy in place.`
-    );
+    const formation = recommendation.formation || `${starting.filter(p => p.position === 'DEF').length}-${starting.filter(p => p.position === 'MID').length}-${starting.filter(p => p.position === 'FWD').length}`;
 
-    const whyBullets = [
-      `Team value: ${teamValueText} • Bank: £${bankValue.toFixed(1)}m.`,
-      `Captain: ${captainName} • Vice captain: ${viceCaptainName}.`,
-      `Final verdict: ${judgeVerdict} (${judgeConfidence}).`
+    document.getElementById('formationPill').textContent = formation;
+
+    const whySummary = managerNotes.summary || `Balanced ${formation} build that uses the full budget, keeps a usable bench, and gives you a clear captain and vice captain.`;
+    const whyBullets = managerNotes.bullets || [
+      `£${squadValue.toFixed(1)}m spent, £${bankValue.toFixed(1)}m left.`,
+      `Formation: ${formation}.`,
+      `Captain: ${captainName}. Vice captain: ${viceCaptainName}.`
     ];
 
     if (whySummaryEl) whySummaryEl.textContent = whySummary;
@@ -231,8 +221,8 @@ fetch('./dashboard.json', { cache: 'no-store' })
     const snapshotCards = [
       { label: 'Team Value', value: teamValueText, sub: 'Current squad spend' },
       { label: 'Bank', value: `£${bankValue.toFixed(1)}m`, sub: 'Available for transfers' },
-      { label: 'Confidence', value: judgeConfidence, sub: 'Current recommendation' },
-      { label: 'Verdict', value: judgeVerdict, sub: 'Final call status' }
+      { label: 'Formation', value: formation, sub: 'Best shape for this squad' },
+      { label: 'Verdict', value: `${judgeVerdict}`, sub: `Confidence: ${judgeConfidence}` }
     ];
 
     if (snapshotGridEl) {
@@ -257,9 +247,6 @@ fetch('./dashboard.json', { cache: 'no-store' })
       MID: [{ x: 16, y: 57 }, { x: 38, y: 57 }, { x: 62, y: 57 }, { x: 84, y: 57 }, { x: 50, y: 76 }],
       FWD: [{ x: 26, y: 82 }, { x: 50, y: 82 }, { x: 74, y: 82 }]
     };
-
-    const formation = `${groups.DEF.length}-${groups.MID.length}-${groups.FWD.length}`;
-    document.getElementById('formationPill').textContent = formation;
 
     const lineup = [];
     ['GK', 'DEF', 'MID', 'FWD'].forEach(pos => {
@@ -301,40 +288,12 @@ fetch('./dashboard.json', { cache: 'no-store' })
       `).join('');
     }
 
-    // Player report panels
-    const buildReportHtml = (player, isBench = false) => {
-      const tags = [];
-      if (player.medical) tags.push(`<span class="tag tag-soft">${escapeHtml(player.medical)}</span>`);
-      if (player.fixture_difficulty != null && Number.isFinite(Number(player.fixture_difficulty))) {
-        tags.push(`<span class="tag tag-accent">Fixture ${Number(player.fixture_difficulty).toFixed(1)}</span>`);
-      }
-
-      return `
-        <article class="report-card ${tone(player.recommendation)}">
-          <div class="report-head">
-            <div>
-              <div class="report-name">${escapeHtml(player.player)}</div>
-              <div class="report-meta">${escapeHtml(player.team)} • ${escapeHtml(player.position)}${isBench ? ' • Bench' : ''}</div>
-            </div>
-            <div class="report-price">£${player.price.toFixed(1)}m</div>
-          </div>
-
-          <div class="report-reco">${escapeHtml(player.recommendation)}</div>
-          <div class="report-reason">${escapeHtml(player.reason)}</div>
-
-          <div class="report-tags">
-            ${tags.join('')}
-          </div>
-        </article>
-      `;
-    };
-
     if (startingXIEl) {
-      startingXIEl.innerHTML = starting.map(p => buildReportHtml(p, false)).join('');
+      startingXIEl.innerHTML = starting.map(p => renderReportCard(p, false)).join('');
     }
 
     if (benchEl) {
-      benchEl.innerHTML = bench.map(p => buildReportHtml(p, true)).join('');
+      benchEl.innerHTML = bench.map(p => renderReportCard(p, true)).join('');
     }
   })
   .catch(err => {
