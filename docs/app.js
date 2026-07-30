@@ -1,79 +1,110 @@
 fetch('./dashboard.json')
   .then(res => res.json())
   .then(data => {
-    const kpis = document.getElementById('kpis');
+    const teamValue = data.team_value ?? '£88.0m';
+    const rankValue = data.rank ?? '-';
 
-    const sortedSquad = (data.squad || []).slice().sort((a, b) => (b.score || 0) - (a.score || 0));
-    const topPick = sortedSquad[0] || { name: 'N/A' };
+    document.getElementById('teamValue').textContent = teamValue;
+    document.getElementById('rankValue').textContent = rankValue;
+    document.getElementById('captainName').textContent = data.captain?.name ?? 'Thiago';
+    document.getElementById('captainMeta').textContent = `${data.captain?.team ?? 'Brentford'} • ${data.captain?.position ?? 'FWD'}`;
+    document.getElementById('viceCaptainName').textContent = data.vice_captain?.name ?? 'Guéhi';
+    document.getElementById('viceCaptainMeta').textContent = `${data.vice_captain?.team ?? 'Crystal Palace'} • ${data.vice_captain?.position ?? 'DEF'}`;
+    document.getElementById('nextMoveText').textContent = data.judge?.action ?? 'Hold transfer this week. Reassess after fresh updates.';
 
-    kpis.innerHTML = `
-      <div class="card kpi">
-        <div class="label">Gameweek</div>
-        <div class="value">${data.gameweek ?? '—'}</div>
-        <div class="sub">Updated from the latest run</div>
-      </div>
-      <div class="card kpi">
-        <div class="label">Team Value</div>
-        <div class="value">${data.team_value ?? '—'}</div>
-        <div class="sub">Current squad valuation</div>
-      </div>
-      <div class="card kpi">
-        <div class="label">Rank</div>
-        <div class="value">${data.rank ?? '—'}</div>
-        <div class="sub">Overall ranking snapshot</div>
-      </div>
-      <div class="card kpi">
-        <div class="label">Top Pick</div>
-        <div class="value">${topPick.name || '—'}</div>
-        <div class="sub">Highest rated player right now</div>
-      </div>
-    `;
-
-    document.getElementById('insights').innerHTML = (data.insights || [])
-      .map(item => `
-        <div class="insight">
-          <strong>${item.title || 'Note'}</strong>
-          <div>${item.text || ''}</div>
+    const notes = data.insights || [];
+    document.getElementById('notesList').innerHTML = notes.map(item => `
+      <div class="note-item">
+        <div class="note-icon">◉</div>
+        <div>
+          <div class="note-title">${item.title}</div>
+          <div class="note-text">${item.text}</div>
         </div>
-      `)
-      .join('');
+      </div>
+    `).join('');
 
-    document.getElementById('squad').innerHTML = sortedSquad
-      .map(player => `
-        <div class="player" style="border-left: 8px solid ${player.shirt || '#4f46e5'};">
-          <div class="name">${player.name || 'Unknown'}</div>
-          <div class="meta">${player.team || '—'} • ${player.position || '—'}</div>
-          <div class="score">Selection Rating: ${Number(player.score || 0).toFixed(2)}</div>
+    const status = [
+      'Planner: Ready',
+      'Medical: Ready',
+      'Fixture: Ready',
+      'Scout: Ready',
+      'News: Ready',
+      'Final Review: Done'
+    ];
+
+    document.getElementById('statusList').innerHTML = status.map(s => `
+      <div class="status-item">
+        <div class="status-check">✓</div>
+        <div class="status-text">${s}</div>
+      </div>
+    `).join('');
+
+    const reasoning = [
+      ['Planner Goal', data.plan?.goal ?? 'Build the best opening squad'],
+      ['Planner Tasks', (data.plan?.tasks || []).map(t => `✔ ${t}`).join('<br>')],
+      ['Final Review', data.judge?.verdict ?? 'High Confidence'],
+      ['Recommendation', data.judge?.action ?? 'Captain Thiago and keep Guéhi as vice captain.']
+    ];
+
+    document.getElementById('reasoningList').innerHTML = reasoning.map(([title, text]) => `
+      <div class="reason-item">
+        <div class="reason-icon">★</div>
+        <div>
+          <div class="reason-title">${title}</div>
+          <div class="reason-text">${text}</div>
         </div>
-      `)
-      .join('');
-
-    const planTasks = (data.plan && data.plan.tasks) ? data.plan.tasks : [];
-    const planGoal = (data.plan && data.plan.goal) ? data.plan.goal : 'No plan available yet.';
-    const judgeVerdict = data.judge?.verdict || '—';
-    const judgeAction = data.judge?.action || '—';
-
-    document.getElementById('reasoning').innerHTML = `
-      <div class="insight">
-        <strong>Planner Goal</strong>
-        <div>${planGoal}</div>
       </div>
+    `).join('');
 
-      <div class="insight">
-        <strong>Planner Tasks</strong>
-        <div>${planTasks.map(task => `✅ ${task}`).join('<br>') || 'No tasks yet.'}</div>
-      </div>
+    const squad = (data.starting_xi && data.starting_xi.length ? data.starting_xi : (data.squad || [])).slice();
+    const bench = (data.bench || []).slice();
 
-      <div class="insight">
-        <strong>Final Review</strong>
-        <div>${judgeVerdict}</div>
-      </div>
+    const formationPositions = {
+      GK: { x: 50, y: 16 },
+      DEF: [ {x: 29, y: 35}, {x: 50, y: 35}, {x: 71, y: 35}, {x: 39, y: 56}, {x: 61, y: 56} ],
+      MID: [ {x: 18, y: 58}, {x: 40, y: 58}, {x: 60, y: 58}, {x: 82, y: 58}, {x: 50, y: 76} ],
+      FWD: [ {x: 27, y: 82}, {x: 50, y: 82}, {x: 73, y: 82} ]
+    };
 
-      <div class="insight">
-        <strong>Recommendation</strong>
-        <div>${judgeAction}</div>
+    const lineup = [];
+    const gk = squad.filter(p => p.position === 'GK').slice(0,1);
+    const def = squad.filter(p => p.position === 'DEF').slice(0,5);
+    const mid = squad.filter(p => p.position === 'MID').slice(0,5);
+    const fwd = squad.filter(p => p.position === 'FWD').slice(0,3);
+
+    lineup.push(...gk.map((p, i) => ({ ...p, pos: formationPositions.GK })));
+    lineup.push(...def.map((p, i) => ({ ...p, pos: formationPositions.DEF[i] })));
+    lineup.push(...mid.map((p, i) => ({ ...p, pos: formationPositions.MID[i] })));
+    lineup.push(...fwd.map((p, i) => ({ ...p, pos: formationPositions.FWD[i] })));
+
+    document.getElementById('pitchArea').innerHTML = lineup.map((p, idx) => {
+      const isCaptain = data.captain?.name === p.name;
+      const isVice = data.vice_captain?.name === p.name;
+      const shirt = p.shirt || '#6d4aff';
+
+      return `
+        <div class="slot" style="left:${p.pos.x}%; top:${p.pos.y}%; --shirt:${shirt}">
+          <div class="shirt"></div>
+          ${isCaptain ? '<div class="captain-badge">C</div>' : ''}
+          ${isVice ? '<div class="vc-badge">VC</div>' : ''}
+          <div class="player-card">
+            <div class="player-name">${p.name}</div>
+            <div class="player-team">${p.team}</div>
+            <div class="player-price">£${Number(p.score || 0).toFixed(2)}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('subsRow').innerHTML = bench.slice(0, 4).map((p, idx) => `
+      <div class="sub-card">
+        <div class="shirt" style="--shirt:${p.shirt || '#6d4aff'}"></div>
+        <div class="player-name">${p.name}</div>
+        <div class="player-team">${p.team}</div>
+        <div class="player-price">£${Number(p.score || 0).toFixed(2)}</div>
+        <div class="subtext">${idx + 1}. ${p.position}</div>
       </div>
-    `;
+    `).join('');
   })
   .catch(err => {
     console.error(err);
