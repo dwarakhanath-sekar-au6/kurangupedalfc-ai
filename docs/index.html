@@ -10,20 +10,20 @@
   <div class="app-shell">
     <header class="topbar">
       <div class="brand">
-        <div class="logo">⚽</div>
+        <div class="logo">KP</div>
         <div>
           <div class="brand-name">KuranguPedalFC.ai</div>
           <div class="brand-sub">Fantasy Premier League Manager</div>
         </div>
       </div>
 
-      <nav class="nav">
-        <a class="nav-item active">Dashboard</a>
-        <a class="nav-item">My Squad</a>
-        <a class="nav-item">Match Plan</a>
-        <a class="nav-item">Player Notes</a>
-        <a class="nav-item">History</a>
-        <a class="nav-item">Settings</a>
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-item active" href="#">Dashboard</a>
+        <a class="nav-item" href="#">My Squad</a>
+        <a class="nav-item" href="#">Match Plan</a>
+        <a class="nav-item" href="#">Player Notes</a>
+        <a class="nav-item" href="#">History</a>
+        <a class="nav-item" href="#">Settings</a>
       </nav>
 
       <div class="top-right">
@@ -48,14 +48,14 @@
         <section class="panel mini-card">
           <h3>Captain</h3>
           <div class="big-name" id="captainName">Gabriel</div>
-          <div class="subtext" id="captainMeta">Arsenal • DEF</div>
+          <div class="subtext" id="captainMeta">Arsenal &middot; DEF</div>
           <div class="badge-circle">C</div>
         </section>
 
         <section class="panel mini-card">
           <h3>Vice Captain</h3>
           <div class="big-name" id="viceCaptainName">Semenyo</div>
-          <div class="subtext" id="viceCaptainMeta">Man City • MID</div>
+          <div class="subtext" id="viceCaptainMeta">Man City &middot; MID</div>
           <div class="badge-circle">VC</div>
         </section>
       </aside>
@@ -68,9 +68,7 @@
               <span class="formation-pill" id="formationPill">3-5-2</span>
             </div>
           </div>
-          <div class="panel-subtext pitch-caption">
-            A clean opening XI with player-by-player notes underneath.
-          </div>
+          <div class="panel-subtext pitch-caption">A clean opening XI with player-by-player notes underneath.</div>
           <div class="pitch" id="pitchArea"></div>
         </section>
 
@@ -100,11 +98,13 @@
             </div>
           </div>
         </section>
+
+        <section class="panel mobile-squad-panel" id="mobileSquadPanel"></section>
       </main>
 
       <aside class="right-rail">
         <section class="panel move-panel">
-          <div class="panel-icon">✈</div>
+          <div class="panel-icon">➡</div>
           <h2>Next Best Move</h2>
           <div class="panel-subtext">The immediate call for this week.</div>
           <p id="nextMoveText">Hold transfer this week. Reassess after fresh updates and press conferences.</p>
