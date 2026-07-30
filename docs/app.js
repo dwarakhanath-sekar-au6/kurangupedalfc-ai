@@ -6,6 +6,27 @@ fetch('./dashboard.json', { cache: 'no-store' })
     return res.json();
   })
   .then(data => {
+    const isObj = (v) => v && typeof v === 'object' && !Array.isArray(v);
+    const toArray = (v) => Array.isArray(v) ? v : [];
+    const firstText = (...values) => values.find(v => typeof v === 'string' && v.trim()) || '';
+    const safeNum = (v, fallback = 0) => {
+      const n = Number(v);
+      return Number.isFinite(n) ? n : fallback;
+    };
+    const parseMoney = (value) => {
+      if (typeof value === 'number') return value;
+      if (!value) return NaN;
+      const cleaned = String(value).replace(/[£m,\s]/g, '');
+      const n = parseFloat(cleaned);
+      return Number.isFinite(n) ? n : NaN;
+    };
+    const escapeHtml = (s) => String(s ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+
     const teamColors = {
       "Arsenal": "#EF0107",
       "Aston Villa": "#7B0033",
@@ -45,344 +66,49 @@ fetch('./dashboard.json', { cache: 'no-store' })
       "MCI": "#6CABDD"
     };
 
-    const asArray = (v) => Array.isArray(v) ? v : [];
-    const isObj = (v) => v && typeof v === 'object' && !Array.isArray(v);
-    const firstText = (...values) => values.find(v => typeof v === 'string' && v.trim()) || '';
-    const safeNum = (v, fallback = 0) => {
-      const n = Number(v);
-      return Number.isFinite(n) ? n : fallback;
-    };
-    const listNames = (items, key = 'player', n = 3) => {
-      return asArray(items)
-        .slice(0, n)
-        .map(x => {
-          if (!isObj(x)) return typeof x === 'string' ? x : '';
-          return x[key] || x.Player || x.name || '';
-        })
-        .filter(Boolean);
-    };
-    const getBlock = (v) => isObj(v) ? v : {};
+    const metadata = isObj(data.metadata) ? data.metadata : {};
+    const recommendation = isObj(data.recommendation) ? data.recommendation : {};
+    const services = isObj(data.services) ? data.services : {};
+    const judge = isObj(data.judge) ? data.judge : {};
+    const squadTrace = isObj(data.squad_trace) ? data.squad_trace : {};
 
-    const flow = getBlock(data.decision_flow || data.trace_view || data.trace);
-    const agents = getBlock(data.agent_cards);
-    const squadTrace = getBlock(data.squad_trace);
+    const captain = isObj(recommendation.captain) ? recommendation.captain : (isObj(squadTrace.captain) ? squadTrace.captain : {});
+    const viceCaptain = isObj(recommendation.vice_captain) ? recommendation.vice_captain : (isObj(squadTrace.vice_captain) ? squadTrace.vice_captain : {});
 
-    const plannerFlow = getBlock(flow.planner);
-    const medicalFlow = getBlock(flow.medical);
-    const fixtureFlow = getBlock(flow.fixture);
-    const scoutFlow = getBlock(flow.scout);
-    const newsFlow = getBlock(flow.news);
-    const judgeFlow = getBlock(flow.judge);
+    const captainName = captain.player || captain.name || data.captain?.name || 'Thiago';
+    const viceCaptainName = viceCaptain.player || viceCaptain.name || data.vice_captain?.name || 'Guéhi';
 
-    const plannerAgent = getBlock(agents.planner);
-    const medicalAgent = getBlock(agents.medical);
-    const fixtureAgent = getBlock(agents.fixture);
-    const scoutAgent = getBlock(agents.scout);
-    const newsAgent = getBlock(agents.news);
-    const judgeAgent = getBlock(agents.judge);
+    const teamValueText = metadata.team_value || data.team_value || '£88.0m';
+    const squadValue = parseMoney(teamValueText);
+    const bankValue = Number.isFinite(squadValue) ? Math.max(0, 100 - squadValue) : 0;
 
-    const selectedPlayers = asArray(squadTrace.starting_xi).length
-      ? asArray(squadTrace.starting_xi)
-      : asArray(data.player_cards).slice(0, 11);
+    const starting = toArray(recommendation.starting_xi).length
+      ? toArray(recommendation.starting_xi)
+      : (toArray(squadTrace.starting_xi).length ? toArray(squadTrace.starting_xi) : toArray(data.player_cards));
 
-    const benchPlayers = asArray(squadTrace.bench).length
-      ? asArray(squadTrace.bench)
-      : asArray(data.player_cards).slice(11);
+    const bench = toArray(recommendation.bench).length
+      ? toArray(recommendation.bench)
+      : toArray(squadTrace.bench);
 
-    const captainReport = getBlock(squadTrace.captain);
-    const viceReport = getBlock(squadTrace.vice_captain);
+    const normalizedPlayers = (items) => toArray(items).map(p => ({
+      player: p.player || p.name || p.Player || 'Unknown',
+      team: p.team || p.Team || '—',
+      position: p.position || p.Position || '—',
+      price: safeNum(p.price ?? p.Price ?? 0, 0),
+      recommendation: p.recommendation || p.status || 'Keep',
+      reason: p.reason || '',
+      medical: p.medical || p.MedicalStatus || '',
+      fixture_difficulty: p.fixture_difficulty ?? p.Next3FixtureDifficulty ?? null
+    }));
 
-    const squadValue = safeNum(
-      String(data.team_value || '0').replace(/[£m]/g, ''),
-      0
-    );
-    const bankValue = Math.max(0, 100 - squadValue);
-
-    const notesSection = document.querySelector('.notes');
-    const whySection = document.querySelector('.why-panel');
-    const statusSection = document.querySelector('.status-panel');
-    const moveSection = document.querySelector('.move-panel');
-
-    if (notesSection) {
-      const h2 = notesSection.querySelector('h2');
-      const sub = notesSection.querySelector('.panel-subtext');
-      if (h2) h2.textContent = 'Decision flow';
-      if (sub) sub.textContent = 'What each specialist checked before the final call.';
-    }
-
-    if (whySection) {
-      const h2 = whySection.querySelector('h2');
-      const sub = whySection.querySelector('.panel-subtext');
-      if (h2) h2.textContent = 'Why this squad?';
-      if (sub) sub.textContent = 'Budget use, strength, and the thinking behind the picks.';
-    }
-
-    if (statusSection) {
-      const h2 = statusSection.querySelector('h2');
-      const sub = statusSection.querySelector('.panel-subtext');
-      if (h2) h2.textContent = 'Run status';
-      if (sub) sub.textContent = 'Checks completed for this build.';
-    }
-
-    if (moveSection) {
-      const h2 = moveSection.querySelector('h2');
-      const sub = moveSection.querySelector('.panel-subtext');
-      if (h2) h2.textContent = 'Next best move';
-      if (sub) sub.textContent = 'The immediate call for this week.';
-    }
-
-    document.getElementById('teamValue').textContent = data.team_value ?? '£88.0m';
-    document.getElementById('bankValue').textContent = `£${bankValue.toFixed(1)}m`;
-    document.getElementById('rankValue').textContent = data.rank ?? '-';
-
-    document.getElementById('captainName').textContent = data.captain?.name ?? captainReport.player ?? 'Thiago';
-    document.getElementById('captainMeta').textContent = `${data.captain?.team ?? captainReport.team ?? 'Brentford'} • ${data.captain?.position ?? captainReport.position ?? 'FWD'}`;
-
-    document.getElementById('viceCaptainName').textContent = data.vice_captain?.name ?? viceReport.player ?? 'Guéhi';
-    document.getElementById('viceCaptainMeta').textContent = `${data.vice_captain?.team ?? viceReport.team ?? 'Crystal Palace'} • ${data.vice_captain?.position ?? viceReport.position ?? 'DEF'}`;
-
-    const now = new Date();
-    document.getElementById('updatedText').textContent = `Last updated: ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-
-    const judgeFinalCall =
-      firstText(
-        judgeFlow.final_call,
-        judgeFlow.action,
-        judgeAgent.what_it_did,
-        data.judge?.action,
-        'Review the risk.'
-      );
-
-    document.getElementById('nextMoveText').textContent = judgeFinalCall;
-
-    const statusItems = [
-      { label: 'Planner', value: 'Complete' },
-      { label: 'Fitness review', value: 'Complete' },
-      { label: 'Fixture review', value: 'Complete' },
-      { label: 'Scout review', value: 'Complete' },
-      { label: 'News review', value: 'Complete' },
-      { label: 'Judge', value: 'Complete' }
-    ];
-
-    document.getElementById('statusList').innerHTML = statusItems.map(item => `
-      <div class="status-item">
-        <div class="status-check">✓</div>
-        <div class="status-text">${item.label}: ${item.value}</div>
-      </div>
-    `).join('');
-
-    const plannerGoal = firstText(
-      plannerAgent.output?.goal,
-      plannerFlow.goal,
-      'Build the best GW1 team'
-    );
-
-    const plannerTasks = asArray(
-      plannerAgent.output?.tasks ||
-      plannerFlow.tasks ||
-      plannerFlow.questions
-    );
-
-    const medicalSummary = firstText(
-      medicalAgent.what_it_did,
-      medicalFlow.summary_text,
-      medicalFlow.summary,
-      'Fitness review completed.'
-    );
-
-    const medicalWatch = asArray(
-      medicalAgent.watchlist ||
-      medicalFlow.watchlist ||
-      medicalFlow.top_concerns
-    );
-
-    const fixtureSummary = firstText(
-      fixtureAgent.what_it_did,
-      fixtureFlow.summary_text,
-      fixtureFlow.headline,
-      'Fixture review completed.'
-    );
-
-    const fixtureBest = asArray(
-      fixtureAgent.best_runs ||
-      fixtureFlow.best_runs ||
-      fixtureFlow.easiest_runs
-    );
-
-    const fixtureWorst = asArray(
-      fixtureAgent.worst_runs ||
-      fixtureFlow.worst_runs ||
-      []
-    );
-
-    const scoutSummary = firstText(
-      scoutAgent.what_it_did,
-      scoutFlow.summary_text,
-      scoutFlow.headline,
-      'Scout review completed.'
-    );
-
-    const scoutBestPlayers = asArray(
-      scoutAgent.best_players ||
-      scoutFlow.best_players ||
-      scoutFlow.top_rated
-    );
-
-    const scoutBestValue = asArray(
-      scoutAgent.best_value ||
-      scoutFlow.best_value
-    );
-
-    const newsSummary = firstText(
-      newsAgent.what_it_did,
-      newsFlow.summary_text,
-      newsFlow.headline,
-      'News review completed.'
-    );
-
-    const newsMentions = asArray(
-      newsAgent.mentions ||
-      newsFlow.mentions
-    );
-
-    const judgeVerdict = firstText(
-      judgeAgent.verdict,
-      judgeFlow.verdict,
-      data.judge?.verdict,
-      'Unknown'
-    );
-
-    const judgeConfidence = firstText(
-      judgeAgent.confidence,
-      judgeFlow.confidence,
-      'Unknown'
-    );
-
-    const judgeReason = firstText(
-      judgeAgent.reason,
-      judgeFlow.reason,
-      'Final recommendation produced.'
-    );
-
-    const decisionCards = [
-      {
-        icon: '🎯',
-        title: 'Planner',
-        subtitle: 'Breaks the request into football questions',
-        body: firstText(
-          plannerAgent.what_it_did,
-          plannerFlow.summary,
-          'Asked for fitness, fixtures, form, news, and captaincy checks.'
-        ),
-        items: plannerTasks
-      },
-      {
-        icon: '💚',
-        title: 'Fitness review',
-        subtitle: 'Flags risk before the deadline',
-        body: medicalSummary,
-        items: listNames(medicalWatch, 'player', 5)
-      },
-      {
-        icon: '🗓️',
-        title: 'Fixture review',
-        subtitle: 'Looks for good and bad runs',
-        body: fixtureSummary,
-        items: listNames(fixtureBest, 'player', 5)
-      },
-      {
-        icon: '📈',
-        title: 'Scout review',
-        subtitle: 'Balances form, value, and upside',
-        body: scoutSummary,
-        items: listNames(scoutBestValue.length ? scoutBestValue : scoutBestPlayers, 'player', 5)
-      },
-      {
-        icon: '📰',
-        title: 'News review',
-        subtitle: 'Checks current notes and flags',
-        body: newsSummary,
-        items: listNames(newsMentions, 'player', 5)
-      },
-      {
-        icon: '🏁',
-        title: 'Judge',
-        subtitle: 'Combines the evidence into one call',
-        body: `${judgeVerdict} • ${judgeConfidence}`,
-        items: [judgeFinalCall]
-      }
-    ];
-
-    const decisionFlowHtml = decisionCards.map(card => `
-      <div class="insight">
-        <strong>${card.title}</strong>
-        <div class="subtext" style="margin-top:4px;">${card.subtitle}</div>
-        <div style="margin-top:8px;">${card.body}</div>
-        ${card.items && card.items.length ? `
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;">
-            ${card.items.map(it => `<span style="padding:6px 10px;border-radius:999px;background:rgba(109,74,255,0.14);border:1px solid rgba(109,74,255,0.22);color:#d9d0ff;font-size:12px;">${it}</span>`).join('')}
-          </div>
-        ` : ''}
-      </div>
-    `).join('');
-
-    document.getElementById('notesList').innerHTML = decisionFlowHtml;
-
-    const judgeCall = firstText(
-      judgeAgent.what_it_did,
-      judgeFinalCall,
-      judgeReason
-    );
-
-    const keyReasons = [
-      `Captain: ${data.captain?.name ?? captainReport.player ?? 'Thiago'}`,
-      `Vice captain: ${data.vice_captain?.name ?? viceReport.player ?? 'Guéhi'}`,
-      `Budget used: ${data.team_value ?? '£88.0m'}`,
-      `Bank left: £${bankValue.toFixed(1)}m`
-    ];
-
-    document.getElementById('reasoningList').innerHTML = `
-      <div class="reason-item">
-        <div class="reason-icon">🏁</div>
-        <div>
-          <div class="reason-title">Final call</div>
-          <div class="reason-text">${judgeCall}</div>
-        </div>
-      </div>
-
-      <div class="reason-item">
-        <div class="reason-icon">⭐</div>
-        <div>
-          <div class="reason-title">What tipped it</div>
-          <div class="reason-text">${judgeReason}</div>
-        </div>
-      </div>
-
-      <div class="reason-item">
-        <div class="reason-icon">💷</div>
-        <div>
-          <div class="reason-title">Budget</div>
-          <div class="reason-text">${keyReasons.join('<br>')}</div>
-        </div>
-      </div>
-    `;
-
-    const lineup = [];
-    const groups = { GK: [], DEF: [], MID: [], FWD: [] };
-    asArray(selectedPlayers).forEach(player => {
-      const pos = player.position || player.Position;
-      if (groups[pos]) groups[pos].push(player);
-    });
-
-    const coords = {
-      GK: [{ x: 50, y: 14 }],
-      DEF: [{ x: 20, y: 33 }, { x: 50, y: 33 }, { x: 80, y: 33 }, { x: 38, y: 52 }, { x: 62, y: 52 }],
-      MID: [{ x: 16, y: 57 }, { x: 38, y: 57 }, { x: 62, y: 57 }, { x: 84, y: 57 }, { x: 50, y: 76 }],
-      FWD: [{ x: 26, y: 82 }, { x: 50, y: 82 }, { x: 74, y: 82 }]
+    const tone = (rec) => {
+      const r = String(rec || '').toLowerCase();
+      if (r.includes('avoid')) return 'bad';
+      if (r.includes('monitor') || r.includes('keep only')) return 'warn';
+      return 'good';
     };
 
-    const shirtMarkup = (player, isCaptain = false, isVice = false) => {
-      const name = player.name || player.player || player.Player || 'Unknown';
+    const renderShirt = (player, isCaptain = false, isVice = false) => {
       const team = player.team || player.Team || '';
       const shirt = player.shirt || teamColors[team] || '#6d4aff';
 
@@ -404,130 +130,230 @@ fetch('./dashboard.json', { cache: 'no-store' })
       `;
     };
 
-    ['GK', 'DEF', 'MID', 'FWD'].forEach(pos => {
-      (groups[pos] || []).forEach((player, idx) => {
-        lineup.push({
-          ...player,
-          coord: coords[pos][idx]
-        });
-      });
-    });
-
-    document.getElementById('pitchArea').innerHTML = lineup.map(player => {
-      const name = player.name || player.player || player.Player || 'Unknown';
-      const team = player.team || player.Team || '—';
-      const position = player.position || player.Position || '—';
-      const isCaptain = name === (data.captain?.name || captainReport.player);
-      const isVice = name === (data.vice_captain?.name || viceReport.player);
-      const price = safeNum(player.price ?? player.Price ?? 0, 0);
-      const selectionRating = safeNum(player.selection_rating ?? player.SelectionRating ?? player.score ?? player.FinalRating ?? 0, 0);
-
-      return `
-        <div class="slot" style="left:${player.coord.x}%; top:${player.coord.y}%;">
-          ${shirtMarkup(player, isCaptain, isVice)}
-          <div class="player-card">
-            <div class="player-name">${name}</div>
-            <div class="player-team">${team} • ${position}</div>
-            <div class="player-price">£${price.toFixed(1)}m</div>
-          </div>
-        </div>
-      `;
-    }).join('');
-
-    document.getElementById('subsRow').innerHTML = asArray(benchPlayers).slice(0, 4).map((player, idx) => {
-      const name = player.name || player.player || player.Player || 'Unknown';
-      const team = player.team || player.Team || '—';
-      const position = player.position || player.Position || '—';
+    const renderPitchPlayer = (player, isCaptain = false, isVice = false) => {
+      const name = escapeHtml(player.name || player.player || player.Player || 'Unknown');
+      const team = escapeHtml(player.team || player.Team || '—');
+      const position = escapeHtml(player.position || player.Position || '—');
       const price = safeNum(player.price ?? player.Price ?? 0, 0);
 
       return `
-        <div class="sub-card">
-          ${shirtMarkup(player, false, false)}
-          <div class="player-name">${name}</div>
-          <div class="player-team">${team} • ${position}</div>
-          <div class="player-price">£${price.toFixed(1)}m</div>
-          <div class="subtext">${idx + 1}. ${position}</div>
-        </div>
-      `;
-    }).join('');
-
-    const playerPanel = document.createElement('section');
-    playerPanel.className = 'panel';
-    playerPanel.style.padding = '18px';
-    playerPanel.style.marginTop = '0';
-
-    const reportSource = asArray(squadTrace.starting_xi).length
-      ? asArray(squadTrace.starting_xi)
-      : asArray(data.player_cards);
-
-    const benchSource = asArray(squadTrace.bench).length
-      ? asArray(squadTrace.bench)
-      : [];
-
-    const renderReportCard = (p) => {
-      const name = p.player || p.name || 'Unknown';
-      const team = p.team || '—';
-      const pos = p.position || '—';
-      const price = safeNum(p.price ?? 0, 0);
-      const rec = p.recommendation || p.status || 'Keep';
-      const reason = p.reason || '';
-      const medical = p.medical || '';
-      const fixture = p.fixture_difficulty != null ? `Fixture: ${p.fixture_difficulty}` : '';
-
-      return `
-        <div style="background:rgba(255,255,255,0.035);border:1px solid rgba(180,190,255,0.12);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:6px;min-height:150px;">
-          <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start;">
-            <div>
-              <div style="font-weight:800;font-size:15px;">${name}</div>
-              <div style="color:#9ca8c7;font-size:12px;margin-top:2px;">${team} • ${pos}</div>
-            </div>
-            <div style="font-weight:800;color:#eef2ff;">£${price.toFixed(1)}m</div>
-          </div>
-
-          <div style="font-weight:700;color:#d9d0ff;">${rec}</div>
-
-          <div style="color:#9ca8c7;font-size:13px;line-height:1.45;">${reason || 'No extra note available.'}</div>
-
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;">
-            ${medical ? `<span style="padding:5px 9px;border-radius:999px;background:rgba(45,211,111,0.12);border:1px solid rgba(45,211,111,0.22);color:#c9f7d7;font-size:11px;">${medical}</span>` : ''}
-            ${fixture ? `<span style="padding:5px 9px;border-radius:999px;background:rgba(109,74,255,0.12);border:1px solid rgba(109,74,255,0.22);color:#d9d0ff;font-size:11px;">${fixture}</span>` : ''}
+        <div class="pitch-slot">
+          ${renderShirt(player, isCaptain, isVice)}
+          <div class="pitch-card">
+            <div class="pitch-name">${name}</div>
+            <div class="pitch-meta">${team} • ${position}</div>
+            <div class="pitch-price">£${price.toFixed(1)}m</div>
           </div>
         </div>
       `;
     };
 
-    playerPanel.innerHTML = `
-      <div class="section-head">
-        <div>
-          <h2 style="margin:0;">Selected players</h2>
-          <div class="panel-subtext">Why each starter is in the team.</div>
-        </div>
-        <span class="view-details">Player reports</span>
-      </div>
+    const renderReportCard = (player, isBench = false) => {
+      const name = escapeHtml(player.player);
+      const team = escapeHtml(player.team);
+      const position = escapeHtml(player.position);
+      const price = safeNum(player.price, 0);
+      const rec = escapeHtml(player.recommendation || 'Keep');
+      const reason = escapeHtml(player.reason || 'No extra note available.');
+      const medical = escapeHtml(player.medical || '');
+      const fixture = player.fixture_difficulty != null && Number.isFinite(Number(player.fixture_difficulty))
+        ? `Fixture ${Number(player.fixture_difficulty).toFixed(1)}`
+        : '';
 
-      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px;">
-        ${reportSource.slice(0, 11).map(renderReportCard).join('')}
-      </div>
-
-      ${benchSource.length ? `
-        <div style="margin-top:18px;">
-          <div class="section-head">
+      return `
+        <article class="report-card ${tone(player.recommendation)}">
+          <div class="report-head">
             <div>
-              <h2 style="margin:0;font-size:16px;">Bench reports</h2>
-              <div class="panel-subtext">Cover options if the starters need replacing.</div>
+              <div class="report-name">${name}</div>
+              <div class="report-meta">${team} • ${position}${isBench ? ' • Bench' : ''}</div>
+            </div>
+            <div class="report-price">£${price.toFixed(1)}m</div>
+          </div>
+
+          <div class="report-reco">${rec}</div>
+          <div class="report-reason">${reason}</div>
+
+          <div class="report-tags">
+            ${medical ? `<span class="tag tag-soft">${medical}</span>` : ''}
+            ${fixture ? `<span class="tag tag-accent">${fixture}</span>` : ''}
+          </div>
+        </article>
+      `;
+    };
+
+    const teamValueEl = document.getElementById('teamValue');
+    const bankValueEl = document.getElementById('bankValue');
+    const rankValueEl = document.getElementById('rankValue');
+    const captainNameEl = document.getElementById('captainName');
+    const captainMetaEl = document.getElementById('captainMeta');
+    const viceCaptainNameEl = document.getElementById('viceCaptainName');
+    const viceCaptainMetaEl = document.getElementById('viceCaptainMeta');
+    const nextMoveTextEl = document.getElementById('nextMoveText');
+    const whySummaryEl = document.getElementById('whySummary');
+    const whyBulletsEl = document.getElementById('whyBullets');
+    const snapshotGridEl = document.getElementById('snapshotGrid');
+    const startingReportsEl = document.getElementById('startingReports');
+    const benchReportsEl = document.getElementById('benchReports');
+    const pitchAreaEl = document.getElementById('pitchArea');
+    const subsRowEl = document.getElementById('subsRow');
+    const gwPillEl = document.getElementById('gwPill');
+    const confidencePillEl = document.getElementById('confidencePill');
+
+    const now = new Date();
+    document.getElementById('updatedText').textContent =
+      `Last updated: ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+    const gameweek = metadata.gameweek || data.gameweek || 1;
+    if (gwPillEl) gwPillEl.textContent = `Gameweek ${gameweek}`;
+
+    if (teamValueEl) teamValueEl.textContent = teamValueText;
+    if (bankValueEl) bankValueEl.textContent = `£${bankValue.toFixed(1)}m`;
+    if (rankValueEl) rankValueEl.textContent = metadata.rank || data.rank || '-';
+
+    if (captainNameEl) captainNameEl.textContent = captainName;
+    if (captainMetaEl) captainMetaEl.textContent = `${captain.team || captain.Team || 'Brentford'} • ${captain.position || captain.Position || 'FWD'}`;
+
+    if (viceCaptainNameEl) viceCaptainNameEl.textContent = viceCaptainName;
+    if (viceCaptainMetaEl) viceCaptainMetaEl.textContent = `${viceCaptain.team || viceCaptain.Team || 'Crystal Palace'} • ${viceCaptain.position || viceCaptain.Position || 'DEF'}`;
+
+    const finalCall = firstText(
+      judge.final_call,
+      judge.action,
+      recommendation.captain ? `Captain ${captainName} and keep ${viceCaptainName} as vice captain.` : '',
+      'Hold transfer this week.'
+    );
+
+    if (nextMoveTextEl) nextMoveTextEl.textContent = finalCall;
+    if (confidencePillEl) confidencePillEl.textContent = judge.confidence || 'High confidence';
+
+    const whySummary = firstText(
+      'A balanced opening squad with captaincy set, bench cover in place, and budget still available for a quick move if needed.'
+    );
+
+    const whyBullets = [
+      `Team value: ${teamValueText} • Bank: £${bankValue.toFixed(1)}m.`,
+      `Captain: ${captainName} • Vice captain: ${viceCaptainName}.`,
+      'The squad was built after checking fitness, fixtures, form, and news.'
+    ];
+
+    if (whySummaryEl) whySummaryEl.textContent = whySummary;
+    if (whyBulletsEl) whyBulletsEl.innerHTML = whyBullets.map(x => `<li>${escapeHtml(x)}</li>`).join('');
+
+    const snapshotCards = [
+      { label: 'Team Value', value: teamValueText, sub: 'Current squad spend' },
+      { label: 'Bank', value: `£${bankValue.toFixed(1)}m`, sub: 'Available for transfers' },
+      { label: 'Confidence', value: escapeHtml(judge.confidence || 'High'), sub: 'Current recommendation' },
+      { label: 'Verdict', value: escapeHtml(judge.verdict || 'Proceed'), sub: 'Final call status' }
+    ];
+
+    if (snapshotGridEl) {
+      snapshotGridEl.innerHTML = snapshotCards.map(card => `
+        <div class="metric-card">
+          <div class="metric-label">${card.label}</div>
+          <div class="metric-value">${card.value}</div>
+          <div class="metric-sub">${card.sub}</div>
+        </div>
+      `).join('');
+    }
+
+    const startingPlayers = normalizedPlayers(starting);
+    const benchPlayers = normalizedPlayers(bench);
+
+    const grouped = { GK: [], DEF: [], MID: [], FWD: [] };
+    startingPlayers.forEach(player => {
+      const pos = player.position;
+      if (grouped[pos]) grouped[pos].push(player);
+    });
+
+    const positions = {
+      GK: [{ x: 50, y: 14 }],
+      DEF: [{ x: 20, y: 33 }, { x: 50, y: 33 }, { x: 80, y: 33 }, { x: 38, y: 52 }, { x: 62, y: 52 }],
+      MID: [{ x: 16, y: 57 }, { x: 38, y: 57 }, { x: 62, y: 57 }, { x: 84, y: 57 }, { x: 50, y: 76 }],
+      FWD: [{ x: 26, y: 82 }, { x: 50, y: 82 }, { x: 74, y: 82 }]
+    };
+
+    const formation = `${grouped.DEF.length}-${grouped.MID.length}-${grouped.FWD.length}`;
+    const formationPill = document.getElementById('formationPill');
+    if (formationPill) formationPill.textContent = formation;
+
+    const lineup = [];
+    ['GK', 'DEF', 'MID', 'FWD'].forEach(pos => {
+      grouped[pos].forEach((player, idx) => {
+        lineup.push({
+          ...player,
+          coord: positions[pos][idx]
+        });
+      });
+    });
+
+    if (pitchAreaEl) {
+      pitchAreaEl.innerHTML = lineup.map(player => {
+        const isCaptain = player.player === captainName;
+        const isVice = player.player === viceCaptainName;
+
+        return `
+          <div class="slot" style="left:${player.coord.x}%; top:${player.coord.y}%;">
+            ${renderShirt(player, isCaptain, isVice)}
+            <div class="pitch-card">
+              <div class="pitch-name">${escapeHtml(player.player)}</div>
+              <div class="pitch-meta">${escapeHtml(player.team)} • ${escapeHtml(player.position)}</div>
+              <div class="pitch-price">£${player.price.toFixed(1)}m</div>
             </div>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px;">
-            ${benchSource.slice(0, 4).map(renderReportCard).join('')}
-          </div>
-        </div>
-      ` : ''}
-    `;
-
-    const centerCol = document.querySelector('.center-col');
-    if (centerCol) {
-      centerCol.appendChild(playerPanel);
+        `;
+      }).join('');
     }
+
+    if (subsRowEl) {
+      subsRowEl.innerHTML = benchPlayers.slice(0, 4).map((player, idx) => `
+        <div class="sub-card">
+          ${renderShirt(player, false, false)}
+          <div class="pitch-name">${escapeHtml(player.player)}</div>
+          <div class="pitch-meta">${escapeHtml(player.team)} • ${escapeHtml(player.position)}</div>
+          <div class="pitch-price">£${player.price.toFixed(1)}m</div>
+          <div class="subtext">${idx + 1}. ${escapeHtml(player.position)}</div>
+        </div>
+      `).join('');
+    }
+
+    const renderPlayerReport = (player) => {
+      const rec = String(player.recommendation || 'Keep').toLowerCase();
+      const cardClass = rec.includes('avoid') ? 'bad' : rec.includes('monitor') ? 'warn' : 'good';
+      const tags = [];
+
+      if (player.medical) tags.push(player.medical);
+      if (player.fixture_difficulty != null && Number.isFinite(Number(player.fixture_difficulty))) {
+        tags.push(`Fixture ${Number(player.fixture_difficulty).toFixed(1)}`);
+      }
+
+      return `
+        <article class="report-card ${cardClass}">
+          <div class="report-head">
+            <div>
+              <div class="report-name">${escapeHtml(player.player)}</div>
+              <div class="report-meta">${escapeHtml(player.team)} • ${escapeHtml(player.position)}</div>
+            </div>
+            <div class="report-price">£${player.price.toFixed(1)}m</div>
+          </div>
+
+          <div class="report-reco">${escapeHtml(player.recommendation || 'Keep')}</div>
+          <div class="report-reason">${escapeHtml(player.reason || 'No extra note available.')}</div>
+
+          <div class="report-tags">
+            ${tags.map(tag => `<span class="tag ${tag === player.medical ? 'tag-soft' : 'tag-accent'}">${escapeHtml(tag)}</span>`).join('')}
+          </div>
+        </article>
+      `;
+    };
+
+    const startingReportsHtml = startingPlayers.map(renderPlayerReport).join('');
+    const benchReportsHtml = benchPlayers.map(renderPlayerReport).join('');
+
+    if (startingReportsEl) startingReportsEl.innerHTML = startingReportsHtml;
+    if (benchReportsEl) benchReportsEl.innerHTML = benchReportsHtml;
+
+    // Keep the page professional: only show end-user content.
+    // Internal decision trace stays in the JSON and backend, not on the main dashboard.
   })
   .catch(err => {
     console.error(err);
