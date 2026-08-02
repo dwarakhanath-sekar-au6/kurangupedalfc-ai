@@ -3,7 +3,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
     if (!res.ok) throw new Error(`dashboard.json load failed: ${res.status}`);
     return res.json();
   })
-  .then(async data => {
+  .then(data => {
     const isObj = (v) => v && typeof v === 'object' && !Array.isArray(v);
     const toArray = (v) => Array.isArray(v) ? v : [];
     const text = (...values) => values.find(v => typeof v === 'string' && v.trim()) || '';
@@ -17,10 +17,6 @@ fetch('./dashboard.json', { cache: 'no-store' })
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;');
-
-    const norm = (s) => String(s ?? '')
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, '');
 
     const baseSquad = isObj(data.base_squad) ? data.base_squad : {};
     const weekly = isObj(data.weekly_advice) ? data.weekly_advice : {};
@@ -48,34 +44,22 @@ fetch('./dashboard.json', { cache: 'no-store' })
     const teamValueText = baseSquad.team_value || `£${squadCost.toFixed(1)}m`;
     const bankValue = Math.max(0, 100 - squadCost);
 
-    let livePriceMap = new Map();
-    try {
-      const bootstrap = await fetch('https://fantasy.premierleague.com/api/bootstrap-static/', { cache: 'no-store' });
-      if (bootstrap.ok) {
-        const bootJson = await bootstrap.json();
-        const elements = Array.isArray(bootJson.elements) ? bootJson.elements : [];
-        livePriceMap = new Map(
-          elements.map(p => [norm(p.web_name), num(p.now_cost, 0) / 10])
-        );
-      }
-    } catch (e) {
-      console.warn('Could not load live FPL prices for transfer cards:', e);
-    }
-
-    const priceFor = (name) => {
-      const p = livePriceMap.get(norm(name));
-      return Number.isFinite(p) ? p : null;
-    };
-
     const normalize = (p) => ({
       player: p.player || p.name || p.Player || 'Unknown',
       team: p.team || p.Team || '—',
       position: p.position || p.Position || '—',
       price: num(p.price ?? p.Price ?? 0, 0),
-      expected_points: num(p.expected_points ?? 0, 0),
+      expected_points: num(p.expected_points ?? p.expected ?? 0, 0),
       recommendation: p.recommendation || 'Start',
       summary: p.summary || p.reason || '',
-      ownership: num(p.ownership ?? 0, 0)
+      ownership: num(p.ownership ?? 0, 0),
+      ppg: num(p.ppg ?? 0, 0),
+      points: num(p.points ?? 0, 0),
+      minutes: num(p.minutes ?? 0, 0),
+      starts: num(p.starts ?? 0, 0),
+      goals: num(p.goals ?? 0, 0),
+      assists: num(p.assists ?? 0, 0),
+      clean_sheets: num(p.clean_sheets ?? 0, 0)
     });
 
     const starting = startingRaw.map(normalize);
@@ -83,9 +67,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
 
     const projectedTeamPoints = num(
       weekly.projected_team_points,
-      Math.round(
-        starting.reduce((sum, p) => sum + num(p.expected_points, 0), 0) + num(captain.expected_points, 0)
-      )
+      Math.round(starting.reduce((sum, p) => sum + num(p.expected_points, 0), 0) + num(captain.expected_points, 0))
     );
 
     const weeklyCall = text(
@@ -101,17 +83,28 @@ fetch('./dashboard.json', { cache: 'no-store' })
           `Captain: ${captain.player || '—'}. Vice captain: ${viceCaptain.player || '—'}.`
         ];
 
-    const transferWatch = toArray(weekly.transfer_watch).map(item => ({
-      sell: item.sell || item.out || '',
-      buy: item.buy || item.in || '',
-      sell_team: item.sell_team || '',
-      buy_team: item.buy_team || '',
-      position: item.position || '',
-      why_sell: item.why_sell || '',
-      why_buy: item.why_buy || '',
-      expected_points_out: num(item.expected_points_out, 0),
-      expected_points_in: num(item.expected_points_in, 0)
-    }));
+    const currentSquadMap = new Map([...starting, ...bench].map(p => [p.player, p]));
+
+    const transferWatch = toArray(weekly.transfer_watch).map(item => {
+      const sell = item.sell || item.out || '';
+      const buy = item.buy || item.in || '';
+      const sellPlayer = currentSquadMap.get(sell);
+      const buyPrice = num(item.buy_price ?? item.price_in ?? item.buy_cost ?? NaN, NaN);
+      const sellPrice = num(item.sell_price ?? item.price_out ?? item.sell_cost ?? (sellPlayer ? sellPlayer.price : NaN), NaN);
+      return {
+        sell,
+        buy,
+        sell_team: item.sell_team || sellPlayer?.team || '',
+        buy_team: item.buy_team || '',
+        position: item.position || sellPlayer?.position || '',
+        why_sell: item.why_sell || '',
+        why_buy: item.why_buy || '',
+        expected_points_out: num(item.expected_points_out, sellPlayer?.expected_points ?? 0),
+        expected_points_in: num(item.expected_points_in, 0),
+        sell_price: sellPrice,
+        buy_price: buyPrice
+      };
+    });
 
     const chipWatch = isObj(weekly.chip_watch) ? weekly.chip_watch : {};
 
@@ -125,6 +118,10 @@ fetch('./dashboard.json', { cache: 'no-store' })
     document.getElementById('heroSub').textContent = `Base squad locked for the season. Weekly advice updates only.`;
     document.getElementById('callMeta').textContent = `Captain: ${captain.player || '—'} • Vice: ${viceCaptain.player || '—'}`;
 
+    const pintLink = 'upi://pay?pa=dwarakhanath.sekar@ybl&pn=Dwarakhanath%20Sekar&am=2&cu=INR&tn=Buy%20me%20a%20pint';
+    const pintBtn = document.getElementById('pintBtn');
+    if (pintBtn) pintBtn.setAttribute('href', pintLink);
+
     const renderShirt = (team) => {
       const colors = {
         Arsenal: '#EF0107', 'Aston Villa': '#7B0033', Bournemouth: '#DA291C', Brentford: '#E30613',
@@ -137,10 +134,52 @@ fetch('./dashboard.json', { cache: 'no-store' })
       return colors[team] || '#0f7a54';
     };
 
-    const shortSummary = (p) => {
-      const raw = p.summary || '';
-      if (raw) return raw;
-      return `Projected ${Math.round(p.expected_points)} pts`;
+    const smartSummary = (p) => {
+      const raw = String(p.summary || '').trim();
+      if (raw && raw !== 'No extra note available.') return raw;
+
+      const pos = String(p.position || '').toUpperCase();
+      const own = num(p.ownership, 0);
+      const ppg = num(p.ppg, 0);
+      const goals = num(p.goals, 0);
+      const assists = num(p.assists, 0);
+      const cs = num(p.clean_sheets, 0);
+      const pts = Math.round(num(p.expected_points, 0));
+
+      if (pos === 'GK') {
+        const bits = ['Safe goalkeeping slot'];
+        if (num(p.points, 0) > 0) bits.push(`${Math.round(num(p.points, 0))} season points`);
+        if (num(p.starts, 0) > 0) bits.push(`${Math.round(num(p.starts, 0))} starts`);
+        return bits.slice(0, 3).join(' • ');
+      }
+      if (pos === 'DEF') {
+        const bits = [];
+        if (cs >= 10) bits.push('Clean-sheet threat');
+        if (goals >= 2) bits.push('Set-piece threat');
+        if (own >= 20) bits.push('Trusted pick');
+        if (!bits.length) bits.push('Defensive value');
+        return bits.slice(0, 3).join(' • ');
+      }
+      if (pos === 'MID') {
+        const bits = [];
+        if (goals >= 8) bits.push('Goal involvement');
+        if (assists >= 6) bits.push('Creative outlet');
+        if (ppg >= 5) bits.push('Consistent returns');
+        if (own >= 25) bits.push('Highly owned');
+        if (!bits.length) bits.push('Midfield output');
+        return bits.slice(0, 3).join(' • ');
+      }
+      if (pos === 'FWD') {
+        const bits = [];
+        if (goals >= 12) bits.push('Proven scorer');
+        else if (goals >= 6) bits.push('Goal threat');
+        if (ppg >= 5) bits.push('Consistent returns');
+        if (!bits.length) bits.push('Forward threat');
+        return bits.slice(0, 3).join(' • ');
+      }
+      if (pts >= 8) return `Projected ${pts} pts • Strong weekly output`;
+      if (pts >= 6) return `Projected ${pts} pts • Solid weekly output`;
+      return `Projected ${pts} pts`;
     };
 
     const getLayout = (form) => {
@@ -180,16 +219,15 @@ fetch('./dashboard.json', { cache: 'no-store' })
     };
 
     const layout = getLayout(formation);
-
     const grouped = { GK: [], DEF: [], MID: [], FWD: [] };
     starting.forEach(p => {
       if (grouped[p.position]) grouped[p.position].push(p);
     });
-
     Object.keys(grouped).forEach(pos => {
       grouped[pos].sort((a, b) => b.expected_points - a.expected_points || b.ownership - a.ownership);
     });
 
+    const isMobile = window.matchMedia('(max-width: 760px)').matches;
     const pitchItems = [];
     ['GK', 'DEF', 'MID', 'FWD'].forEach(pos => {
       grouped[pos].forEach((p, i) => {
@@ -202,6 +240,24 @@ fetch('./dashboard.json', { cache: 'no-store' })
     pitchArea.innerHTML = pitchItems.map(p => {
       const isCaptain = p.player === captain.player;
       const isVice = p.player === viceCaptain.player;
+
+      if (isMobile) {
+        return `
+          <div class="slot" style="left:${p.coord.x}%; top:${p.coord.y}%; width:84px;">
+            <div class="button-token" style="background:${renderShirt(p.team)}">
+              <span class="button-token-letter">${esc((p.player || '?').slice(0,1).toUpperCase())}</span>
+              ${isCaptain ? '<span class="button-badge button-c">C</span>' : ''}
+              ${isVice ? '<span class="button-badge button-vc">VC</span>' : ''}
+            </div>
+            <div class="pitch-card button-card">
+              <div class="pitch-name">${esc(p.player)}</div>
+              <div class="pitch-subline">${esc(p.team)} • ${esc(p.position)}</div>
+              <div class="pitch-points">${Math.round(p.expected_points)} pts</div>
+            </div>
+          </div>
+        `;
+      }
+
       return `
         <div class="slot" style="left:${p.coord.x}%; top:${p.coord.y}%;">
           <div class="shirt-wrap">
@@ -213,7 +269,6 @@ fetch('./dashboard.json', { cache: 'no-store' })
             ${isCaptain ? '<span class="badge badge-c">C</span>' : ''}
             ${isVice ? '<span class="badge badge-vc">VC</span>' : ''}
           </div>
-          <div class="mobile-chip">${esc(p.player)} • ${Math.round(p.expected_points)} pts</div>
           <div class="pitch-card">
             <div class="pitch-name">${esc(p.player)}</div>
             <div class="pitch-subline">${esc(p.team)} • ${esc(p.position)}</div>
@@ -225,22 +280,36 @@ fetch('./dashboard.json', { cache: 'no-store' })
 
     const subsRow = document.getElementById('subsRow');
     if (bench.length) {
-      subsRow.innerHTML = bench.map((p, idx) => `
-        <div class="sub-card">
-          <div class="shirt-wrap">
-            <svg class="shirt-svg" viewBox="0 0 72 78" aria-hidden="true">
-              <path d="M22 6h28l8 6 11 8-6 18-8-4v36H17V34l-8 4-6-18 11-8 8-6z" fill="${renderShirt(p.team)}" stroke="rgba(255,255,255,0.65)" stroke-width="2" />
-              <path d="M28 6h16l4 8H24z" fill="rgba(255,255,255,0.18)" />
-              <path d="M27 15h18l-2 8H29z" fill="rgba(0,0,0,0.10)" />
-            </svg>
+      subsRow.innerHTML = bench.map((p, idx) => {
+        if (isMobile) {
+          return `
+            <div class="sub-card sub-pill">
+              <div class="button-token small-token" style="background:${renderShirt(p.team)}">
+                <span class="button-token-letter">${esc((p.player || '?').slice(0,1).toUpperCase())}</span>
+              </div>
+              <div class="pitch-name">${esc(p.player)}</div>
+              <div class="pitch-subline">${esc(p.team)} • ${esc(p.position)}</div>
+              <div class="pitch-points">${Math.round(p.expected_points)} pts</div>
+              <div class="pitch-subline">${idx + 1}. Bench order</div>
+            </div>
+          `;
+        }
+        return `
+          <div class="sub-card">
+            <div class="shirt-wrap">
+              <svg class="shirt-svg" viewBox="0 0 72 78" aria-hidden="true">
+                <path d="M22 6h28l8 6 11 8-6 18-8-4v36H17V34l-8 4-6-18 11-8 8-6z" fill="${renderShirt(p.team)}" stroke="rgba(255,255,255,0.65)" stroke-width="2" />
+                <path d="M28 6h16l4 8H24z" fill="rgba(255,255,255,0.18)" />
+                <path d="M27 15h18l-2 8H29z" fill="rgba(0,0,0,0.10)" />
+              </svg>
+            </div>
+            <div class="pitch-name">${esc(p.player)}</div>
+            <div class="pitch-subline">${esc(p.team)} • ${esc(p.position)}</div>
+            <div class="pitch-points">${Math.round(p.expected_points)} pts</div>
+            <div class="pitch-subline">${idx + 1}. Bench order</div>
           </div>
-          <div class="mobile-chip">${esc(p.player)} • ${Math.round(p.expected_points)} pts</div>
-          <div class="pitch-name">${esc(p.player)}</div>
-          <div class="pitch-subline">${esc(p.team)} • ${esc(p.position)}</div>
-          <div class="pitch-points">${Math.round(p.expected_points)} pts</div>
-          <div class="pitch-subline">${idx + 1}. Bench order</div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     } else {
       subsRow.innerHTML = `<div class="empty-state">No bench players found in the JSON.</div>`;
     }
@@ -248,15 +317,15 @@ fetch('./dashboard.json', { cache: 'no-store' })
     const transferWatchEl = document.getElementById('transferWatch');
     if (transferWatch.length) {
       transferWatchEl.innerHTML = transferWatch.map(item => {
-        const sellPrice = priceFor(item.sell);
-        const buyPrice = priceFor(item.buy);
         const gain = Math.max(0, item.expected_points_in - item.expected_points_out);
+        const sellPrice = Number.isFinite(item.sell_price) ? `£${item.sell_price.toFixed(1)}m` : '£—';
+        const buyPrice = Number.isFinite(item.buy_price) ? `£${item.buy_price.toFixed(1)}m` : '£—';
         return `
           <div class="transfer-card">
             <div class="transfer-side">
               <div class="label">Out</div>
               <div class="name">${esc(item.sell)}</div>
-              <div class="meta">${esc(item.sell_team)} • ${esc(item.position)}${sellPrice !== null ? ` • £${sellPrice.toFixed(1)}m` : ''}</div>
+              <div class="meta">${sellPrice} • ${esc(item.sell_team)} • ${esc(item.position)}</div>
               <div class="meta">${esc(item.why_sell || '')}</div>
             </div>
             <div>
@@ -266,7 +335,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
             <div class="transfer-side">
               <div class="label">In</div>
               <div class="name">${esc(item.buy)}</div>
-              <div class="meta">${esc(item.buy_team)} • ${esc(item.position)}${buyPrice !== null ? ` • £${buyPrice.toFixed(1)}m` : ''}</div>
+              <div class="meta">${buyPrice} • ${esc(item.buy_team || 'Target') } • ${esc(item.position)}</div>
               <div class="meta">${esc(item.why_buy || '')}</div>
             </div>
           </div>
@@ -277,22 +346,37 @@ fetch('./dashboard.json', { cache: 'no-store' })
     }
 
     const chipWatchEl = document.getElementById('chipWatch');
-    const chipItems = [
-      ['Triple Captain', chipWatch.triple_captain],
-      ['Bench Boost', chipWatch.bench_boost],
-      ['Wildcard', chipWatch.free_hit],
-      ['Free Hit', chipWatch.free_hit]
+    const chipConfig = [
+      {
+        name: 'Triple Captain',
+        status: text(chipWatch.triple_captain?.status, 'wait'),
+        reason: text(chipWatch.triple_captain?.reason, 'Use when your captain is the best ceiling pick and the fixture is kind.')
+      },
+      {
+        name: 'Bench Boost',
+        status: text(chipWatch.bench_boost?.status, 'wait'),
+        reason: text(chipWatch.bench_boost?.reason, 'Use when the bench has proper starter-level points, not just bodies.')
+      },
+      {
+        name: 'Wildcard',
+        status: text(chipWatch.free_hit?.status, 'not needed'),
+        reason: text(chipWatch.free_hit?.reason, 'Use when the squad needs a full reset, not just a single transfer.')
+      },
+      {
+        name: 'Free Hit',
+        status: text(chipWatch.free_hit?.status, 'not needed'),
+        reason: text(chipWatch.free_hit?.reason, 'Use for one awkward week when the normal squad shape breaks down.')
+      }
     ];
 
-    chipWatchEl.innerHTML = chipItems.map(([name, obj]) => {
-      const status = text(obj?.status, 'wait');
-      const reason = text(obj?.reason, '');
+    chipWatchEl.innerHTML = chipConfig.map(item => {
+      const status = item.status.toLowerCase();
       const cls = status === 'ready' ? 'chip-ready' : status === 'watch' || status === 'consider' ? 'chip-watch' : 'chip-no';
       return `
         <div class="chip-item ${cls}">
-          <div class="chip-name">${esc(name)}</div>
-          <div class="chip-status">${esc(status.toUpperCase())}</div>
-          <div class="chip-reason">${esc(reason)}</div>
+          <div class="chip-name">${esc(item.name)}</div>
+          <div class="chip-status">${esc(item.status.toUpperCase())}</div>
+          <div class="chip-reason">${esc(item.reason)}</div>
         </div>
       `;
     }).join('');
@@ -302,13 +386,13 @@ fetch('./dashboard.json', { cache: 'no-store' })
       {
         role: 'Captain',
         name: captain.player || '—',
-        summary: shortSummary(captain),
+        summary: smartSummary(captain),
         meta: `${captain.team || '—'} • ${Math.round(num(captain.expected_points, 0))} pts`
       },
       {
         role: 'Vice captain',
         name: viceCaptain.player || '—',
-        summary: shortSummary(viceCaptain),
+        summary: smartSummary(viceCaptain),
         meta: `${viceCaptain.team || '—'} • ${Math.round(num(viceCaptain.expected_points, 0))} pts`
       }
     ];
@@ -317,14 +401,14 @@ fetch('./dashboard.json', { cache: 'no-store' })
       focusCards.push({
         role: 'Transfer out',
         name: transferWatch[0].sell,
-        summary: transferWatch[0].why_sell,
-        meta: `${transferWatch[0].sell_team} • ${transferWatch[0].position}`
+        summary: `${transferWatch[0].why_sell || 'Exit the weak spot.'} ${Number.isFinite(transferWatch[0].sell_price) ? `Current price: £${transferWatch[0].sell_price.toFixed(1)}m.` : ''}`.trim(),
+        meta: `${transferWatch[0].sell_team || '—'} • ${transferWatch[0].position || '—'}`
       });
       focusCards.push({
         role: 'Transfer in',
         name: transferWatch[0].buy,
-        summary: transferWatch[0].why_buy,
-        meta: `${transferWatch[0].buy_team} • ${transferWatch[0].position}`
+        summary: `${transferWatch[0].why_buy || 'Upgrade the slot.'} ${Number.isFinite(transferWatch[0].buy_price) ? `Price: £${transferWatch[0].buy_price.toFixed(1)}m.` : ''}`.trim(),
+        meta: `${transferWatch[0].buy_team || 'Target'} • ${transferWatch[0].position || '—'}`
       });
     }
 
