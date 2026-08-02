@@ -751,3 +751,33 @@ a { color: inherit; }
     align-items: stretch;
   }
 }
+
+.pitch-meta{
+    margin-top:4px;
+    font-size:11px;
+    font-weight:700;
+    color:#0f7a54;
+    line-height:1.15;
+}
+
+@media(max-width:760px){
+
+.mobile-pitch-card{
+    padding:6px 5px;
+}
+
+.mobile-pitch-card .pitch-name{
+    font-size:11px;
+    line-height:1.05;
+}
+
+.mobile-pitch-card .pitch-club{
+    font-size:9px;
+    margin-top:2px;
+}
+
+.mobile-pitch-card .pitch-meta{
+    font-size:9px;
+    margin-top:3px;
+}
+}
