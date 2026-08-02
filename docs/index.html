@@ -1,147 +1,479 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KuranguPedalFC</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KuranguPedalFC</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <div class="app-shell">
+
+<div class="app-shell">
+
+    <!-- =======================================================
+                        HEADER
+    ======================================================== -->
+
     <header class="topbar">
-      <a class="brand" href="./" aria-label="KuranguPedalFC home">
-        <div class="brand-logo-wrap">
-          <img class="brand-logo" src="./logo.jpg?v=5" alt="KuranguPedalFC logo" />
-        </div>
-        <div class="brand-copy">
-          <div class="brand-name">KuranguPedalFC</div>
-          <div class="brand-sub">Weekly FPL briefing</div>
-        </div>
-      </a>
-      <a class="ghost-link" href="rules.html" target="_blank" rel="noopener">How to play</a>
+
+        <a class="brand" href="./">
+
+            <div class="brand-logo-wrap">
+                <img
+                    src="./logo.jpg?v=5"
+                    class="brand-logo"
+                    alt="KuranguPedalFC">
+            </div>
+
+            <div class="brand-copy">
+
+                <div class="brand-name">
+                    KuranguPedalFC
+                </div>
+
+                <div class="brand-sub">
+                    Weekly FPL Briefing
+                </div>
+
+            </div>
+
+        </a>
+
+        <a
+            href="rules.html"
+            target="_blank"
+            class="ghost-link">
+            How to play
+        </a>
+
     </header>
 
+
+
+    <!-- =======================================================
+                    TEAM ACCESS
+    ======================================================== -->
+
     <section class="access-card panel">
-      <div class="access-copy">
-        <div class="section-kicker">Team access</div>
-        <h2>Enter your team access key</h2>
-        <p>When your access is added, the weekly advice switches to your live squad.</p>
-      </div>
-      <div class="access-controls">
-        <label class="sr-only" for="teamIdInput">Team access key</label>
-        <input id="teamIdInput" class="team-input" type="text" placeholder="Team access key" autocomplete="off" inputmode="numeric" />
-        <button id="teamIdSaveBtn" class="primary-btn" type="button">Save access</button>
-        <div id="teamIdStatus" class="access-status">No access saved yet.</div>
-      </div>
+
+        <div class="access-copy">
+
+            <div class="section-kicker">
+                Team access
+            </div>
+
+            <h2>
+                Enter your FPL Team ID
+            </h2>
+
+            <p>
+
+                This page shows the recommended base squad until
+                we receive your access.
+
+                Once your Team ID is connected,
+                every recommendation automatically changes
+                to YOUR team.
+
+            </p>
+
+        </div>
+
+
+        <div class="access-controls">
+
+            <input
+                id="teamIdInput"
+                class="team-input"
+                type="text"
+                placeholder="FPL Team ID">
+
+            <button
+                id="teamIdSaveBtn"
+                class="primary-btn">
+
+                Save access
+
+            </button>
+
+            <div id="teamIdStatus"
+                 class="access-status">
+
+                No Team ID saved.
+
+            </div>
+
+        </div>
+
     </section>
+
+
+
+    <!-- =======================================================
+                        HERO
+    ======================================================== -->
 
     <section class="hero-grid">
-      <div class="panel hero-panel">
-        <div class="hero-label">Projected team points</div>
-        <div class="hero-points" id="projectedPoints">0</div>
-      </div>
 
-      <div class="panel call-panel">
-        <div class="section-title">Immediate call</div>
-        <div class="call-text" id="nextMoveText">Loading...</div>
-        <div class="call-meta" id="callMeta">Recommended base squad for the gameweek.</div>
-      </div>
+        <div class="panel hero-panel">
 
-      <div class="panel stats-panel">
-        <div class="mini-stat">
-          <span>Team value</span>
-          <strong id="teamValue">£0.0m</strong>
+            <div class="hero-label">
+
+                Projected team points
+
+            </div>
+
+            <div
+                class="hero-points"
+                id="projectedPoints">
+
+                0
+
+            </div>
+
         </div>
-        <div class="mini-stat">
-          <span>Bank</span>
-          <strong id="bankValue">£0.0m</strong>
+
+
+
+        <div class="panel call-panel">
+
+            <div class="section-title">
+
+                Immediate call
+
+            </div>
+
+            <div
+                class="call-text"
+                id="nextMoveText">
+
+                Loading...
+
+            </div>
+
+            <div
+                class="call-meta"
+                id="callMeta">
+
+                Recommended base squad for this gameweek.
+
+            </div>
+
         </div>
-        <div class="mini-stat">
-          <span>Formation</span>
-          <strong id="formationValue">4-4-2</strong>
+
+
+
+        <div class="panel stats-panel">
+
+            <div class="mini-stat">
+
+                <span>Team value</span>
+
+                <strong id="teamValue">
+
+                    £0.0m
+
+                </strong>
+
+            </div>
+
+            <div class="mini-stat">
+
+                <span>Bank</span>
+
+                <strong id="bankValue">
+
+                    £0.0m
+
+                </strong>
+
+            </div>
+
+            <div class="mini-stat">
+
+                <span>Formation</span>
+
+                <strong id="formationValue">
+
+                    4-4-2
+
+                </strong>
+
+            </div>
+
         </div>
-      </div>
+
     </section>
 
+
+
+    <!-- =======================================================
+                        MAIN CONTENT
+    ======================================================== -->
+
     <main class="content-grid">
-      <section class="panel pitch-panel">
-        <div class="section-head">
-          <div>
-            <h2>Recommended base squad for the gameweek</h2>
-            <p>This will start populating once we receive your access.</p>
-          </div>
-          <div class="chip soft">Week view</div>
-        </div>
-        <div class="pitch" id="pitchArea"></div>
-      </section>
 
-      <section class="panel notes-panel">
-        <div class="section-head">
-          <div>
-            <h2>Key decisions</h2>
-            <p>Short, neat reasons that show why the squad holds together.</p>
-          </div>
-          <div class="chip soft">Ownership</div>
-        </div>
-        <div id="focusCards" class="focus-grid"></div>
-      </section>
+        <!-- Pitch -->
 
-      <section class="panel subs-panel">
-        <div class="section-head">
-          <div>
-            <h2>Substitutes</h2>
-            <p>Bench order for the week.</p>
-          </div>
-          <div class="chip soft">Bench</div>
-        </div>
-        <div id="subsRow" class="subs-row"></div>
-      </section>
+        <section class="panel pitch-panel">
 
-      <section class="panel transfer-panel">
-        <div class="section-head">
-          <div>
-            <h2>Transfer watch</h2>
-            <p>Only affordable swaps are shown.</p>
-          </div>
-          <div class="chip soft">Weekly</div>
-        </div>
-        <div id="transferWatch" class="transfer-list"></div>
-      </section>
+            <div class="section-head">
 
-      <section class="panel chip-panel">
-        <div class="section-head">
-          <div>
-            <h2>Chip watch</h2>
-            <p>Triple Captain, Bench Boost, Wildcard, and Free Hit.</p>
-          </div>
-          <div class="chip soft">Decision</div>
-        </div>
-        <div id="chipWatch" class="chip-grid"></div>
-      </section>
+                <div>
+
+                    <h2>
+
+                        Recommended base squad for the gameweek
+
+                    </h2>
+
+                    <p>
+
+                        This will start populating once we receive your access.
+
+                    </p>
+
+                </div>
+
+                <div class="chip soft">
+
+                    Week view
+
+                </div>
+
+            </div>
+
+            <div
+                id="pitchArea"
+                class="pitch">
+
+            </div>
+
+        </section>
+
+            <!-- =======================================================
+                        KEY DECISIONS
+        ======================================================== -->
+
+        <section class="panel notes-panel">
+
+            <div class="section-head">
+
+                <div>
+
+                    <h2>
+
+                        Key decisions
+
+                    </h2>
+
+                    <p>
+
+                        Clear reasoning behind every important recommendation.
+
+                    </p>
+
+                </div>
+
+                <div class="chip soft">
+
+                    Focus
+
+                </div>
+
+            </div>
+
+            <div
+                id="focusCards"
+                class="focus-grid">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =======================================================
+                        BENCH
+        ======================================================== -->
+
+        <section class="panel subs-panel">
+
+            <div class="section-head">
+
+                <div>
+
+                    <h2>
+
+                        Substitutes
+
+                    </h2>
+
+                    <p>
+
+                        Bench order for this gameweek.
+
+                    </p>
+
+                </div>
+
+                <div class="chip soft">
+
+                    Bench
+
+                </div>
+
+            </div>
+
+            <div
+                id="subsRow"
+                class="subs-row">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =======================================================
+                    TRANSFER WATCH
+        ======================================================== -->
+
+        <section class="panel transfer-panel">
+
+            <div class="section-head">
+
+                <div>
+
+                    <h2>
+
+                        Transfer watch
+
+                    </h2>
+
+                    <p>
+
+                        Only affordable upgrades are suggested.
+
+                    </p>
+
+                </div>
+
+                <div class="chip soft">
+
+                    Weekly
+
+                </div>
+
+            </div>
+
+            <div
+                id="transferWatch"
+                class="transfer-list">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =======================================================
+                        CHIP WATCH
+        ======================================================== -->
+
+        <section class="panel chip-panel">
+
+            <div class="section-head">
+
+                <div>
+
+                    <h2>
+
+                        Chip watch
+
+                    </h2>
+
+                    <p>
+
+                        Triple Captain, Bench Boost, Wildcard and Free Hit.
+
+                    </p>
+
+                </div>
+
+                <div class="chip soft">
+
+                    Decision
+
+                </div>
+
+            </div>
+
+            <div
+                id="chipWatch"
+                class="chip-grid">
+
+            </div>
+
+        </section>
+
     </main>
 
-        <footer class="footer-card panel">
-      <div class="footer-copy">
-        <div class="footer-title">Like the work?</div>
-        <div class="footer-text">
-          Keep the engine running with a pint of beer.
-        </div>
-      </div>
 
-      <a class="pint-btn"
-         id="pintBtn"
-         href="#"
-         aria-label="Buy me a pint">
-        <span class="beer-icon">🍺</span>
-        <span>Buy me a pint</span>
-      </a>
+
+    <!-- =======================================================
+                        FOOTER
+    ======================================================== -->
+
+    <footer class="footer-card panel">
+
+        <div class="footer-copy">
+
+            <div class="footer-title">
+
+                Like the work?
+
+            </div>
+
+            <div class="footer-text">
+
+                Every pint helps keep KuranguPedalFC improving every gameweek.
+
+            </div>
+
+        </div>
+
+
+        <a
+            id="pintBtn"
+            class="pint-btn"
+            href="#"
+            aria-label="Buy me a pint">
+
+            <span class="beer-icon">
+                🍺
+            </span>
+
+            <span>
+
+                Buy me a pint
+
+            </span>
+
+        </a>
+
     </footer>
 
-  </div>
+</div>
 
-  <script src="app.js"></script>
+<script src="app.js"></script>
+
 </body>
 </html>
