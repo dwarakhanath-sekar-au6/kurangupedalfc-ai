@@ -1,9 +1,9 @@
 :root {
-  --bg: #f2f5f1;
+  --bg: #f3f6f2;
   --card: #ffffff;
   --card-2: #f8faf7;
-  --line: #e2e8e0;
-  --text: #111827;
+  --line: #dfe6dc;
+  --text: #0f172a;
   --muted: #64748b;
   --accent: #0f7a54;
   --accent-2: #1d4ed8;
@@ -16,18 +16,22 @@
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+
 body {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(15, 122, 84, 0.08), transparent 32%),
-    linear-gradient(180deg, #f7f9f6 0%, var(--bg) 100%);
+    radial-gradient(circle at top left, rgba(15, 122, 84, 0.07), transparent 30%),
+    linear-gradient(180deg, #f9fbf8 0%, var(--bg) 100%);
 }
+
+a { color: inherit; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
 .app-shell {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 22px;
+  padding: 20px;
 }
 
 .panel {
@@ -50,14 +54,12 @@ body {
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  color: inherit;
 }
 
 .brand-logo-wrap {
-  width: 58px;
-  height: 58px;
-  border-radius: 18px;
-  padding: 4px;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
   overflow: hidden;
   background: #fff;
   border: 1px solid var(--line);
@@ -74,7 +76,7 @@ body {
 
 .brand-name {
   font-family: Manrope, Inter, sans-serif;
-  font-size: 30px;
+  font-size: 28px;
   line-height: 1;
   letter-spacing: -0.04em;
   font-weight: 800;
@@ -146,7 +148,14 @@ body {
 .access-status,
 .call-meta,
 .mini-stat span,
-.hero-label {
+.hero-label,
+.pitch-club,
+.pitch-owned,
+.pitch-price,
+.subs-panel p,
+.notes-panel p,
+.transfer-panel p,
+.chip-panel p {
   color: var(--muted);
 }
 
@@ -194,7 +203,7 @@ body {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.35fr 1.1fr 0.9fr;
+  grid-template-columns: 1.25fr 1.15fr 0.9fr;
   gap: 16px;
   margin-bottom: 16px;
 }
@@ -212,7 +221,7 @@ body {
 
 .hero-points {
   font-family: Manrope, Inter, sans-serif;
-  font-size: 62px;
+  font-size: 64px;
   line-height: 0.95;
   letter-spacing: -0.06em;
   font-weight: 800;
@@ -265,7 +274,7 @@ body {
 
 .content-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.05fr 0.95fr;
   gap: 16px;
 }
 
@@ -275,10 +284,14 @@ body {
 
 .section-head {
   display: flex;
-  align-items: flex-start;
+  align-items: start;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 14px;
+}
+
+.section-head h2 {
+  font-size: 20px;
 }
 
 .section-head p {
@@ -293,7 +306,7 @@ body {
   padding: 8px 12px;
   border-radius: 999px;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
   border: 1px solid var(--line);
   background: #fafcfa;
 }
@@ -307,14 +320,11 @@ body {
 .pitch {
   position: relative;
   min-height: 720px;
-  border-radius: 22px;
+  border-radius: 24px;
   border: 1px solid #d8e5d8;
   overflow: hidden;
   background:
-    linear-gradient(90deg, rgba(255,255,255,0.16) 0 50%, transparent 50% 100%),
-    linear-gradient(180deg, rgba(255,255,255,0.14) 0 50%, transparent 50% 100%),
-    radial-gradient(circle at center, rgba(255,255,255,0.24), transparent 56%),
-    linear-gradient(180deg, #dff0dd 0%, #cfe3cb 100%);
+    linear-gradient(180deg, #daf0d4 0%, #c9e6c2 100%);
 }
 
 .pitch::before {
@@ -330,8 +340,8 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 176px;
-  height: 176px;
+  width: 180px;
+  height: 180px;
   transform: translate(-50%, -50%);
   border: 2px solid rgba(255,255,255,0.72);
   border-radius: 999px;
@@ -339,85 +349,89 @@ body {
 
 .slot {
   position: absolute;
-  width: 110px;
   transform: translate(-50%, -50%);
-  text-align: center;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
-.shirt-wrap {
+.pitch-token {
   position: relative;
-  width: 60px;
-  height: 66px;
-  margin: 0 auto 8px;
-}
-
-.shirt-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  filter: drop-shadow(0 10px 16px rgba(15, 23, 42, 0.16));
-}
-
-.badge {
-  position: absolute;
-  right: -4px;
-  top: 2px;
-  width: 22px;
-  height: 22px;
+  width: 38px;
+  height: 38px;
   border-radius: 999px;
   display: grid;
   place-items: center;
-  color: white;
-  font-size: 10px;
-  font-weight: 800;
-  border: 2px solid rgba(255,255,255,0.7);
+  box-shadow: 0 8px 18px rgba(16, 24, 40, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.62);
 }
 
-.badge-c { background: var(--accent); }
-.badge-vc { background: var(--accent-2); }
+.pitch-token.small-token {
+  width: 30px;
+  height: 30px;
+}
 
-.pitch-card {
-  display: inline-block;
-  min-width: 96px;
-  padding: 9px 10px 8px;
-  border-radius: 14px;
+.pitch-token-letter {
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.token-badge {
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  background: #0f766e;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 5px;
+  border-radius: 999px;
+}
+
+.token-badge-vc {
+  background: #2563eb;
+}
+
+.pitch-card,
+.sub-card {
+  width: 100%;
+  background: rgba(255,255,255,0.96);
   border: 1px solid var(--line);
-  background: rgba(255,255,255,0.95);
-  box-shadow: 0 10px 20px rgba(15,23,42,0.05);
+  border-radius: 16px;
+  padding: 10px 10px 8px;
+  text-align: center;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
 }
 
 .pitch-name {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.pitch-club {
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.pitch-price {
+  margin-top: 6px;
   font-size: 14px;
   font-weight: 800;
-  line-height: 1.15;
+  color: var(--accent);
 }
 
-.pitch-subline {
+.pitch-owned {
   margin-top: 4px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.35;
-}
-
-.pitch-points {
-  margin-top: 6px;
-  color: var(--accent);
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.owned-pill,
-.stat-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 5px 8px;
-  border-radius: 999px;
-  background: rgba(15, 122, 84, 0.08);
-  color: var(--accent);
   font-size: 11px;
-  font-weight: 800;
-  margin-top: 7px;
-  margin-right: 6px;
+  font-weight: 700;
+  color: var(--accent);
 }
 
 .subs-row {
@@ -427,16 +441,22 @@ body {
 }
 
 .sub-card {
-  padding: 14px;
-  border-radius: 18px;
-  border: 1px solid var(--line);
-  background: var(--card-2);
-  text-align: center;
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  padding: 14px 12px;
 }
 
-.sub-card .pitch-card { display: none; }
-.sub-card .shirt-wrap { width: 52px; height: 58px; }
-.sub-card .pitch-name { margin-top: 2px; }
+.sub-token {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 800;
+  box-shadow: 0 8px 18px rgba(16, 24, 40, 0.12);
+}
 
 .transfer-list {
   display: grid;
@@ -473,7 +493,7 @@ body {
   margin-top: 4px;
   color: var(--muted);
   font-size: 12px;
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
 .transfer-arrow {
@@ -527,7 +547,7 @@ body {
   margin-top: 8px;
   color: var(--muted);
   font-size: 12px;
-  line-height: 1.55;
+  line-height: 1.45;
 }
 
 .chip-ready { border-color: rgba(21,128,61,0.18); }
@@ -577,7 +597,7 @@ body {
   margin-top: 8px;
   color: var(--text);
   font-size: 13px;
-  line-height: 1.65;
+  line-height: 1.5;
 }
 
 .focus-card .meta {
@@ -616,149 +636,118 @@ body {
 
 .pint-btn {
   gap: 8px;
-  padding: 11px 14px;
-  border: 1px solid rgba(15,122,84,.18);
-  background: linear-gradient(135deg, #0f7a54 0%, #0c5d41 100%);
+  padding: 12px 16px;
   color: #fff;
-  box-shadow: 0 12px 24px rgba(15, 122, 84, 0.18);
+  background: linear-gradient(135deg, #0f7a54 0%, #0c5d41 100%);
+  border: 1px solid rgba(15,122,84,.18);
+  box-shadow: 0 12px 24px rgba(15, 122, 84, 0.16);
 }
 
 .beer-icon { font-size: 15px; }
 
-.sr-only {
-  position: absolute !important;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 @media (max-width: 1100px) {
   .hero-grid,
-  .content-grid,
-  .access-card {
+  .content-grid {
     grid-template-columns: 1fr;
   }
-
-  .pitch-panel { grid-column: auto; }
+  .pitch-panel {
+    grid-column: auto;
+  }
 }
 
 @media (max-width: 760px) {
-  .app-shell { padding: 14px; }
-
-  .topbar {
-    align-items: flex-start;
-    flex-direction: column;
+  .app-shell {
+    padding: 14px;
   }
 
-  .brand-name { font-size: 26px; }
-  .brand-logo-wrap { width: 52px; height: 52px; }
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .access-card,
+  .footer-card {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
+  }
 
   .access-controls {
     grid-template-columns: 1fr;
   }
 
-  .hero-points { font-size: 50px; }
-
   .hero-panel, .call-panel, .stats-panel,
-  .pitch-panel, .subs-panel, .transfer-panel, .chip-panel, .notes-panel,
-  .access-card {
+  .pitch-panel, .subs-panel, .transfer-panel, .chip-panel, .notes-panel {
     padding: 16px;
   }
 
-  .pitch { min-height: 420px; }
-  .slot { width: 64px; }
-
-  .button-token,
-  .button-token.small-token {
-    width: 34px;
-    height: 34px;
-    border-radius: 12px;
+  .hero-points {
+    font-size: 54px;
   }
 
-  .button-token-letter {
-    font-size: 13px;
+  .call-text {
+    font-size: 19px;
   }
 
-  .button-badge {
-    width: 16px;
-    height: 16px;
-    font-size: 8px;
-    right: -4px;
-    top: -4px;
+  .pitch {
+    min-height: 520px;
   }
 
-  .mobile-chip {
-    margin-top: 4px;
-    padding: 4px 6px;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.92);
+  .slot {
+    width: 86px;
+    gap: 6px;
+  }
+
+  .pitch-token,
+  .sub-token {
+    width: 30px;
+    height: 30px;
+  }
+
+  .pitch-token-letter {
+    font-size: 12px;
+  }
+
+  .pitch-card,
+  .sub-card {
+    padding: 8px 8px 6px;
+    border-radius: 14px;
+  }
+
+  .pitch-name {
+    font-size: 12px;
+  }
+
+  .pitch-club {
     font-size: 10px;
-    line-height: 1.2;
-    font-weight: 700;
   }
 
-  .pitch-card {
-    min-width: 84px;
-    padding: 8px;
+  .pitch-price {
+    font-size: 11px;
   }
 
-  .pitch-name { font-size: 13px; }
-  .pitch-subline { display: none; }
-  .pitch-points { font-size: 12px; }
+  .pitch-owned {
+    font-size: 10px;
+  }
 
-  .subs-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .subs-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
   .transfer-card {
     grid-template-columns: 1fr;
     gap: 8px;
   }
 
-  .transfer-arrow { transform: rotate(90deg); }
-  .chip-grid { grid-template-columns: 1fr 1fr; }
-  .footer-card { flex-direction: column; align-items: stretch; }
+  .transfer-arrow {
+    transform: rotate(90deg);
+  }
+
+  .chip-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-card {
+    align-items: stretch;
+  }
 }
-
-.button-token {
-  position: relative;
-  width: 58px;
-  height: 58px;
-  margin: 0 auto 8px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 10px 16px rgba(15, 23, 42, 0.16);
-  border: 1px solid rgba(255,255,255,0.65);
-}
-
-.button-token-letter {
-  color: #fff;
-  font-weight: 900;
-  font-size: 18px;
-  letter-spacing: -0.04em;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
-}
-
-.button-badge {
-  position: absolute;
-  right: -5px;
-  top: -5px;
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  color: white;
-  font-size: 9px;
-  font-weight: 900;
-  border: 2px solid rgba(255,255,255,0.8);
-}
-
-.button-c { background: var(--accent); }
-.button-vc { background: var(--accent-2); }
-
-.sub-pill { text-align: center; }
