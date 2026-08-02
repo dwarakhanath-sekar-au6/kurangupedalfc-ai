@@ -1,434 +1,693 @@
-
-fetch('./dashboard.json', { cache: 'no-store' })
-  .then(async res => {
-    if (!res.ok) throw new Error(`dashboard.json load failed: ${res.status}`);
-    return res.json();
-  })
-  .then(data => {
-    const isObj = (v) => v && typeof v === 'object' && !Array.isArray(v);
-    const toArray = (v) => Array.isArray(v) ? v : [];
-    const text = (...values) => values.find(v => typeof v === 'string' && v.trim()) || '';
-    const num = (v, fallback = 0) => {
-      const n = Number(v);
-      return Number.isFinite(n) ? n : fallback;
-    };
-    const esc = (s) => String(s ?? '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
+:root {
+  --bg: #f2f5f1;
+  --card: #ffffff;
+  --card-2: #f8faf7;
+  --line: #e2e8e0;
+  --text: #111827;
+  --muted: #64748b;
+  --accent: #0f7a54;
+  --accent-2: #1d4ed8;
+  --good: #15803d;
+  --warn: #b45309;
+  --bad: #b91c1c;
+  --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  --radius: 24px;
+}
  
-    const baseSquad = isObj(data.base_squad) ? data.base_squad : {};
-    const weekly = isObj(data.weekly_advice) ? data.weekly_advice : {};
-    const recommendation = isObj(data.recommendation) ? data.recommendation : {};
-    const judge = isObj(data.judge) ? data.judge : {};
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
  
-    const startingRaw = toArray(recommendation.starting_xi).length
-      ? toArray(recommendation.starting_xi)
-      : toArray(baseSquad.starting_xi);
+body {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(15, 122, 84, 0.08), transparent 32%),
+    linear-gradient(180deg, #f7f9f6 0%, var(--bg) 100%);
+}
  
-    const benchRaw = toArray(recommendation.bench).length
-      ? toArray(recommendation.bench)
-      : toArray(baseSquad.bench);
+.app-shell {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 22px;
+}
  
-    const captain = isObj(recommendation.captain) ? recommendation.captain : (isObj(baseSquad.captain) ? baseSquad.captain : {});
-    const viceCaptain = isObj(recommendation.vice_captain) ? recommendation.vice_captain : (isObj(baseSquad.vice_captain) ? baseSquad.vice_captain : {});
+.topbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+}
  
-    const formation = recommendation.formation || baseSquad.formation || '3-5-2';
-    const squadCost = num(baseSquad.squad_cost, 100);
-    const teamValueText = baseSquad.team_value || `£${squadCost.toFixed(1)}m`;
-    const bankValue = Math.max(0, 100 - squadCost);
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: inherit;
+}
  
-    const normalize = (p) => ({
-      player: p.player || p.name || p.Player || 'Unknown',
-      team: p.team || p.Team || '—',
-      position: p.position || p.Position || '—',
-      price: num(p.price ?? p.Price ?? 0, 0),
-      expected_points: num(p.expected_points ?? p.expected ?? 0, 0),
-      recommendation: p.recommendation || 'Start',
-      summary: p.summary || p.reason || '',
-      ownership: num(p.ownership ?? 0, 0),
-      ppg: num(p.ppg ?? 0, 0),
-      points: num(p.points ?? 0, 0),
-      minutes: num(p.minutes ?? 0, 0),
-      starts: num(p.starts ?? 0, 0),
-      goals: num(p.goals ?? 0, 0),
-      assists: num(p.assists ?? 0, 0),
-      clean_sheets: num(p.clean_sheets ?? 0, 0)
-    });
+.brand-logo-wrap {
+  width: 74px;
+  height: 74px;
+  border-radius: 22px;
+  padding: 5px;
+  background: linear-gradient(135deg, rgba(15,122,84,.12), rgba(29,78,216,.08));
+  border: 1px solid rgba(15,122,84,.12);
+  box-shadow: var(--shadow);
+}
  
-    const starting = startingRaw.map(normalize);
-    const bench = benchRaw.map(normalize);
+.brand-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+}
  
-    const projectedTeamPoints = num(
-      weekly.projected_team_points,
-      Math.round(starting.reduce((sum, p) => sum + num(p.expected_points, 0), 0) + num(captain.expected_points, 0))
-    );
+.brand-copy { text-align: left; }
  
-    const weeklyCall = text(
-      weekly.immediate_call,
-      `Captain ${captain.player || 'your best attacker'} and keep ${viceCaptain.player || 'your best vice'} as vice captain.`
-    );
+.brand-name {
+  font-family: Manrope, Inter, sans-serif;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
  
-    const whyBullets = toArray(weekly.why_this_works).length
-      ? toArray(weekly.why_this_works)
-      : [
-          `£${squadCost.toFixed(1)}m spent, £${bankValue.toFixed(1)}m left.`,
-          `Formation set to ${formation}.`,
-          `Captain: ${captain.player || '—'}. Vice captain: ${viceCaptain.player || '—'}.`
-        ];
+.brand-sub {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
  
-    const currentSquadMap = new Map([...starting, ...bench].map(p => [p.player, p]));
+.top-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
  
-    const transferWatch = toArray(weekly.transfer_watch).map(item => {
-      const sell = item.sell || item.out || '';
-      const buy = item.buy || item.in || '';
-      const sellPlayer = currentSquadMap.get(sell);
-      const buyPrice = num(item.buy_price ?? item.price_in ?? item.buy_cost ?? NaN, NaN);
-      const sellPrice = num(item.sell_price ?? item.price_out ?? item.sell_cost ?? (sellPlayer ? sellPlayer.price : NaN), NaN);
-      return {
-        sell,
-        buy,
-        sell_team: item.sell_team || sellPlayer?.team || '',
-        buy_team: item.buy_team || '',
-        position: item.position || sellPlayer?.position || '',
-        why_sell: item.why_sell || '',
-        why_buy: item.why_buy || '',
-        expected_points_out: num(item.expected_points_out, sellPlayer?.expected_points ?? 0),
-        expected_points_in: num(item.expected_points_in, 0),
-        sell_price: sellPrice,
-        buy_price: buyPrice
-      };
-    });
+.ghost-link {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.8);
+}
  
-    const chipWatch = isObj(weekly.chip_watch) ? weekly.chip_watch : {};
-    const benchOrder = toArray(weekly.bench_order).length ? toArray(weekly.bench_order) : bench.map(p => p.player);
+.pint-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(15,122,84,.18);
+  background: linear-gradient(135deg, #0f7a54 0%, #0c5d41 100%);
+  box-shadow: 0 12px 24px rgba(15, 122, 84, 0.18);
+}
  
-    const setText = (id, value) => {
-      const el = document.getElementById(id);
-      if (el) el.textContent = value;
-    };
-    setText('gwPill', `Gameweek ${num(data.metadata?.gameweek, 1)}`);
-    setText('updatedText', `Updated: ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`);
-    setText('teamValue', teamValueText);
-    setText('bankValue', `£${bankValue.toFixed(1)}m`);
-    setText('formationValue', formation);
-    setText('projectedPoints', projectedTeamPoints.toString());
-    setText('nextMoveText', weeklyCall);
-    setText('heroSub', `Base squad locked for the season. Weekly advice updates only.`);
-    setText('callMeta', `Captain: ${captain.player || '—'} • Vice: ${viceCaptain.player || '—'}`);
+.beer-icon { font-size: 15px; }
  
-    const pintLink = 'upi://pay?pa=dwarakhanath.sekar@ybl&pn=Dwarakhanath%20Sekar&am=2&cu=INR&tn=Buy%20me%20a%20pint';
-    const pintBtn = document.getElementById('pintBtn');
-    if (pintBtn) pintBtn.setAttribute('href', pintLink);
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1.1fr 0.9fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
  
-    const renderShirt = (team) => {
-      const colors = {
-        Arsenal: '#EF0107', 'Aston Villa': '#7B0033', Bournemouth: '#DA291C', Brentford: '#E30613',
-        Brighton: '#0057B8', Burnley: '#6C1D45', Chelsea: '#034694', 'Crystal Palace': '#1B458F',
-        Everton: '#003399', Fulham: '#D9D9D9', Liverpool: '#C8102E', Luton: '#F78F1E',
-        'Man City': '#6CABDD', 'Man Utd': '#DA291C', Newcastle: '#241F20', "Nott'm Forest": '#DA291C',
-        Spurs: '#FFFFFF', 'West Ham': '#7A263A', Wolves: '#FDB913', Leeds: '#FFCD00', Leicester: '#003090',
-        Southampton: '#D71920', Watford: '#FBEE23', Coventry: '#5B9BD5', Ipswich: '#0053A0'
-      };
-      return colors[team] || '#0f7a54';
-    };
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
  
-    const smartSummary = (p) => {
-      const raw = String(p.summary || '').trim();
-      if (raw && raw !== 'No extra note available.') return raw;
+.hero-panel, .call-panel, .stats-panel,
+.pitch-panel, .subs-panel, .transfer-panel, .chip-panel, .notes-panel {
+  padding: 20px;
+}
  
-      const pos = String(p.position || '').toUpperCase();
-      const own = num(p.ownership, 0);
-      const ppg = num(p.ppg, 0);
-      const goals = num(p.goals, 0);
-      const assists = num(p.assists, 0);
-      const cs = num(p.clean_sheets, 0);
-      const pts = Math.round(num(p.expected_points, 0));
+.hero-label {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
  
-      if (pos === 'GK') {
-        const bits = ['Safe goalkeeping slot'];
-        if (num(p.points, 0) > 0) bits.push(`${Math.round(num(p.points, 0))} season points`);
-        if (num(p.starts, 0) > 0) bits.push(`${Math.round(num(p.starts, 0))} starts`);
-        return bits.slice(0, 3).join(' • ');
-      }
-      if (pos === 'DEF') {
-        const bits = [];
-        if (cs >= 10) bits.push('Clean-sheet threat');
-        if (goals >= 2) bits.push('Set-piece threat');
-        if (own >= 20) bits.push('Trusted pick');
-        if (!bits.length) bits.push('Defensive value');
-        return bits.slice(0, 3).join(' • ');
-      }
-      if (pos === 'MID') {
-        const bits = [];
-        if (goals >= 8) bits.push('Goal involvement');
-        if (assists >= 6) bits.push('Creative outlet');
-        if (ppg >= 5) bits.push('Consistent returns');
-        if (own >= 25) bits.push('Highly owned');
-        if (!bits.length) bits.push('Midfield output');
-        return bits.slice(0, 3).join(' • ');
-      }
-      if (pos === 'FWD') {
-        const bits = [];
-        if (goals >= 12) bits.push('Proven scorer');
-        else if (goals >= 6) bits.push('Goal threat');
-        if (ppg >= 5) bits.push('Consistent returns');
-        if (!bits.length) bits.push('Forward threat');
-        return bits.slice(0, 3).join(' • ');
-      }
-      if (pts >= 8) return `Projected ${pts} pts • Strong weekly output`;
-      if (pts >= 6) return `Projected ${pts} pts • Solid weekly output`;
-      return `Projected ${pts} pts`;
-    };
+.hero-points {
+  font-family: Manrope, Inter, sans-serif;
+  font-size: 62px;
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  font-weight: 800;
+  color: var(--text);
+}
  
-    const getLayout = (form) => {
-      const layouts = {
-        '3-5-2': {
-          GK: [{ x: 50, y: 12 }],
-          DEF: [{ x: 22, y: 32 }, { x: 50, y: 32 }, { x: 78, y: 32 }],
-          MID: [{ x: 10, y: 56 }, { x: 30, y: 56 }, { x: 50, y: 56 }, { x: 70, y: 56 }, { x: 90, y: 56 }],
-          FWD: [{ x: 38, y: 84 }, { x: 62, y: 84 }]
-        },
-        '3-4-3': {
-          GK: [{ x: 50, y: 12 }],
-          DEF: [{ x: 20, y: 32 }, { x: 50, y: 32 }, { x: 80, y: 32 }],
-          MID: [{ x: 14, y: 56 }, { x: 38, y: 56 }, { x: 62, y: 56 }, { x: 86, y: 56 }],
-          FWD: [{ x: 25, y: 84 }, { x: 50, y: 84 }, { x: 75, y: 84 }]
-        },
-        '4-4-2': {
-          GK: [{ x: 50, y: 12 }],
-          DEF: [{ x: 16, y: 32 }, { x: 38, y: 32 }, { x: 62, y: 32 }, { x: 84, y: 32 }],
-          MID: [{ x: 16, y: 56 }, { x: 38, y: 56 }, { x: 62, y: 56 }, { x: 84, y: 56 }],
-          FWD: [{ x: 38, y: 84 }, { x: 62, y: 84 }]
-        },
-        '4-3-3': {
-          GK: [{ x: 50, y: 12 }],
-          DEF: [{ x: 16, y: 32 }, { x: 38, y: 32 }, { x: 62, y: 32 }, { x: 84, y: 32 }],
-          MID: [{ x: 20, y: 56 }, { x: 50, y: 56 }, { x: 80, y: 56 }],
-          FWD: [{ x: 25, y: 84 }, { x: 50, y: 84 }, { x: 75, y: 84 }]
-        },
-        '5-3-2': {
-          GK: [{ x: 50, y: 12 }],
-          DEF: [{ x: 10, y: 32 }, { x: 30, y: 32 }, { x: 50, y: 32 }, { x: 70, y: 32 }, { x: 90, y: 32 }],
-          MID: [{ x: 20, y: 56 }, { x: 50, y: 56 }, { x: 80, y: 56 }],
-          FWD: [{ x: 38, y: 84 }, { x: 62, y: 84 }]
-        }
-      };
-      return layouts[form] || layouts['3-5-2'];
-    };
+.hero-sub { display: none; }
  
-    const layout = getLayout(formation);
-    const grouped = { GK: [], DEF: [], MID: [], FWD: [] };
-    starting.forEach(p => {
-      if (grouped[p.position]) grouped[p.position].push(p);
-    });
-    Object.keys(grouped).forEach(pos => {
-      grouped[pos].sort((a, b) => b.expected_points - a.expected_points || b.ownership - a.ownership);
-    });
+.section-title,
+.section-head h2 {
+  font-family: Manrope, Inter, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
  
-    const isMobile = window.matchMedia('(max-width: 760px)').matches;
-    const pitchItems = [];
-    ['GK', 'DEF', 'MID', 'FWD'].forEach(pos => {
-      grouped[pos].forEach((p, i) => {
-        const coord = layout[pos][i] || { x: 50, y: 50 };
-        pitchItems.push({ ...p, coord });
-      });
-    });
+.section-title {
+  font-size: 18px;
+  margin-bottom: 14px;
+}
  
-    const pitchArea = document.getElementById('pitchArea');
-    pitchArea.innerHTML = pitchItems.map(p => {
-      const isCaptain = p.player === captain.player;
-      const isVice = p.player === viceCaptain.player;
+.call-text {
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
  
-      if (isMobile) {
-        return `
-          <div class="slot" style="left:${p.coord.x}%; top:${p.coord.y}%; width:84px;">
-            <div class="button-token" style="background:${renderShirt(p.team)}">
-              <span class="button-token-letter">${esc((p.player || '?').slice(0,1).toUpperCase())}</span>
-              ${isCaptain ? '<span class="button-badge button-c">C</span>' : ''}
-              ${isVice ? '<span class="button-badge button-vc">VC</span>' : ''}
-            </div>
-            <div class="pitch-card button-card">
-              <div class="pitch-name">${esc(p.player)}</div>
-              <div class="pitch-subline">${esc(p.team)} • ${esc(p.position)}</div>
-              <div class="pitch-points">${Math.round(p.expected_points)} pts</div>
-            </div>
-          </div>
-        `;
-      }
+.call-meta {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
  
-      return `
-        <div class="slot" style="left:${p.coord.x}%; top:${p.coord.y}%;">
-          <div class="shirt-wrap">
-            <svg class="shirt-svg" viewBox="0 0 72 78" aria-hidden="true">
-              <path d="M22 6h28l8 6 11 8-6 18-8-4v36H17V34l-8 4-6-18 11-8 8-6z" fill="${renderShirt(p.team)}" stroke="rgba(255,255,255,0.65)" stroke-width="2" />
-              <path d="M28 6h16l4 8H24z" fill="rgba(255,255,255,0.18)" />
-              <path d="M27 15h18l-2 8H29z" fill="rgba(0,0,0,0.10)" />
-            </svg>
-            ${isCaptain ? '<span class="badge badge-c">C</span>' : ''}
-            ${isVice ? '<span class="badge badge-vc">VC</span>' : ''}
-          </div>
-          <div class="pitch-card">
-            <div class="pitch-name">${esc(p.player)}</div>
-            <div class="pitch-subline">${esc(p.team)} • ${esc(p.position)}</div>
-            <div class="pitch-points">${Math.round(p.expected_points)} pts</div>
-          </div>
-        </div>
-      `;
-    }).join('');
+.stats-panel {
+  display: grid;
+  gap: 12px;
+  align-content: center;
+}
  
-    const subsRow = document.getElementById('subsRow');
-    if (bench.length) {
-      subsRow.innerHTML = bench.map((p, idx) => {
-        if (isMobile) {
-          return `
-            <div class="sub-card sub-pill">
-              <div class="button-token small-token" style="background:${renderShirt(p.team)}">
-                <span class="button-token-letter">${esc((p.player || '?').slice(0,1).toUpperCase())}</span>
-              </div>
-              <div class="pitch-name">${esc(p.player)}</div>
-              <div class="pitch-subline">${esc(p.team)} • ${esc(p.position)}</div>
-              <div class="pitch-points">${Math.round(p.expected_points)} pts</div>
-              <div class="pitch-subline">${idx + 1}. Bench order</div>
-            </div>
-          `;
-        }
-        return `
-          <div class="sub-card">
-            <div class="shirt-wrap">
-              <svg class="shirt-svg" viewBox="0 0 72 78" aria-hidden="true">
-                <path d="M22 6h28l8 6 11 8-6 18-8-4v36H17V34l-8 4-6-18 11-8 8-6z" fill="${renderShirt(p.team)}" stroke="rgba(255,255,255,0.65)" stroke-width="2" />
-                <path d="M28 6h16l4 8H24z" fill="rgba(255,255,255,0.18)" />
-                <path d="M27 15h18l-2 8H29z" fill="rgba(0,0,0,0.10)" />
-              </svg>
-            </div>
-            <div class="pitch-name">${esc(p.player)}</div>
-            <div class="pitch-subline">${esc(p.team)} • ${esc(p.position)}</div>
-            <div class="pitch-points">${Math.round(p.expected_points)} pts</div>
-            <div class="pitch-subline">${idx + 1}. Bench order</div>
-          </div>
-        `;
-      }).join('');
-    } else {
-      subsRow.innerHTML = `<div class="empty-state">No bench players found in the JSON.</div>`;
-    }
+.mini-stat {
+  padding: 14px 16px;
+  background: var(--card-2);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
  
-    const transferWatchEl = document.getElementById('transferWatch');
-    if (transferWatch.length) {
-      transferWatchEl.innerHTML = transferWatch.map(item => {
-        const gain = Math.max(0, item.expected_points_in - item.expected_points_out);
-        const sellPrice = Number.isFinite(item.sell_price) ? `£${item.sell_price.toFixed(1)}m` : '£—';
-        const buyPrice = Number.isFinite(item.buy_price) ? `£${item.buy_price.toFixed(1)}m` : '£—';
-        return `
-          <div class="transfer-card">
-            <div class="transfer-side">
-              <div class="label">Out</div>
-              <div class="name">${esc(item.sell)}</div>
-              <div class="meta">${sellPrice} • ${esc(item.sell_team)} • ${esc(item.position)}</div>
-              <div class="meta">${esc(item.why_sell || '')}</div>
-            </div>
-            <div>
-              <div class="transfer-arrow">→</div>
-              <div class="transfer-gain">+${gain} pts</div>
-            </div>
-            <div class="transfer-side">
-              <div class="label">In</div>
-              <div class="name">${esc(item.buy)}</div>
-              <div class="meta">${buyPrice} • ${esc(item.buy_team || 'Target') } • ${esc(item.position)}</div>
-              <div class="meta">${esc(item.why_buy || '')}</div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    } else {
-      transferWatchEl.innerHTML = `<div class="empty-state">No clear transfer move right now. Keep the base squad and hold the free transfer.</div>`;
-    }
+.mini-stat span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
  
-    const chipWatchEl = document.getElementById('chipWatch');
-    const chipConfig = [
-      {
-        name: 'Triple Captain',
-        status: text(chipWatch.triple_captain?.status, 'wait'),
-        reason: text(chipWatch.triple_captain?.reason, 'Use when your captain is the best ceiling pick and the fixture is kind.')
-      },
-      {
-        name: 'Bench Boost',
-        status: text(chipWatch.bench_boost?.status, 'wait'),
-        reason: text(chipWatch.bench_boost?.reason, 'Use when the bench has proper starter-level points, not just bodies.')
-      },
-      {
-        name: 'Wildcard',
-        status: text(chipWatch.free_hit?.status, 'not needed'),
-        reason: text(chipWatch.free_hit?.reason, 'Use when the squad needs a full reset, not just a single transfer.')
-      },
-      {
-        name: 'Free Hit',
-        status: text(chipWatch.free_hit?.status, 'not needed'),
-        reason: text(chipWatch.free_hit?.reason, 'Use for one awkward week when the normal squad shape breaks down.')
-      }
-    ];
+.mini-stat strong {
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
  
-    chipWatchEl.innerHTML = chipConfig.map(item => {
-      const status = item.status.toLowerCase();
-      const cls = status === 'ready' ? 'chip-ready' : status === 'watch' || status === 'consider' ? 'chip-watch' : 'chip-no';
-      return `
-        <div class="chip-item ${cls}">
-          <div class="chip-name">${esc(item.name)}</div>
-          <div class="chip-status">${esc(item.status.toUpperCase())}</div>
-          <div class="chip-reason">${esc(item.reason)}</div>
-        </div>
-      `;
-    }).join('');
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
  
-    const focusCardsEl = document.getElementById('focusCards');
-    const focusCards = [
-      {
-        role: 'Captain',
-        name: captain.player || '—',
-        summary: smartSummary(captain),
-        meta: `${captain.team || '—'} • ${Math.round(num(captain.expected_points, 0))} pts`
-      },
-      {
-        role: 'Vice captain',
-        name: viceCaptain.player || '—',
-        summary: smartSummary(viceCaptain),
-        meta: `${viceCaptain.team || '—'} • ${Math.round(num(viceCaptain.expected_points, 0))} pts`
-      }
-    ];
+.pitch-panel { grid-column: 1 / -1; }
  
-    if (transferWatch[0]) {
-      focusCards.push({
-        role: 'Transfer out',
-        name: transferWatch[0].sell,
-        summary: `${transferWatch[0].why_sell || 'Exit the weak spot.'} ${Number.isFinite(transferWatch[0].sell_price) ? `Current price: £${transferWatch[0].sell_price.toFixed(1)}m.` : ''}`.trim(),
-        meta: `${transferWatch[0].sell_team || '—'} • ${transferWatch[0].position || '—'}`
-      });
-      focusCards.push({
-        role: 'Transfer in',
-        name: transferWatch[0].buy,
-        summary: `${transferWatch[0].why_buy || 'Upgrade the slot.'} ${Number.isFinite(transferWatch[0].buy_price) ? `Price: £${transferWatch[0].buy_price.toFixed(1)}m.` : ''}`.trim(),
-        meta: `${transferWatch[0].buy_team || 'Target'} • ${transferWatch[0].position || '—'}`
-      });
-    }
+.section-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
  
-    focusCardsEl.innerHTML = focusCards.map(card => `
-      <article class="focus-card">
-        <div class="topline">
-          <div class="name">${esc(card.name)}</div>
-          <div class="role">${esc(card.role)}</div>
-        </div>
-        <div class="summary">${esc(card.summary)}</div>
-        <div class="meta">${esc(card.meta)}</div>
-      </article>
-    `).join('');
+.section-head h2 {
+  margin: 0;
+  font-size: 20px;
+}
  
-    document.getElementById('heroSub').textContent =
-      `Base squad locked for the season. This week is only about transfers, captaincy, chips, and bench order.`;
-  })
-  .catch(err => {
-    console.error(err);
-    document.body.innerHTML = '<div style="padding:40px;font-family:Inter, sans-serif">Failed to load dashboard.json</div>';
-  });
-
+.section-head p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+ 
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid var(--line);
+  background: #fafcfa;
+}
+ 
+.chip.soft {
+  color: var(--accent);
+  background: rgba(15, 122, 84, 0.08);
+  border-color: rgba(15, 122, 84, 0.16);
+}
+ 
+.pitch {
+  position: relative;
+  min-height: 720px;
+  border-radius: 22px;
+  border: 1px solid #d8e5d8;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.16) 0 50%, transparent 50% 100%),
+    linear-gradient(180deg, rgba(255,255,255,0.14) 0 50%, transparent 50% 100%),
+    radial-gradient(circle at center, rgba(255,255,255,0.24), transparent 56%),
+    linear-gradient(180deg, #dff0dd 0%, #cfe3cb 100%);
+}
+ 
+.pitch::before {
+  content: '';
+  position: absolute;
+  inset: 16px;
+  border: 2px solid rgba(255,255,255,0.7);
+  border-radius: 18px;
+}
+ 
+.pitch::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 176px;
+  height: 176px;
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(255,255,255,0.72);
+  border-radius: 999px;
+}
+ 
+.slot {
+  position: absolute;
+  width: 110px;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+ 
+.shirt-wrap {
+  position: relative;
+  width: 60px;
+  height: 66px;
+  margin: 0 auto 8px;
+}
+ 
+.shirt-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 10px 16px rgba(15, 23, 42, 0.16));
+}
+ 
+.badge {
+  position: absolute;
+  right: -4px;
+  top: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  border: 2px solid rgba(255,255,255,0.7);
+}
+ 
+.badge-c { background: var(--accent); }
+.badge-vc { background: var(--accent-2); }
+ 
+.pitch-card {
+  display: inline-block;
+  min-width: 96px;
+  padding: 9px 10px 8px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 10px 20px rgba(15,23,42,0.05);
+}
+ 
+.pitch-name {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+ 
+.pitch-subline {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+ 
+.pitch-note {
+  margin-top: 6px;
+  color: var(--accent);
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+ 
+.pitch-points {
+  margin-top: 6px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 800;
+}
+ 
+.subs-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+ 
+.sub-card {
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--card-2);
+  text-align: center;
+}
+ 
+.sub-card .pitch-card { display: none; }
+.sub-card .shirt-wrap {
+  width: 52px;
+  height: 58px;
+}
+ 
+.transfer-list {
+  display: grid;
+  gap: 12px;
+}
+ 
+.transfer-card {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--card-2);
+}
+ 
+.transfer-side .label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+ 
+.transfer-side .name {
+  margin-top: 4px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+ 
+.transfer-side .meta {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+ 
+.transfer-arrow {
+  font-size: 22px;
+  color: var(--accent);
+  font-weight: 900;
+  text-align: center;
+}
+ 
+.transfer-gain {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(15, 122, 84, 0.1);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+}
+ 
+.chip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+ 
+.chip-item {
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--card-2);
+}
+ 
+.chip-item .chip-name {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+ 
+.chip-item .chip-status {
+  margin-top: 6px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+ 
+.chip-item .chip-reason {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+ 
+.chip-ready { border-color: rgba(21,128,61,0.18); }
+.chip-ready .chip-status { color: var(--good); }
+.chip-watch { border-color: rgba(180,83,9,0.18); }
+.chip-watch .chip-status { color: var(--warn); }
+.chip-no { border-color: rgba(185,28,28,0.18); }
+.chip-no .chip-status { color: var(--bad); }
+ 
+.focus-grid {
+  display: grid;
+  gap: 12px;
+}
+ 
+.focus-card {
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--card-2);
+}
+ 
+.focus-card .topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+ 
+.focus-card .name {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+ 
+.focus-card .role {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(15, 122, 84, 0.1);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+}
+ 
+.focus-card .summary {
+  margin-top: 8px;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.5;
+}
+ 
+.focus-card .meta {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+ 
+.empty-state {
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px dashed var(--line);
+  color: var(--muted);
+  background: rgba(255,255,255,0.55);
+  font-size: 13px;
+}
+ 
+.footer-card {
+  margin-top: 16px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+ 
+.footer-title {
+  font-family: Manrope, Inter, sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+ 
+.footer-text {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+ 
+.button-token {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 8px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 16px rgba(15, 23, 42, 0.16);
+  border: 1px solid rgba(255,255,255,0.65);
+}
+ 
+.button-token.small-token {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+}
+ 
+.button-token-letter {
+  color: #fff;
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: -0.04em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+}
+ 
+.button-badge {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 9px;
+  font-weight: 900;
+  border: 2px solid rgba(255,255,255,0.8);
+}
+ 
+.button-c { background: var(--accent); }
+.button-vc { background: var(--accent-2); }
+ 
+.mobile-chip {
+  display: none;
+}
+ 
+@media (max-width: 1100px) {
+  .hero-grid,
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+ 
+  .pitch-panel { grid-column: auto; }
+}
+ 
+@media (max-width: 760px) {
+  .app-shell { padding: 14px; }
+ 
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+ 
+  .top-actions {
+    width: 100%;
+    justify-content: center;
+  }
+ 
+  .brand-name { font-size: 26px; }
+  .brand-logo-wrap { width: 64px; height: 64px; }
+  .hero-points { font-size: 50px; }
+ 
+  .hero-panel, .call-panel, .stats-panel,
+  .pitch-panel, .subs-panel, .transfer-panel, .chip-panel, .notes-panel {
+    padding: 16px;
+  }
+ 
+  .pitch { min-height: 420px; }
+  .slot { width: 64px; }
+ 
+  .pitch-card { min-width: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
+  .pitch-name,
+  .pitch-subline,
+  .pitch-note,
+  .pitch-points { display: none; }
+ 
+  .button-token { width: 34px; height: 34px; border-radius: 12px; margin-bottom: 0; }
+  .button-token.small-token { width: 34px; height: 34px; border-radius: 12px; }
+  .button-token-letter { font-size: 13px; }
+  .button-badge { width: 16px; height: 16px; font-size: 8px; }
+ 
+  .mobile-chip {
+    display: block;
+    margin-top: 4px;
+    padding: 4px 6px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.92);
+    font-size: 10px;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+ 
+  .subs-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+ 
+  .sub-card {
+    padding: 10px;
+  }
+ 
+  .sub-card .pitch-name,
+  .sub-card .pitch-subline,
+  .sub-card .pitch-note,
+  .sub-card .pitch-points { display: none; }
+ 
+  .transfer-card {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+ 
+  .transfer-arrow { transform: rotate(90deg); }
+ 
+  .chip-grid { grid-template-columns: 1fr 1fr; }
+ 
+  .footer-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
