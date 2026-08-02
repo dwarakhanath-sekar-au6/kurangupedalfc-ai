@@ -9,15 +9,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <style>
-    body { background: linear-gradient(180deg, #f7f9f6 0%, #eef3ee 100%); }
-    .rules-shell { max-width: 980px; margin: 0 auto; padding: 24px; }
-    .rules-card { padding: 26px; }
+    body {
+      background: linear-gradient(180deg, #f7f9f6 0%, #eef3ee 100%);
+    }
+
+    .rules-shell {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .rules-card {
+      padding: 26px;
+    }
+
     .rules-head {
       display: flex;
       align-items: center;
       gap: 14px;
       margin-bottom: 22px;
     }
+
     .rules-logo {
       width: 52px;
       height: 52px;
@@ -28,6 +40,7 @@
       box-shadow: 0 10px 20px rgba(15, 23, 42, 0.06);
       flex: 0 0 auto;
     }
+
     h1 {
       font-family: Manrope, Inter, sans-serif;
       letter-spacing: -0.04em;
@@ -35,6 +48,7 @@
       font-size: 34px;
       line-height: 1.05;
     }
+
     h2 {
       font-family: Manrope, Inter, sans-serif;
       letter-spacing: -0.03em;
@@ -42,12 +56,17 @@
       margin-bottom: 10px;
       font-size: 22px;
     }
+
     p, li {
       color: #374151;
       line-height: 1.7;
       font-size: 16px;
     }
-    .muted { color: #64748b; }
+
+    .muted {
+      color: #64748b;
+    }
+
     .callout {
       background: #f8faf7;
       border: 1px solid #e2e8e0;
@@ -55,6 +74,7 @@
       padding: 16px;
       margin: 16px 0;
     }
+
     .pill {
       display: inline-flex;
       padding: 8px 12px;
@@ -65,16 +85,55 @@
       font-weight: 800;
       margin-bottom: 8px;
     }
-    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
-    .mini { border: 1px solid #e2e8e0; border-radius: 18px; padding: 16px; background: #fff; }
-    .mini h3 { margin: 0 0 8px; font-size: 18px; font-family: Manrope, Inter, sans-serif; }
-    .back { display: inline-flex; margin-top: 18px; text-decoration: none; color: #111827; font-weight: 700; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .mini {
+      border: 1px solid #e2e8e0;
+      border-radius: 18px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .mini h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-family: Manrope, Inter, sans-serif;
+    }
+
+    .back {
+      display: inline-flex;
+      margin-top: 18px;
+      text-decoration: none;
+      color: #111827;
+      font-weight: 700;
+    }
+
     @media (max-width: 760px) {
-      .rules-shell { padding: 14px; }
-      .rules-card { padding: 18px; }
-      h1 { font-size: 28px; }
-      .grid { grid-template-columns: 1fr; }
-      .rules-head { flex-direction: column; align-items: flex-start; }
+      .rules-shell {
+        padding: 14px;
+      }
+
+      .rules-card {
+        padding: 18px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rules-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
@@ -82,16 +141,16 @@
   <div class="rules-shell">
     <div class="panel rules-card">
       <div class="rules-head">
-        <img class="rules-logo" src="./logo.jpg?v=4" alt="KuranguPedalFC logo" />
+        <img class="rules-logo" src="./logo.jpg?v=5" alt="KuranguPedalFC logo" />
         <div>
           <span class="pill">How to play</span>
           <h1>Fantasy Premier League, explained simply</h1>
-          <p class="muted">A simple guide for anyone joining the game for the first time.</p>
+          <p class="muted">Short rules. Clear steps. No clutter.</p>
         </div>
       </div>
 
       <div class="callout">
-        <strong>The game in one line:</strong> pick a 15-player squad, stay within the budget, choose 11 starters each week, and earn points from real Premier League performances. The official rules say the squad must have 15 players, the budget must not exceed £100m, and no more than 3 players can come from the same club.
+        <strong>The game in one line:</strong> pick a 15-player squad, stay within the budget, choose 11 starters each week, and earn points from real Premier League performances.
       </div>
 
       <h2>What happens every week</h2>
@@ -106,27 +165,27 @@
       <div class="grid">
         <div class="mini">
           <h3>Triple Captain</h3>
-          <p>Your captain scores triple points instead of double for that Gameweek. Best used when the captain is the strongest weekly option and the fixture looks friendly.</p>
+          <p>Your captain scores triple points instead of double for that Gameweek.</p>
         </div>
         <div class="mini">
           <h3>Bench Boost</h3>
-          <p>Points from your bench count too. Best when the full 15 are in good shape and the bench can actually return useful points.</p>
+          <p>Points from your bench count too.</p>
         </div>
         <div class="mini">
           <h3>Wildcard</h3>
-          <p>Lets you rebuild the squad without the normal transfer limits. Best when several players need to change at once.</p>
+          <p>Lets you rebuild the squad without the normal transfer limits.</p>
         </div>
         <div class="mini">
           <h3>Free Hit</h3>
-          <p>Lets you make a one-week-only squad for a single Gameweek. Good for awkward fixture swings or weeks when the normal squad breaks down.</p>
+          <p>Lets you make a one-week-only squad for a single Gameweek.</p>
         </div>
       </div>
 
       <h2>What KuranguPedalFC shows</h2>
-      <p>The page starts with the weekly projected points, then the immediate call, then the pitch, substitutes, transfer watch, chip watch, and player notes. The goal is to help you decide fast without clutter.</p>
+      <p>Start with the weekly points number, then the immediate call, then the pitch, substitutes, transfer watch, chip watch, and key decisions.</p>
 
       <h2>How the app works</h2>
-      <p>Once your team access is added, the weekly manager reads your live squad, checks form, minutes, fixtures, ownership, and availability, and then recommends the next move. Until then, the page shows the recommended base squad for the week.</p>
+      <p>Once your access is added, the weekly manager reads your live squad, checks form, fixtures, ownership, and availability, and then recommends the next move.</p>
 
       <a class="back" href="./">← Back to the main page</a>
     </div>
