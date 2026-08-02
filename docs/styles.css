@@ -13,24 +13,24 @@
   --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
   --radius: 24px;
 }
- 
+
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
- 
+
 body {
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--text);
   background:
     radial-gradient(circle at top left, rgba(15, 122, 84, 0.08), transparent 32%),
     linear-gradient(180deg, #f7f9f6 0%, var(--bg) 100%);
 }
- 
+
 .app-shell {
   max-width: 1440px;
   margin: 0 auto;
   padding: 22px;
 }
- 
+
 .topbar {
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@ body {
   margin-bottom: 20px;
   text-align: center;
 }
- 
+
 .brand {
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@ body {
   text-decoration: none;
   color: inherit;
 }
- 
+
 .brand-logo-wrap {
   width: 74px;
   height: 74px;
@@ -58,7 +58,7 @@ body {
   border: 1px solid rgba(15,122,84,.12);
   box-shadow: var(--shadow);
 }
- 
+
 .brand-logo {
   width: 100%;
   height: 100%;
@@ -66,9 +66,7 @@ body {
   border-radius: 18px;
   display: block;
 }
- 
-.brand-copy { text-align: left; }
- 
+
 .brand-name {
   font-family: Manrope, Inter, sans-serif;
   font-size: 30px;
@@ -76,13 +74,13 @@ body {
   letter-spacing: -0.04em;
   font-weight: 800;
 }
- 
+
 .brand-sub {
   margin-top: 4px;
   color: var(--muted);
   font-size: 13px;
 }
- 
+
 .top-actions {
   display: flex;
   align-items: center;
@@ -90,7 +88,7 @@ body {
   gap: 10px;
   width: 100%;
 }
- 
+
 .ghost-link {
   text-decoration: none;
   color: var(--text);
@@ -101,7 +99,7 @@ body {
   border: 1px solid var(--line);
   background: rgba(255,255,255,0.8);
 }
- 
+
 .pint-btn {
   display: inline-flex;
   align-items: center;
@@ -116,35 +114,35 @@ body {
   background: linear-gradient(135deg, #0f7a54 0%, #0c5d41 100%);
   box-shadow: 0 12px 24px rgba(15, 122, 84, 0.18);
 }
- 
+
 .beer-icon { font-size: 15px; }
- 
+
 .hero-grid {
   display: grid;
   grid-template-columns: 1.5fr 1.1fr 0.9fr;
   gap: 16px;
   margin-bottom: 16px;
 }
- 
+
 .panel {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
- 
+
 .hero-panel, .call-panel, .stats-panel,
 .pitch-panel, .subs-panel, .transfer-panel, .chip-panel, .notes-panel {
   padding: 20px;
 }
- 
+
 .hero-label {
   color: var(--muted);
   font-size: 13px;
   font-weight: 600;
   margin-bottom: 8px;
 }
- 
+
 .hero-points {
   font-family: Manrope, Inter, sans-serif;
   font-size: 62px;
@@ -153,68 +151,75 @@ body {
   font-weight: 800;
   color: var(--text);
 }
- 
-.hero-sub { display: none; }
- 
+
+.hero-sub {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
 .section-title,
 .section-head h2 {
   font-family: Manrope, Inter, sans-serif;
   font-weight: 800;
   letter-spacing: -0.03em;
 }
- 
+
 .section-title {
   font-size: 18px;
   margin-bottom: 14px;
 }
- 
+
 .call-text {
   font-size: 20px;
   line-height: 1.4;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
- 
+
 .call-meta {
   margin-top: 12px;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.45;
 }
- 
+
 .stats-panel {
   display: grid;
   gap: 12px;
   align-content: center;
 }
- 
+
 .mini-stat {
   padding: 14px 16px;
   background: var(--card-2);
   border: 1px solid var(--line);
   border-radius: 18px;
 }
- 
+
 .mini-stat span {
   display: block;
   color: var(--muted);
   font-size: 12px;
   margin-bottom: 6px;
 }
- 
+
 .mini-stat strong {
   font-size: 20px;
   letter-spacing: -0.03em;
 }
- 
+
 .content-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
- 
-.pitch-panel { grid-column: 1 / -1; }
- 
+
+.pitch-panel {
+  grid-column: 1 / -1;
+}
+
 .section-head {
   display: flex;
   align-items: start;
@@ -222,19 +227,19 @@ body {
   gap: 12px;
   margin-bottom: 14px;
 }
- 
+
 .section-head h2 {
   margin: 0;
   font-size: 20px;
 }
- 
+
 .section-head p {
   margin: 6px 0 0;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.45;
 }
- 
+
 .chip {
   display: inline-flex;
   align-items: center;
@@ -245,13 +250,13 @@ body {
   border: 1px solid var(--line);
   background: #fafcfa;
 }
- 
+
 .chip.soft {
   color: var(--accent);
   background: rgba(15, 122, 84, 0.08);
   border-color: rgba(15, 122, 84, 0.16);
 }
- 
+
 .pitch {
   position: relative;
   min-height: 720px;
@@ -264,17 +269,17 @@ body {
     radial-gradient(circle at center, rgba(255,255,255,0.24), transparent 56%),
     linear-gradient(180deg, #dff0dd 0%, #cfe3cb 100%);
 }
- 
+
 .pitch::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 16px;
   border: 2px solid rgba(255,255,255,0.7);
   border-radius: 18px;
 }
- 
+
 .pitch::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   top: 50%;
@@ -284,28 +289,28 @@ body {
   border: 2px solid rgba(255,255,255,0.72);
   border-radius: 999px;
 }
- 
+
 .slot {
   position: absolute;
   width: 110px;
   transform: translate(-50%, -50%);
   text-align: center;
 }
- 
+
 .shirt-wrap {
   position: relative;
   width: 60px;
   height: 66px;
   margin: 0 auto 8px;
 }
- 
+
 .shirt-svg {
   width: 100%;
   height: 100%;
   display: block;
   filter: drop-shadow(0 10px 16px rgba(15, 23, 42, 0.16));
 }
- 
+
 .badge {
   position: absolute;
   right: -4px;
@@ -320,10 +325,10 @@ body {
   font-weight: 800;
   border: 2px solid rgba(255,255,255,0.7);
 }
- 
+
 .badge-c { background: var(--accent); }
 .badge-vc { background: var(--accent-2); }
- 
+
 .pitch-card {
   display: inline-block;
   min-width: 96px;
@@ -333,41 +338,33 @@ body {
   background: rgba(255,255,255,0.95);
   box-shadow: 0 10px 20px rgba(15,23,42,0.05);
 }
- 
+
 .pitch-name {
   font-size: 14px;
   font-weight: 800;
   line-height: 1.15;
 }
- 
+
 .pitch-subline {
   margin-top: 4px;
   color: var(--muted);
   font-size: 12px;
   line-height: 1.35;
 }
- 
-.pitch-note {
-  margin-top: 6px;
-  color: var(--accent);
-  font-size: 12px;
-  line-height: 1.35;
-  font-weight: 700;
-}
- 
+
 .pitch-points {
   margin-top: 6px;
   color: var(--accent);
   font-size: 13px;
   font-weight: 800;
 }
- 
+
 .subs-row {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
 }
- 
+
 .sub-card {
   padding: 14px;
   border-radius: 18px;
@@ -375,18 +372,25 @@ body {
   background: var(--card-2);
   text-align: center;
 }
- 
-.sub-card .pitch-card { display: none; }
+
+.sub-card .pitch-card {
+  display: none;
+}
+
 .sub-card .shirt-wrap {
   width: 52px;
   height: 58px;
 }
- 
+
+.sub-card .pitch-name {
+  margin-top: 2px;
+}
+
 .transfer-list {
   display: grid;
   gap: 12px;
 }
- 
+
 .transfer-card {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -397,7 +401,7 @@ body {
   border: 1px solid var(--line);
   background: var(--card-2);
 }
- 
+
 .transfer-side .label {
   font-size: 11px;
   font-weight: 800;
@@ -405,28 +409,28 @@ body {
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
- 
+
 .transfer-side .name {
   margin-top: 4px;
   font-size: 18px;
   font-weight: 800;
   letter-spacing: -0.03em;
 }
- 
+
 .transfer-side .meta {
   margin-top: 4px;
   color: var(--muted);
   font-size: 12px;
   line-height: 1.4;
 }
- 
+
 .transfer-arrow {
   font-size: 22px;
   color: var(--accent);
   font-weight: 900;
   text-align: center;
 }
- 
+
 .transfer-gain {
   margin-top: 8px;
   display: inline-flex;
@@ -438,20 +442,20 @@ body {
   font-size: 12px;
   font-weight: 800;
 }
- 
+
 .chip-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
- 
+
 .chip-item {
   padding: 14px;
   border-radius: 18px;
   border: 1px solid var(--line);
   background: var(--card-2);
 }
- 
+
 .chip-item .chip-name {
   font-size: 12px;
   font-weight: 800;
@@ -459,53 +463,53 @@ body {
   text-transform: uppercase;
   color: var(--muted);
 }
- 
+
 .chip-item .chip-status {
   margin-top: 6px;
   font-size: 18px;
   font-weight: 800;
   letter-spacing: -0.03em;
 }
- 
+
 .chip-item .chip-reason {
   margin-top: 8px;
   color: var(--muted);
   font-size: 12px;
   line-height: 1.45;
 }
- 
+
 .chip-ready { border-color: rgba(21,128,61,0.18); }
 .chip-ready .chip-status { color: var(--good); }
 .chip-watch { border-color: rgba(180,83,9,0.18); }
 .chip-watch .chip-status { color: var(--warn); }
 .chip-no { border-color: rgba(185,28,28,0.18); }
 .chip-no .chip-status { color: var(--bad); }
- 
+
 .focus-grid {
   display: grid;
   gap: 12px;
 }
- 
+
 .focus-card {
   padding: 14px;
   border-radius: 18px;
   border: 1px solid var(--line);
   background: var(--card-2);
 }
- 
+
 .focus-card .topline {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
 }
- 
+
 .focus-card .name {
   font-size: 18px;
   font-weight: 800;
   letter-spacing: -0.03em;
 }
- 
+
 .focus-card .role {
   display: inline-flex;
   align-items: center;
@@ -516,20 +520,20 @@ body {
   font-size: 12px;
   font-weight: 800;
 }
- 
+
 .focus-card .summary {
   margin-top: 8px;
   color: var(--text);
   font-size: 13px;
   line-height: 1.5;
 }
- 
+
 .focus-card .meta {
   margin-top: 8px;
   color: var(--muted);
   font-size: 12px;
 }
- 
+
 .empty-state {
   padding: 16px;
   border-radius: 18px;
@@ -538,7 +542,7 @@ body {
   background: rgba(255,255,255,0.55);
   font-size: 13px;
 }
- 
+
 .footer-card {
   margin-top: 16px;
   padding: 18px 20px;
@@ -547,21 +551,113 @@ body {
   justify-content: space-between;
   gap: 16px;
 }
- 
+
 .footer-title {
   font-family: Manrope, Inter, sans-serif;
   font-size: 18px;
   font-weight: 800;
   letter-spacing: -0.03em;
 }
- 
+
 .footer-text {
   margin-top: 4px;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.45;
 }
- 
+
+@media (max-width: 1100px) {
+  .hero-grid,
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pitch-panel {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .app-shell {
+    padding: 14px;
+  }
+
+  .topbar {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .top-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .brand-name {
+    font-size: 26px;
+  }
+
+  .brand-logo-wrap {
+    width: 64px;
+    height: 64px;
+  }
+
+  .hero-points {
+    font-size: 50px;
+  }
+
+  .hero-panel, .call-panel, .stats-panel,
+  .pitch-panel, .subs-panel, .transfer-panel, .chip-panel, .notes-panel {
+    padding: 16px;
+  }
+
+  .pitch {
+    min-height: 420px;
+  }
+
+  .slot {
+    width: 92px;
+  }
+
+  .pitch-card {
+    min-width: 84px;
+    padding: 8px;
+  }
+
+  .pitch-name {
+    font-size: 13px;
+  }
+
+  .pitch-subline {
+    display: none;
+  }
+
+  .pitch-points {
+    font-size: 12px;
+  }
+
+  .subs-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .transfer-card {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .transfer-arrow {
+    transform: rotate(90deg);
+  }
+
+  .chip-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
 .button-token {
   position: relative;
   width: 58px;
@@ -573,13 +669,13 @@ body {
   box-shadow: 0 10px 16px rgba(15, 23, 42, 0.16);
   border: 1px solid rgba(255,255,255,0.65);
 }
- 
+
 .button-token.small-token {
   width: 46px;
   height: 46px;
   border-radius: 14px;
 }
- 
+
 .button-token-letter {
   color: #fff;
   font-weight: 900;
@@ -587,7 +683,7 @@ body {
   letter-spacing: -0.04em;
   text-shadow: 0 1px 2px rgba(0,0,0,0.25);
 }
- 
+
 .button-badge {
   position: absolute;
   right: -5px;
@@ -602,92 +698,85 @@ body {
   font-weight: 900;
   border: 2px solid rgba(255,255,255,0.8);
 }
- 
+
 .button-c { background: var(--accent); }
 .button-vc { background: var(--accent-2); }
- 
+
+.sub-pill {
+  text-align: center;
+}
+
+
+/* Updated mobile compact tokens */
+.button-card {
+  margin-top: 4px;
+  min-width: 0;
+  padding: 7px 8px 6px;
+}
+
 .mobile-chip {
   display: none;
 }
- 
-@media (max-width: 1100px) {
-  .hero-grid,
-  .content-grid {
-    grid-template-columns: 1fr;
-  }
- 
-  .pitch-panel { grid-column: auto; }
-}
- 
+
 @media (max-width: 760px) {
-  .app-shell { padding: 14px; }
- 
-  .topbar {
-    align-items: flex-start;
-    flex-direction: column;
+  .slot {
+    width: 64px;
   }
- 
-  .top-actions {
-    width: 100%;
-    justify-content: center;
+
+  .button-token {
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    margin-bottom: 4px;
   }
- 
-  .brand-name { font-size: 26px; }
-  .brand-logo-wrap { width: 64px; height: 64px; }
-  .hero-points { font-size: 50px; }
- 
-  .hero-panel, .call-panel, .stats-panel,
-  .pitch-panel, .subs-panel, .transfer-panel, .chip-panel, .notes-panel {
-    padding: 16px;
+
+  .button-token.small-token {
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
   }
- 
-  .pitch { min-height: 420px; }
-  .slot { width: 64px; }
- 
-  .pitch-card { min-width: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
-  .pitch-name,
-  .pitch-subline,
-  .pitch-note,
-  .pitch-points { display: none; }
- 
-  .button-token { width: 34px; height: 34px; border-radius: 12px; margin-bottom: 0; }
-  .button-token.small-token { width: 34px; height: 34px; border-radius: 12px; }
-  .button-token-letter { font-size: 13px; }
-  .button-badge { width: 16px; height: 16px; font-size: 8px; }
- 
+
+  .button-token-letter {
+    font-size: 13px;
+  }
+
+  .button-badge {
+    width: 16px;
+    height: 16px;
+    font-size: 8px;
+  }
+
+  .button-card {
+    margin-top: 3px;
+    padding: 5px 6px 4px;
+    border-radius: 10px;
+  }
+
+  .button-card .pitch-name {
+    font-size: 11px;
+  }
+
+  .button-card .pitch-subline {
+    display: none;
+  }
+
+  .button-card .pitch-points {
+    font-size: 10px;
+    margin-top: 2px;
+  }
+
   .mobile-chip {
     display: block;
-    margin-top: 4px;
+    margin: 2px auto 0;
     padding: 4px 6px;
     border-radius: 10px;
     background: rgba(255,255,255,0.92);
     font-size: 10px;
     line-height: 1.2;
     font-weight: 700;
-  }
- 
-  .subs-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
- 
-  .sub-card {
-    padding: 10px;
-  }
- 
-  .sub-card .pitch-name,
-  .sub-card .pitch-subline,
-  .sub-card .pitch-note,
-  .sub-card .pitch-points { display: none; }
- 
-  .transfer-card {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
- 
-  .transfer-arrow { transform: rotate(90deg); }
- 
-  .chip-grid { grid-template-columns: 1fr 1fr; }
- 
-  .footer-card {
-    flex-direction: column;
-    align-items: stretch;
+    color: var(--text);
+    width: fit-content;
+    max-width: 100%;
+    box-shadow: 0 8px 16px rgba(15,23,42,0.08);
   }
 }
