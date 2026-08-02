@@ -1,3 +1,4 @@
+
 fetch('./dashboard.json', { cache: 'no-store' })
   .then(async res => {
     if (!res.ok) throw new Error(`dashboard.json load failed: ${res.status}`);
@@ -104,15 +105,19 @@ fetch('./dashboard.json', { cache: 'no-store' })
     const chipWatch = isObj(weekly.chip_watch) ? weekly.chip_watch : {};
     const benchOrder = toArray(weekly.bench_order).length ? toArray(weekly.bench_order) : bench.map(p => p.player);
  
-    document.getElementById('gwPill').textContent = `Gameweek ${num(data.metadata?.gameweek, 1)}`;
-    document.getElementById('updatedText').textContent = `Updated: ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-    document.getElementById('teamValue').textContent = teamValueText;
-    document.getElementById('bankValue').textContent = `£${bankValue.toFixed(1)}m`;
-    document.getElementById('formationValue').textContent = formation;
-    document.getElementById('projectedPoints').textContent = projectedTeamPoints.toString();
-    document.getElementById('nextMoveText').textContent = weeklyCall;
-    document.getElementById('heroSub').textContent = `Base squad locked for the season. Weekly advice updates only.`;
-    document.getElementById('callMeta').textContent = `Captain: ${captain.player || '—'} • Vice: ${viceCaptain.player || '—'}`;
+    const setText = (id, value) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    };
+    setText('gwPill', `Gameweek ${num(data.metadata?.gameweek, 1)}`);
+    setText('updatedText', `Updated: ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`);
+    setText('teamValue', teamValueText);
+    setText('bankValue', `£${bankValue.toFixed(1)}m`);
+    setText('formationValue', formation);
+    setText('projectedPoints', projectedTeamPoints.toString());
+    setText('nextMoveText', weeklyCall);
+    setText('heroSub', `Base squad locked for the season. Weekly advice updates only.`);
+    setText('callMeta', `Captain: ${captain.player || '—'} • Vice: ${viceCaptain.player || '—'}`);
  
     const pintLink = 'upi://pay?pa=dwarakhanath.sekar@ybl&pn=Dwarakhanath%20Sekar&am=2&cu=INR&tn=Buy%20me%20a%20pint';
     const pintBtn = document.getElementById('pintBtn');
@@ -426,3 +431,4 @@ fetch('./dashboard.json', { cache: 'no-store' })
     console.error(err);
     document.body.innerHTML = '<div style="padding:40px;font-family:Inter, sans-serif">Failed to load dashboard.json</div>';
   });
+
