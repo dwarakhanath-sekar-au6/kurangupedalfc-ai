@@ -121,13 +121,17 @@
           ${isCaptain ? '<span class="token-badge">C</span>' : ''}
           ${isVice ? '<span class="token-badge token-badge-vc">VC</span>' : ''}
         </div>
-        <div class="pitch-card">
-          <div class="pitch-name">${esc(p.player)}</div>
-          <div class="pitch-club">${esc(p.team)} • ${esc(p.position)}</div>
-          <div class="pitch-price">£${num(p.price).toFixed(1)}m</div>
-          <div class="pitch-owned">Owned by ${num(p.ownership).toFixed(1)}%</div>
-        </div>
-      </div>
+        <div class="pitch-card ${isMobile ? 'mobile-pitch-card' : ''}">
+    <div class="pitch-name">${esc(p.player)}</div>
+
+    <div class="pitch-club">
+        ${esc(p.team)}
+    </div>
+
+    <div class="pitch-meta">
+        £${num(p.price).toFixed(1)}m &nbsp; • &nbsp; 👥${num(p.ownership).toFixed(1)}%
+    </div>
+</div>
     `;
   };
 
