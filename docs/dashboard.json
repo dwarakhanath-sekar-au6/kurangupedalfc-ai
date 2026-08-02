@@ -4,99 +4,19 @@
     "team_value": "\u00a3100.0m",
     "bank": "\u00a30.0m",
     "rank": "-",
-    "is_demo": true,
-    "team_name": "Demo Squad"
+    "source_mode": "best_squad",
+    "team_name": "Best squad"
   },
   "current_team": {
     "team_id": "",
-    "team_name": "Demo Squad",
+    "team_name": "Best squad",
     "gameweek_last_updated": 1,
     "formation": "4-4-2",
     "squad_value": 100.0,
     "bank": 0.0,
     "is_demo": true,
+    "source_mode": "best_squad",
     "players": [
-      {
-        "fpl_id": 426,
-        "player": "B.Fernandes",
-        "team": "Man Utd",
-        "position": "MID",
-        "price": 12.0,
-        "purchase_price": 12.0,
-        "selection_rating": 96.86,
-        "expected_points": 8,
-        "medical": "Available",
-        "ownership": 48.7,
-        "ppg": 6.7,
-        "points": 235,
-        "minutes": 3065,
-        "starts": 35,
-        "goals": 9,
-        "assists": 24,
-        "clean_sheets": 7,
-        "is_starting": true,
-        "is_captain": true,
-        "is_vice_captain": false,
-        "is_bench_1": false,
-        "is_bench_2": false,
-        "is_bench_3": false,
-        "is_bench_4": false,
-        "locked": false
-      },
-      {
-        "fpl_id": 397,
-        "player": "Semenyo",
-        "team": "Man City",
-        "position": "MID",
-        "price": 8.5,
-        "purchase_price": 8.5,
-        "selection_rating": 83.16,
-        "expected_points": 7,
-        "medical": "Available",
-        "ownership": 21.5,
-        "ppg": 5.5,
-        "points": 202,
-        "minutes": 3200,
-        "starts": 37,
-        "goals": 17,
-        "assists": 6,
-        "clean_sheets": 12,
-        "is_starting": true,
-        "is_captain": false,
-        "is_vice_captain": true,
-        "is_bench_1": false,
-        "is_bench_2": false,
-        "is_bench_3": false,
-        "is_bench_4": false,
-        "locked": false
-      },
-      {
-        "fpl_id": 388,
-        "player": "Gu\u00e9hi",
-        "team": "Man City",
-        "position": "DEF",
-        "price": 6.0,
-        "purchase_price": 6.0,
-        "selection_rating": 79.61,
-        "expected_points": 7,
-        "medical": "Available",
-        "ownership": 24.1,
-        "ppg": 5.1,
-        "points": 179,
-        "minutes": 3150,
-        "starts": 35,
-        "goals": 3,
-        "assists": 5,
-        "clean_sheets": 14,
-        "is_starting": true,
-        "is_captain": false,
-        "is_vice_captain": false,
-        "is_bench_1": false,
-        "is_bench_2": false,
-        "is_bench_3": false,
-        "is_bench_4": false,
-        "locked": false
-      },
       {
         "fpl_id": 106,
         "player": "Thiago",
@@ -104,7 +24,7 @@
         "position": "FWD",
         "price": 8.0,
         "purchase_price": 8.0,
-        "selection_rating": 78.75,
+        "selection_rating": 76.17,
         "expected_points": 7,
         "medical": "Available",
         "ownership": 15.9,
@@ -125,16 +45,43 @@
         "locked": false
       },
       {
+        "fpl_id": 165,
+        "player": "Jo\u00e3o Pedro",
+        "team": "Chelsea",
+        "position": "FWD",
+        "price": 7.5,
+        "purchase_price": 7.5,
+        "selection_rating": 72.04,
+        "expected_points": 7,
+        "medical": "Available",
+        "ownership": 54.7,
+        "ppg": 5.1,
+        "points": 177,
+        "minutes": 2658,
+        "starts": 31,
+        "goals": 15,
+        "assists": 9,
+        "clean_sheets": 10,
+        "is_starting": true,
+        "is_captain": false,
+        "is_vice_captain": true,
+        "is_bench_1": false,
+        "is_bench_2": false,
+        "is_bench_3": false,
+        "is_bench_4": false,
+        "locked": false
+      },
+      {
         "fpl_id": 356,
         "player": "Virgil",
         "team": "Liverpool",
         "position": "DEF",
         "price": 6.5,
         "purchase_price": 6.5,
-        "selection_rating": 78.65,
+        "selection_rating": 75.6,
         "expected_points": 7,
         "medical": "Available",
-        "ownership": 16.3,
+        "ownership": 16.4,
         "ppg": 4.6,
         "points": 175,
         "minutes": 3420,
@@ -158,7 +105,7 @@
         "position": "MID",
         "price": 7.0,
         "purchase_price": 7.0,
-        "selection_rating": 77.74,
+        "selection_rating": 73.94,
         "expected_points": 7,
         "medical": "Available",
         "ownership": 48.2,
@@ -179,23 +126,50 @@
         "locked": false
       },
       {
-        "fpl_id": 498,
-        "player": "Senesi",
-        "team": "Spurs",
+        "fpl_id": 388,
+        "player": "Gu\u00e9hi",
+        "team": "Man City",
         "position": "DEF",
         "price": 6.0,
         "purchase_price": 6.0,
-        "selection_rating": 77.51,
+        "selection_rating": 76.72,
         "expected_points": 7,
         "medical": "Available",
-        "ownership": 10.9,
-        "ppg": 4.7,
-        "points": 175,
-        "minutes": 3288,
+        "ownership": 24.1,
+        "ppg": 5.1,
+        "points": 179,
+        "minutes": 3150,
+        "starts": 35,
+        "goals": 3,
+        "assists": 5,
+        "clean_sheets": 14,
+        "is_starting": true,
+        "is_captain": false,
+        "is_vice_captain": false,
+        "is_bench_1": false,
+        "is_bench_2": false,
+        "is_bench_3": false,
+        "is_bench_4": false,
+        "locked": false
+      },
+      {
+        "fpl_id": 397,
+        "player": "Semenyo",
+        "team": "Man City",
+        "position": "MID",
+        "price": 8.5,
+        "purchase_price": 8.5,
+        "selection_rating": 81.07,
+        "expected_points": 7,
+        "medical": "Available",
+        "ownership": 21.6,
+        "ppg": 5.5,
+        "points": 202,
+        "minutes": 3200,
         "starts": 37,
-        "goals": 0,
+        "goals": 17,
         "assists": 6,
-        "clean_sheets": 11,
+        "clean_sheets": 12,
         "is_starting": true,
         "is_captain": false,
         "is_vice_captain": false,
@@ -212,7 +186,7 @@
         "position": "MID",
         "price": 6.5,
         "purchase_price": 6.5,
-        "selection_rating": 75.85,
+        "selection_rating": 73.71,
         "expected_points": 7,
         "medical": "Available",
         "ownership": 12.0,
@@ -233,22 +207,76 @@
         "locked": false
       },
       {
-        "fpl_id": 165,
-        "player": "Jo\u00e3o Pedro",
-        "team": "Chelsea",
-        "position": "FWD",
-        "price": 7.5,
-        "purchase_price": 7.5,
-        "selection_rating": 74.57,
+        "fpl_id": 426,
+        "player": "B.Fernandes",
+        "team": "Man Utd",
+        "position": "MID",
+        "price": 12.0,
+        "purchase_price": 12.0,
+        "selection_rating": 94.2,
+        "expected_points": 8,
+        "medical": "Available",
+        "ownership": 48.6,
+        "ppg": 6.7,
+        "points": 235,
+        "minutes": 3065,
+        "starts": 35,
+        "goals": 9,
+        "assists": 24,
+        "clean_sheets": 7,
+        "is_starting": true,
+        "is_captain": true,
+        "is_vice_captain": false,
+        "is_bench_1": false,
+        "is_bench_2": false,
+        "is_bench_3": false,
+        "is_bench_4": false,
+        "locked": false
+      },
+      {
+        "fpl_id": 498,
+        "player": "Senesi",
+        "team": "Spurs",
+        "position": "DEF",
+        "price": 6.0,
+        "purchase_price": 6.0,
+        "selection_rating": 74.81,
         "expected_points": 7,
         "medical": "Available",
-        "ownership": 54.6,
-        "ppg": 5.1,
-        "points": 177,
-        "minutes": 2658,
-        "starts": 31,
-        "goals": 15,
-        "assists": 9,
+        "ownership": 10.9,
+        "ppg": 4.7,
+        "points": 175,
+        "minutes": 3288,
+        "starts": 37,
+        "goals": 0,
+        "assists": 6,
+        "clean_sheets": 11,
+        "is_starting": true,
+        "is_captain": false,
+        "is_vice_captain": false,
+        "is_bench_1": false,
+        "is_bench_2": false,
+        "is_bench_3": false,
+        "is_bench_4": false,
+        "locked": false
+      },
+      {
+        "fpl_id": 529,
+        "player": "Roefs",
+        "team": "Sunderland",
+        "position": "GK",
+        "price": 5.0,
+        "purchase_price": 5.0,
+        "selection_rating": 67.96,
+        "expected_points": 7,
+        "medical": "Available",
+        "ownership": 5.4,
+        "ppg": 3.9,
+        "points": 136,
+        "minutes": 3150,
+        "starts": 35,
+        "goals": 0,
+        "assists": 0,
         "clean_sheets": 10,
         "is_starting": true,
         "is_captain": false,
@@ -266,10 +294,10 @@
         "position": "DEF",
         "price": 5.5,
         "purchase_price": 5.5,
-        "selection_rating": 73.22,
+        "selection_rating": 70.4,
         "expected_points": 7,
         "medical": "Available",
-        "ownership": 7.5,
+        "ownership": 7.6,
         "ppg": 4.7,
         "points": 151,
         "minutes": 2784,
@@ -287,49 +315,22 @@
         "locked": false
       },
       {
-        "fpl_id": 529,
-        "player": "Roefs",
-        "team": "Sunderland",
+        "fpl_id": 109,
+        "player": "Verbruggen",
+        "team": "Brighton",
         "position": "GK",
-        "price": 5.0,
-        "purchase_price": 5.0,
-        "selection_rating": 71.52,
-        "expected_points": 7,
+        "price": 4.5,
+        "purchase_price": 4.5,
+        "selection_rating": 63.46,
+        "expected_points": 6,
         "medical": "Available",
-        "ownership": 5.4,
-        "ppg": 3.9,
-        "points": 136,
-        "minutes": 3150,
-        "starts": 35,
+        "ownership": 16.7,
+        "ppg": 3.4,
+        "points": 130,
+        "minutes": 3420,
+        "starts": 38,
         "goals": 0,
         "assists": 0,
-        "clean_sheets": 10,
-        "is_starting": true,
-        "is_captain": false,
-        "is_vice_captain": false,
-        "is_bench_1": false,
-        "is_bench_2": false,
-        "is_bench_3": false,
-        "is_bench_4": false,
-        "locked": false
-      },
-      {
-        "fpl_id": 542,
-        "player": "E.Le F\u00e9e",
-        "team": "Sunderland",
-        "position": "MID",
-        "price": 6.0,
-        "purchase_price": 6.0,
-        "selection_rating": 71.18,
-        "expected_points": 7,
-        "medical": "Available",
-        "ownership": 11.8,
-        "ppg": 4.1,
-        "points": 147,
-        "minutes": 2930,
-        "starts": 33,
-        "goals": 5,
-        "assists": 6,
         "clean_sheets": 10,
         "is_starting": false,
         "is_captain": false,
@@ -341,23 +342,23 @@
         "locked": false
       },
       {
-        "fpl_id": 82,
-        "player": "Kelleher",
-        "team": "Brentford",
-        "position": "GK",
-        "price": 5.0,
-        "purchase_price": 5.0,
-        "selection_rating": 70.76,
-        "expected_points": 7,
+        "fpl_id": 346,
+        "player": "Calvert-Lewin",
+        "team": "Leeds",
+        "position": "FWD",
+        "price": 6.0,
+        "purchase_price": 6.0,
+        "selection_rating": 63.89,
+        "expected_points": 6,
         "medical": "Available",
-        "ownership": 5.6,
-        "ppg": 3.9,
-        "points": 143,
-        "minutes": 3330,
-        "starts": 37,
-        "goals": 0,
-        "assists": 0,
-        "clean_sheets": 10,
+        "ownership": 18.3,
+        "ppg": 4.1,
+        "points": 142,
+        "minutes": 2721,
+        "starts": 30,
+        "goals": 14,
+        "assists": 2,
+        "clean_sheets": 8,
         "is_starting": false,
         "is_captain": false,
         "is_vice_captain": false,
@@ -368,22 +369,22 @@
         "locked": false
       },
       {
-        "fpl_id": 423,
-        "player": "Shaw",
-        "team": "Man Utd",
+        "fpl_id": 112,
+        "player": "Van Hecke",
+        "team": "Spurs",
         "position": "DEF",
-        "price": 4.5,
-        "purchase_price": 4.5,
-        "selection_rating": 68.87,
-        "expected_points": 6,
+        "price": 5.0,
+        "purchase_price": 5.0,
+        "selection_rating": 68.49,
+        "expected_points": 7,
         "medical": "Available",
-        "ownership": 24.3,
-        "ppg": 3.0,
-        "points": 113,
-        "minutes": 3220,
-        "starts": 38,
-        "goals": 1,
-        "assists": 1,
+        "ownership": 8.1,
+        "ppg": 4.1,
+        "points": 148,
+        "minutes": 3210,
+        "starts": 36,
+        "goals": 3,
+        "assists": 3,
         "clean_sheets": 10,
         "is_starting": false,
         "is_captain": false,
@@ -395,23 +396,23 @@
         "locked": false
       },
       {
-        "fpl_id": 346,
-        "player": "Calvert-Lewin",
-        "team": "Leeds",
-        "position": "FWD",
+        "fpl_id": 542,
+        "player": "E.Le F\u00e9e",
+        "team": "Sunderland",
+        "position": "MID",
         "price": 6.0,
         "purchase_price": 6.0,
-        "selection_rating": 66.41,
-        "expected_points": 6,
+        "selection_rating": 68.32,
+        "expected_points": 7,
         "medical": "Available",
-        "ownership": 18.2,
+        "ownership": 11.9,
         "ppg": 4.1,
-        "points": 142,
-        "minutes": 2721,
-        "starts": 30,
-        "goals": 14,
-        "assists": 2,
-        "clean_sheets": 8,
+        "points": 147,
+        "minutes": 2930,
+        "starts": 33,
+        "goals": 5,
+        "assists": 6,
+        "clean_sheets": 10,
         "is_starting": false,
         "is_captain": false,
         "is_vice_captain": false,
@@ -427,69 +428,12 @@
     "formation": "4-4-2",
     "starting_xi": [
       {
-        "player": "B.Fernandes",
-        "team": "Man Utd",
-        "position": "MID",
-        "price": 12.0,
-        "selection_rating": 91.48,
-        "expected_points": 6,
-        "medical": "Available",
-        "ownership": 48.7,
-        "ppg": 6.7,
-        "points": 235,
-        "minutes": 3065,
-        "starts": 35,
-        "goals": 9,
-        "assists": 24,
-        "clean_sheets": 7,
-        "recommendation": "Start",
-        "summary": "Goal involvement \u2022 Creative outlet \u2022 Consistent returns"
-      },
-      {
-        "player": "Semenyo",
-        "team": "Man City",
-        "position": "MID",
-        "price": 8.5,
-        "selection_rating": 71.09,
-        "expected_points": 5,
-        "medical": "Available",
-        "ownership": 21.5,
-        "ppg": 5.5,
-        "points": 202,
-        "minutes": 3200,
-        "starts": 37,
-        "goals": 17,
-        "assists": 6,
-        "clean_sheets": 12,
-        "recommendation": "Start",
-        "summary": "Goal involvement \u2022 Creative outlet \u2022 Consistent returns"
-      },
-      {
-        "player": "Gu\u00e9hi",
-        "team": "Man City",
-        "position": "DEF",
-        "price": 6.0,
-        "selection_rating": 61.4,
-        "expected_points": 5,
-        "medical": "Available",
-        "ownership": 24.1,
-        "ppg": 5.1,
-        "points": 179,
-        "minutes": 3150,
-        "starts": 35,
-        "goals": 3,
-        "assists": 5,
-        "clean_sheets": 14,
-        "recommendation": "Start",
-        "summary": "Clean-sheet threat \u2022 Set-piece threat \u2022 Trusted pick"
-      },
-      {
         "player": "Thiago",
         "team": "Brentford",
         "position": "FWD",
         "price": 8.0,
-        "selection_rating": 63.67,
-        "expected_points": 5,
+        "selection_rating": 76.17,
+        "expected_points": 7,
         "medical": "Available",
         "ownership": 15.9,
         "ppg": 4.8,
@@ -499,18 +443,37 @@
         "goals": 22,
         "assists": 1,
         "clean_sheets": 10,
-        "recommendation": "Captain",
-        "summary": "Best captain option \u2022 Highest weekly upside"
+        "recommendation": "Start",
+        "summary": "Forward threat. Thiago remains a clean route to points through goals, shots, and a useful weekly ceiling."
+      },
+      {
+        "player": "Jo\u00e3o Pedro",
+        "team": "Chelsea",
+        "position": "FWD",
+        "price": 7.5,
+        "selection_rating": 72.04,
+        "expected_points": 7,
+        "medical": "Available",
+        "ownership": 54.7,
+        "ppg": 5.1,
+        "points": 177,
+        "minutes": 2658,
+        "starts": 31,
+        "goals": 15,
+        "assists": 9,
+        "clean_sheets": 10,
+        "recommendation": "Vice captain",
+        "summary": "Reliable vice-captain cover. Jo\u00e3o Pedro gives a strong fallback if the captain call changes late."
       },
       {
         "player": "Virgil",
         "team": "Liverpool",
         "position": "DEF",
         "price": 6.5,
-        "selection_rating": 62.86,
-        "expected_points": 4,
+        "selection_rating": 75.6,
+        "expected_points": 7,
         "medical": "Available",
-        "ownership": 16.3,
+        "ownership": 16.4,
         "ppg": 4.6,
         "points": 175,
         "minutes": 3420,
@@ -519,15 +482,15 @@
         "assists": 1,
         "clean_sheets": 10,
         "recommendation": "Start",
-        "summary": "Clean-sheet threat \u2022 Set-piece threat"
+        "summary": "Defensive value. Virgil mixes clean-sheet potential with 10 clean sheets already, and the ownership base keeps the pick sensible."
       },
       {
         "player": "Szoboszlai",
         "team": "Liverpool",
         "position": "MID",
         "price": 7.0,
-        "selection_rating": 59.5,
-        "expected_points": 5,
+        "selection_rating": 73.94,
+        "expected_points": 7,
         "medical": "Available",
         "ownership": 48.2,
         "ppg": 4.4,
@@ -538,34 +501,53 @@
         "assists": 7,
         "clean_sheets": 9,
         "recommendation": "Start",
-        "summary": "Creative outlet \u2022 Highly owned"
+        "summary": "Midfield output. Szoboszlai brings 4.4 PPG, 48.2% ownership, and enough attacking involvement to matter each week."
       },
       {
-        "player": "Senesi",
-        "team": "Spurs",
+        "player": "Gu\u00e9hi",
+        "team": "Man City",
         "position": "DEF",
         "price": 6.0,
-        "selection_rating": 59.6,
-        "expected_points": 4,
+        "selection_rating": 76.72,
+        "expected_points": 7,
         "medical": "Available",
-        "ownership": 10.9,
-        "ppg": 4.7,
-        "points": 175,
-        "minutes": 3288,
-        "starts": 37,
-        "goals": 0,
-        "assists": 6,
-        "clean_sheets": 11,
+        "ownership": 24.1,
+        "ppg": 5.1,
+        "points": 179,
+        "minutes": 3150,
+        "starts": 35,
+        "goals": 3,
+        "assists": 5,
+        "clean_sheets": 14,
         "recommendation": "Start",
-        "summary": "Clean-sheet threat \u2022 Strong value"
+        "summary": "Defensive value. Gu\u00e9hi mixes clean-sheet potential with 14 clean sheets already, and the ownership base keeps the pick sensible."
+      },
+      {
+        "player": "Semenyo",
+        "team": "Man City",
+        "position": "MID",
+        "price": 8.5,
+        "selection_rating": 81.07,
+        "expected_points": 7,
+        "medical": "Available",
+        "ownership": 21.6,
+        "ppg": 5.5,
+        "points": 202,
+        "minutes": 3200,
+        "starts": 37,
+        "goals": 17,
+        "assists": 6,
+        "clean_sheets": 12,
+        "recommendation": "Start",
+        "summary": "Midfield output. Semenyo brings 5.5 PPG, 21.6% ownership, and enough attacking involvement to matter each week."
       },
       {
         "player": "Anderson",
         "team": "Man City",
         "position": "MID",
         "price": 6.5,
-        "selection_rating": 59.59,
-        "expected_points": 4,
+        "selection_rating": 73.71,
+        "expected_points": 7,
         "medical": "Available",
         "ownership": 12.0,
         "ppg": 4.7,
@@ -576,53 +558,53 @@
         "assists": 5,
         "clean_sheets": 10,
         "recommendation": "Start",
-        "summary": "Midfield output"
+        "summary": "Midfield output. Anderson brings 4.7 PPG, 12.0% ownership, and enough attacking involvement to matter each week."
       },
       {
-        "player": "Jo\u00e3o Pedro",
-        "team": "Chelsea",
-        "position": "FWD",
-        "price": 7.5,
-        "selection_rating": 47.34,
-        "expected_points": 4,
+        "player": "B.Fernandes",
+        "team": "Man Utd",
+        "position": "MID",
+        "price": 12.0,
+        "selection_rating": 94.2,
+        "expected_points": 8,
         "medical": "Available",
-        "ownership": 54.6,
-        "ppg": 5.1,
-        "points": 177,
-        "minutes": 2658,
-        "starts": 31,
-        "goals": 15,
-        "assists": 9,
-        "clean_sheets": 10,
-        "recommendation": "Vice captain",
-        "summary": "Reliable fallback \u2022 Safe captain cover"
+        "ownership": 48.6,
+        "ppg": 6.7,
+        "points": 235,
+        "minutes": 3065,
+        "starts": 35,
+        "goals": 9,
+        "assists": 24,
+        "clean_sheets": 7,
+        "recommendation": "Captain",
+        "summary": "Best captain option. B.Fernandes combines the strongest weekly upside in the squad with the clearest route to a big return."
       },
       {
-        "player": "Mukiele",
-        "team": "Sunderland",
+        "player": "Senesi",
+        "team": "Spurs",
         "position": "DEF",
-        "price": 5.5,
-        "selection_rating": 43.94,
-        "expected_points": 4,
+        "price": 6.0,
+        "selection_rating": 74.81,
+        "expected_points": 7,
         "medical": "Available",
-        "ownership": 7.5,
+        "ownership": 10.9,
         "ppg": 4.7,
-        "points": 151,
-        "minutes": 2784,
-        "starts": 32,
-        "goals": 3,
-        "assists": 5,
-        "clean_sheets": 9,
+        "points": 175,
+        "minutes": 3288,
+        "starts": 37,
+        "goals": 0,
+        "assists": 6,
+        "clean_sheets": 11,
         "recommendation": "Start",
-        "summary": "Set-piece threat \u2022 Strong value"
+        "summary": "Defensive value. Senesi mixes clean-sheet potential with 11 clean sheets already, and the ownership base keeps the pick sensible."
       },
       {
         "player": "Roefs",
         "team": "Sunderland",
         "position": "GK",
         "price": 5.0,
-        "selection_rating": 45.55,
-        "expected_points": 4,
+        "selection_rating": 67.96,
+        "expected_points": 7,
         "medical": "Available",
         "ownership": 5.4,
         "ppg": 3.9,
@@ -633,76 +615,57 @@
         "assists": 0,
         "clean_sheets": 10,
         "recommendation": "Start",
-        "summary": "Safe goalkeeping slot \u2022 136 points \u2022 35 starts"
+        "summary": "Safe goalkeeping slot. Roefs offers steady starts and a reliable weekly floor with 5.4% ownership."
+      },
+      {
+        "player": "Mukiele",
+        "team": "Sunderland",
+        "position": "DEF",
+        "price": 5.5,
+        "selection_rating": 70.4,
+        "expected_points": 7,
+        "medical": "Available",
+        "ownership": 7.6,
+        "ppg": 4.7,
+        "points": 151,
+        "minutes": 2784,
+        "starts": 32,
+        "goals": 3,
+        "assists": 5,
+        "clean_sheets": 9,
+        "recommendation": "Start",
+        "summary": "Defensive value. Mukiele mixes clean-sheet potential with 9 clean sheets already, and the ownership base keeps the pick sensible."
       }
     ],
     "bench": [
       {
-        "player": "E.Le F\u00e9e",
-        "team": "Sunderland",
-        "position": "MID",
-        "price": 6.0,
-        "selection_rating": 44.84,
-        "expected_points": 5,
-        "medical": "Available",
-        "ownership": 11.8,
-        "ppg": 4.1,
-        "points": 147,
-        "minutes": 2930,
-        "starts": 33,
-        "goals": 5,
-        "assists": 6,
-        "clean_sheets": 10,
-        "recommendation": "Bench",
-        "summary": "Squad depth \u2022 Rotation cover"
-      },
-      {
-        "player": "Kelleher",
-        "team": "Brentford",
+        "player": "Verbruggen",
+        "team": "Brighton",
         "position": "GK",
-        "price": 5.0,
-        "selection_rating": 47.26,
-        "expected_points": 4,
+        "price": 4.5,
+        "selection_rating": 63.46,
+        "expected_points": 6,
         "medical": "Available",
-        "ownership": 5.6,
-        "ppg": 3.9,
-        "points": 143,
-        "minutes": 3330,
-        "starts": 37,
+        "ownership": 16.7,
+        "ppg": 3.4,
+        "points": 130,
+        "minutes": 3420,
+        "starts": 38,
         "goals": 0,
         "assists": 0,
         "clean_sheets": 10,
         "recommendation": "Bench",
-        "summary": "Squad depth \u2022 Rotation cover"
-      },
-      {
-        "player": "Shaw",
-        "team": "Man Utd",
-        "position": "DEF",
-        "price": 4.5,
-        "selection_rating": 42.16,
-        "expected_points": 4,
-        "medical": "Available",
-        "ownership": 24.3,
-        "ppg": 3.0,
-        "points": 113,
-        "minutes": 3220,
-        "starts": 38,
-        "goals": 1,
-        "assists": 1,
-        "clean_sheets": 10,
-        "recommendation": "Bench",
-        "summary": "Squad depth \u2022 Rotation cover"
+        "summary": "Safe goalkeeping slot. Verbruggen offers steady starts and a reliable weekly floor with 16.7% ownership."
       },
       {
         "player": "Calvert-Lewin",
         "team": "Leeds",
         "position": "FWD",
         "price": 6.0,
-        "selection_rating": 32.81,
-        "expected_points": 4,
+        "selection_rating": 63.89,
+        "expected_points": 6,
         "medical": "Available",
-        "ownership": 18.2,
+        "ownership": 18.3,
         "ppg": 4.1,
         "points": 142,
         "minutes": 2721,
@@ -711,37 +674,75 @@
         "assists": 2,
         "clean_sheets": 8,
         "recommendation": "Bench",
-        "summary": "Squad depth \u2022 Rotation cover"
+        "summary": "Forward threat. Calvert-Lewin remains a clean route to points through goals, shots, and a useful weekly ceiling."
+      },
+      {
+        "player": "Van Hecke",
+        "team": "Spurs",
+        "position": "DEF",
+        "price": 5.0,
+        "selection_rating": 68.49,
+        "expected_points": 7,
+        "medical": "Available",
+        "ownership": 8.1,
+        "ppg": 4.1,
+        "points": 148,
+        "minutes": 3210,
+        "starts": 36,
+        "goals": 3,
+        "assists": 3,
+        "clean_sheets": 10,
+        "recommendation": "Bench",
+        "summary": "Defensive value. Van Hecke mixes clean-sheet potential with 10 clean sheets already, and the ownership base keeps the pick sensible."
+      },
+      {
+        "player": "E.Le F\u00e9e",
+        "team": "Sunderland",
+        "position": "MID",
+        "price": 6.0,
+        "selection_rating": 68.32,
+        "expected_points": 7,
+        "medical": "Available",
+        "ownership": 11.9,
+        "ppg": 4.1,
+        "points": 147,
+        "minutes": 2930,
+        "starts": 33,
+        "goals": 5,
+        "assists": 6,
+        "clean_sheets": 10,
+        "recommendation": "Bench",
+        "summary": "Midfield output. E.Le F\u00e9e brings 4.1 PPG, 11.9% ownership, and enough attacking involvement to matter each week."
       }
     ],
     "captain": {
-      "player": "Thiago",
-      "team": "Brentford",
-      "position": "FWD",
-      "price": 8.0,
-      "selection_rating": 63.67,
-      "expected_points": 5,
+      "player": "B.Fernandes",
+      "team": "Man Utd",
+      "position": "MID",
+      "price": 12.0,
+      "selection_rating": 94.2,
+      "expected_points": 8,
       "medical": "Available",
-      "ownership": 15.9,
-      "ppg": 4.8,
-      "points": 181,
-      "minutes": 3282,
-      "starts": 37,
-      "goals": 22,
-      "assists": 1,
-      "clean_sheets": 10,
+      "ownership": 48.6,
+      "ppg": 6.7,
+      "points": 235,
+      "minutes": 3065,
+      "starts": 35,
+      "goals": 9,
+      "assists": 24,
+      "clean_sheets": 7,
       "recommendation": "Captain",
-      "summary": "Best captain option \u2022 Highest weekly upside"
+      "summary": "Best captain option. B.Fernandes combines the strongest weekly upside in the squad with the clearest route to a big return."
     },
     "vice_captain": {
       "player": "Jo\u00e3o Pedro",
       "team": "Chelsea",
       "position": "FWD",
       "price": 7.5,
-      "selection_rating": 47.34,
-      "expected_points": 4,
+      "selection_rating": 72.04,
+      "expected_points": 7,
       "medical": "Available",
-      "ownership": 54.6,
+      "ownership": 54.7,
       "ppg": 5.1,
       "points": 177,
       "minutes": 2658,
@@ -750,497 +751,139 @@
       "assists": 9,
       "clean_sheets": 10,
       "recommendation": "Vice captain",
-      "summary": "Reliable fallback \u2022 Safe captain cover"
+      "summary": "Reliable vice-captain cover. Jo\u00e3o Pedro gives a strong fallback if the captain call changes late."
     }
   },
   "weekly_advice": {
-    "headline": "Watch Mukiele \u2192 Van Hecke. Captain Thiago and keep Jo\u00e3o Pedro as vice captain.",
-    "immediate_call": "Watch Mukiele \u2192 Van Hecke. Captain Thiago and keep Jo\u00e3o Pedro as vice captain.",
+    "headline": "Captain B.Fernandes and keep Jo\u00e3o Pedro as vice captain.",
+    "immediate_call": "Watch Verbruggen \u2192 Raya",
     "transfer_call": {
-      "action": "Watch Mukiele \u2192 Van Hecke",
-      "reason": "Mukiele can be upgraded by Van Hecke within budget."
+      "action": "Watch Verbruggen \u2192 Raya",
+      "reason": "Verbruggen can be upgraded by Raya without breaking the budget."
     },
     "captain_call": {
-      "player": "Thiago",
-      "reason": "Best captain option \u2022 Highest weekly upside",
-      "expected_points": 5,
-      "fixture_ease": 0.66
+      "player": "B.Fernandes",
+      "reason": "Best captain option. B.Fernandes combines the strongest weekly upside in the squad with the clearest route to a big return."
     },
     "vice_call": {
       "player": "Jo\u00e3o Pedro",
-      "reason": "Reliable fallback \u2022 Safe captain cover",
-      "expected_points": 4,
-      "fixture_ease": 0.0
+      "reason": "Reliable vice-captain cover. Jo\u00e3o Pedro gives a strong fallback if the captain call changes late."
     },
     "chip_call": {
-      "chip": "None",
-      "reason": "Captain ceiling is not high enough this week to burn a season chip."
+      "chip": "Bench Boost",
+      "reason": "The bench averages 6.5 projected points, which is useful but not strong enough for a premium chip unless the week lines up perfectly."
     },
     "bench_call": {
       "order": [
+        "Van Hecke",
         "E.Le F\u00e9e",
-        "Kelleher",
-        "Shaw",
+        "Verbruggen",
         "Calvert-Lewin"
-      ]
+      ],
+      "reason": "Keep the bench in the order that protects the XI and maximises cover."
     },
     "why_this_works": [
       "\u00a3100.0m spent, \u00a30.0m left.",
       "Formation set to 4-4-2.",
-      "Captain: Thiago. Vice captain: Jo\u00e3o Pedro."
+      "Captain: B.Fernandes. Vice captain: Jo\u00e3o Pedro."
     ],
     "transfer_watch": [
       {
-        "sell": "Mukiele",
-        "buy": "Van Hecke",
-        "sell_team": "Sunderland",
-        "buy_team": "Spurs",
-        "position": "DEF",
-        "sell_price": 5.5,
-        "buy_price": 5.0,
-        "budget_after_sale": 5.5,
-        "expected_points_out": 4,
+        "sell": "Verbruggen",
+        "buy": "Raya",
+        "sell_team": "Brighton",
+        "buy_team": "Arsenal",
+        "position": "GK",
+        "sell_price": 4.5,
+        "buy_price": 6.0,
+        "why_sell": "Verbruggen is the lowest weekly return slot in this squad.",
+        "why_buy": "Raya adds a stronger weekly route at 6.0m.",
+        "expected_points_out": 6,
         "expected_points_in": 7,
-        "gain": 3,
-        "why_sell": "Set-piece threat \u2022 Strong value",
-        "why_buy": "Clean-sheet threat \u2022 Set-piece threat \u2022 Strong value"
+        "sell_ownership": 16.7,
+        "buy_ownership": 30.6
+      },
+      {
+        "sell": "Calvert-Lewin",
+        "buy": "Haaland",
+        "sell_team": "Leeds",
+        "buy_team": "Man City",
+        "position": "FWD",
+        "sell_price": 6.0,
+        "buy_price": 15.5,
+        "why_sell": "Calvert-Lewin is the lowest weekly return slot in this squad.",
+        "why_buy": "Haaland adds a stronger weekly route at 15.5m.",
+        "expected_points_out": 6,
+        "expected_points_in": 8,
+        "sell_ownership": 18.3,
+        "buy_ownership": 75.1
       },
       {
         "sell": "Roefs",
-        "buy": "Verbruggen",
+        "buy": "Raya",
         "sell_team": "Sunderland",
-        "buy_team": "Brighton",
+        "buy_team": "Arsenal",
         "position": "GK",
         "sell_price": 5.0,
-        "buy_price": 4.5,
-        "budget_after_sale": 5.0,
-        "expected_points_out": 4,
-        "expected_points_in": 6,
-        "gain": 2,
-        "why_sell": "Safe goalkeeping slot \u2022 136 points \u2022 35 starts",
-        "why_buy": "Safe goalkeeping slot \u2022 130 points \u2022 38 starts"
-      },
-      {
-        "sell": "Jo\u00e3o Pedro",
-        "buy": "Richarlison",
-        "sell_team": "Chelsea",
-        "buy_team": "Spurs",
-        "position": "FWD",
-        "sell_price": 7.5,
         "buy_price": 6.0,
-        "budget_after_sale": 7.5,
-        "expected_points_out": 4,
-        "expected_points_in": 6,
-        "gain": 2,
-        "why_sell": "Proven scorer \u2022 Consistent returns \u2022 Strong value",
-        "why_buy": "Goal threat \u2022 Strong value"
+        "why_sell": "Roefs is the lowest weekly return slot in this squad.",
+        "why_buy": "Raya adds a stronger weekly route at 6.0m.",
+        "expected_points_out": 7,
+        "expected_points_in": 7,
+        "sell_ownership": 5.4,
+        "buy_ownership": 30.6
       },
       {
-        "sell": "Anderson",
-        "buy": "Wilson",
-        "sell_team": "Man City",
-        "buy_team": "Leeds",
+        "sell": "E.Le F\u00e9e",
+        "buy": "B.Fernandes",
+        "sell_team": "Sunderland",
+        "buy_team": "Man Utd",
         "position": "MID",
-        "sell_price": 6.5,
-        "buy_price": 6.5,
-        "budget_after_sale": 6.5,
-        "expected_points_out": 4,
-        "expected_points_in": 6,
-        "gain": 2,
-        "why_sell": "Midfield output",
-        "why_buy": "Goal involvement \u2022 Creative outlet"
+        "sell_price": 6.0,
+        "buy_price": 12.0,
+        "why_sell": "E.Le F\u00e9e is the lowest weekly return slot in this squad.",
+        "why_buy": "B.Fernandes adds a stronger weekly route at 12.0m.",
+        "expected_points_out": 7,
+        "expected_points_in": 8,
+        "sell_ownership": 11.9,
+        "buy_ownership": 48.6
       }
     ],
     "chip_watch": {
       "triple_captain": {
-        "status": "wait",
-        "reason": "Captain ceiling is not high enough this week to burn a season chip."
+        "status": "watch",
+        "reason": "B.Fernandes has the best ceiling in the current XI, so this is the only chip that looks remotely interesting right now."
       },
       "bench_boost": {
-        "status": "wait",
-        "reason": "Bench averages 4.2 projected points and needs a stronger week."
+        "status": "ready",
+        "reason": "The bench averages 6.5 projected points, which is useful but not strong enough for a premium chip unless the week lines up perfectly."
       },
       "wildcard": {
         "status": "not needed",
-        "reason": "Squad shape is stable enough to keep the chip."
+        "reason": "Use a Wildcard only if multiple starters need a proper reset. Right now 0 starters are flagged."
       },
       "free_hit": {
         "status": "not needed",
-        "reason": "No urgent one-week problem to solve."
+        "reason": "Free Hit is for one awkward week with poor fixture shape or missing starters. This squad does not need it immediately."
       }
     },
-    "projected_team_points": 55,
-    "projected_starting_xi_points": 50
+    "projected_team_points": 86,
+    "projected_starting_xi_points": 78,
+    "access_note": "Best squad shown until access is connected."
+  },
+  "manager_notes": {
+    "summary": "Recommended base squad for the gameweek. This will start populating your data once we receive your access.",
+    "bullets": [
+      "Team value: \u00a3100.0m with \u00a30.0m left.",
+      "Formation set to 4-4-2.",
+      "Best squad shown until access is connected."
+    ]
+  },
+  "connect": {
+    "prompt": "Enter an FPL Team ID to switch from the best squad to a live squad.",
+    "team_id_hint": "FPL Team ID"
   },
   "agents": {
-    "medical": {
-      "summary": {
-        "available": 15,
-        "doubtful": 0,
-        "unavailable": 0
-      },
-      "watchlist": [
-        {
-          "player": "B.Fernandes",
-          "team": "Man Utd",
-          "position": "MID",
-          "availability": "Available",
-          "points": 235
-        },
-        {
-          "player": "Semenyo",
-          "team": "Man City",
-          "position": "MID",
-          "availability": "Available",
-          "points": 202
-        },
-        {
-          "player": "Thiago",
-          "team": "Brentford",
-          "position": "FWD",
-          "availability": "Available",
-          "points": 181
-        },
-        {
-          "player": "Anderson",
-          "team": "Man City",
-          "position": "MID",
-          "availability": "Available",
-          "points": 180
-        },
-        {
-          "player": "Gu\u00e9hi",
-          "team": "Man City",
-          "position": "DEF",
-          "availability": "Available",
-          "points": 179
-        }
-      ]
-    },
-    "fixture": {
-      "best_runs": [
-        {
-          "player": "B.Fernandes",
-          "team": "Man Utd",
-          "position": "MID",
-          "difficulty": 2.33
-        },
-        {
-          "player": "Roefs",
-          "team": "Sunderland",
-          "position": "GK",
-          "difficulty": 2.33
-        },
-        {
-          "player": "E.Le F\u00e9e",
-          "team": "Sunderland",
-          "position": "MID",
-          "difficulty": 2.33
-        },
-        {
-          "player": "Mukiele",
-          "team": "Sunderland",
-          "position": "DEF",
-          "difficulty": 2.33
-        },
-        {
-          "player": "Shaw",
-          "team": "Man Utd",
-          "position": "DEF",
-          "difficulty": 2.33
-        }
-      ],
-      "worst_runs": [
-        {
-          "player": "Jo\u00e3o Pedro",
-          "team": "Chelsea",
-          "position": "FWD",
-          "difficulty": 3.33
-        },
-        {
-          "player": "Calvert-Lewin",
-          "team": "Leeds",
-          "position": "FWD",
-          "difficulty": 3.0
-        },
-        {
-          "player": "Semenyo",
-          "team": "Man City",
-          "position": "MID",
-          "difficulty": 2.67
-        },
-        {
-          "player": "Thiago",
-          "team": "Brentford",
-          "position": "FWD",
-          "difficulty": 2.67
-        },
-        {
-          "player": "Virgil",
-          "team": "Liverpool",
-          "position": "DEF",
-          "difficulty": 2.67
-        }
-      ]
-    },
-    "form": {
-      "top_form": [
-        {
-          "player": "B.Fernandes",
-          "team": "Man Utd",
-          "position": "MID",
-          "form": 0.0,
-          "ppg": 6.7,
-          "minutes": 3065
-        },
-        {
-          "player": "Semenyo",
-          "team": "Man City",
-          "position": "MID",
-          "form": 0.0,
-          "ppg": 5.5,
-          "minutes": 3200
-        },
-        {
-          "player": "Virgil",
-          "team": "Liverpool",
-          "position": "DEF",
-          "form": 0.0,
-          "ppg": 4.6,
-          "minutes": 3420
-        },
-        {
-          "player": "Anderson",
-          "team": "Man City",
-          "position": "MID",
-          "form": 0.0,
-          "ppg": 4.7,
-          "minutes": 3332
-        },
-        {
-          "player": "Thiago",
-          "team": "Brentford",
-          "position": "FWD",
-          "form": 0.0,
-          "ppg": 4.8,
-          "minutes": 3282
-        }
-      ],
-      "falling_off": [
-        {
-          "player": "Calvert-Lewin",
-          "team": "Leeds",
-          "position": "FWD",
-          "form": 0.0,
-          "ppg": 4.1,
-          "minutes": 2721
-        },
-        {
-          "player": "Shaw",
-          "team": "Man Utd",
-          "position": "DEF",
-          "form": 0.0,
-          "ppg": 3.0,
-          "minutes": 3220
-        },
-        {
-          "player": "E.Le F\u00e9e",
-          "team": "Sunderland",
-          "position": "MID",
-          "form": 0.0,
-          "ppg": 4.1,
-          "minutes": 2930
-        },
-        {
-          "player": "Mukiele",
-          "team": "Sunderland",
-          "position": "DEF",
-          "form": 0.0,
-          "ppg": 4.7,
-          "minutes": 2784
-        },
-        {
-          "player": "Jo\u00e3o Pedro",
-          "team": "Chelsea",
-          "position": "FWD",
-          "form": 0.0,
-          "ppg": 5.1,
-          "minutes": 2658
-        }
-      ]
-    },
-    "ownership": {
-      "trusted": [
-        {
-          "player": "Jo\u00e3o Pedro",
-          "team": "Chelsea",
-          "position": "FWD",
-          "ownership": 54.6
-        },
-        {
-          "player": "B.Fernandes",
-          "team": "Man Utd",
-          "position": "MID",
-          "ownership": 48.7
-        },
-        {
-          "player": "Szoboszlai",
-          "team": "Liverpool",
-          "position": "MID",
-          "ownership": 48.2
-        },
-        {
-          "player": "Shaw",
-          "team": "Man Utd",
-          "position": "DEF",
-          "ownership": 24.3
-        },
-        {
-          "player": "Gu\u00e9hi",
-          "team": "Man City",
-          "position": "DEF",
-          "ownership": 24.1
-        }
-      ],
-      "differentials": [
-        {
-          "player": "Roefs",
-          "team": "Sunderland",
-          "position": "GK",
-          "ownership": 5.4
-        },
-        {
-          "player": "Kelleher",
-          "team": "Brentford",
-          "position": "GK",
-          "ownership": 5.6
-        },
-        {
-          "player": "Mukiele",
-          "team": "Sunderland",
-          "position": "DEF",
-          "ownership": 7.5
-        },
-        {
-          "player": "Senesi",
-          "team": "Spurs",
-          "position": "DEF",
-          "ownership": 10.9
-        },
-        {
-          "player": "E.Le F\u00e9e",
-          "team": "Sunderland",
-          "position": "MID",
-          "ownership": 11.8
-        }
-      ]
-    },
-    "transfer": {
-      "action": "Watch Mukiele \u2192 Van Hecke",
-      "reason": "Mukiele can be upgraded by Van Hecke within budget."
-    },
-    "transfer_watch": [
-      {
-        "sell": "Mukiele",
-        "buy": "Van Hecke",
-        "sell_team": "Sunderland",
-        "buy_team": "Spurs",
-        "position": "DEF",
-        "sell_price": 5.5,
-        "buy_price": 5.0,
-        "budget_after_sale": 5.5,
-        "expected_points_out": 4,
-        "expected_points_in": 7,
-        "gain": 3,
-        "why_sell": "Set-piece threat \u2022 Strong value",
-        "why_buy": "Clean-sheet threat \u2022 Set-piece threat \u2022 Strong value"
-      },
-      {
-        "sell": "Roefs",
-        "buy": "Verbruggen",
-        "sell_team": "Sunderland",
-        "buy_team": "Brighton",
-        "position": "GK",
-        "sell_price": 5.0,
-        "buy_price": 4.5,
-        "budget_after_sale": 5.0,
-        "expected_points_out": 4,
-        "expected_points_in": 6,
-        "gain": 2,
-        "why_sell": "Safe goalkeeping slot \u2022 136 points \u2022 35 starts",
-        "why_buy": "Safe goalkeeping slot \u2022 130 points \u2022 38 starts"
-      },
-      {
-        "sell": "Jo\u00e3o Pedro",
-        "buy": "Richarlison",
-        "sell_team": "Chelsea",
-        "buy_team": "Spurs",
-        "position": "FWD",
-        "sell_price": 7.5,
-        "buy_price": 6.0,
-        "budget_after_sale": 7.5,
-        "expected_points_out": 4,
-        "expected_points_in": 6,
-        "gain": 2,
-        "why_sell": "Proven scorer \u2022 Consistent returns \u2022 Strong value",
-        "why_buy": "Goal threat \u2022 Strong value"
-      },
-      {
-        "sell": "Anderson",
-        "buy": "Wilson",
-        "sell_team": "Man City",
-        "buy_team": "Leeds",
-        "position": "MID",
-        "sell_price": 6.5,
-        "buy_price": 6.5,
-        "budget_after_sale": 6.5,
-        "expected_points_out": 4,
-        "expected_points_in": 6,
-        "gain": 2,
-        "why_sell": "Midfield output",
-        "why_buy": "Goal involvement \u2022 Creative outlet"
-      }
-    ],
-    "captain": {
-      "captain": {
-        "player": "Thiago",
-        "reason": "Best captain option \u2022 Highest weekly upside",
-        "expected_points": 5,
-        "fixture_ease": 0.66
-      },
-      "vice_captain": {
-        "player": "Jo\u00e3o Pedro",
-        "reason": "Reliable fallback \u2022 Safe captain cover",
-        "expected_points": 4,
-        "fixture_ease": 0.0
-      }
-    },
-    "chip": {
-      "triple_captain": {
-        "status": "wait",
-        "reason": "Captain ceiling is not high enough this week to burn a season chip."
-      },
-      "bench_boost": {
-        "status": "wait",
-        "reason": "Bench averages 4.2 projected points and needs a stronger week."
-      },
-      "wildcard": {
-        "status": "not needed",
-        "reason": "Squad shape is stable enough to keep the chip."
-      },
-      "free_hit": {
-        "status": "not needed",
-        "reason": "No urgent one-week problem to solve."
-      }
-    },
-    "judge": {
-      "verdict": "Proceed",
-      "confidence": "High",
-      "reason": "Weekly squad is within budget at \u00a3100.0m. 15 players are available, 0 doubtful, 0 unavailable. Captaincy is on Thiago with 5 projected points.",
-      "final_call": "Watch Mukiele \u2192 Van Hecke. Captain Thiago and keep Jo\u00e3o Pedro as vice captain."
-    }
-  },
-  "services": {
     "medical": {
       "summary": "527 available, 0 doubtful, 37 unavailable.",
       "watchlist": [
@@ -1280,7 +923,7 @@
           "points": 123
         }
       ],
-      "recommendation": "Avoid risky picks if there is a safer alternative with similar upside."
+      "recommendation": "Avoid risky picks if a safer player gives a similar weekly ceiling."
     },
     "fixture": {
       "best_runs": [
@@ -1309,254 +952,293 @@
           "difficulty": 2.33
         },
         {
-          "player": "Roefs",
+          "player": "E.Le F\u00e9e",
           "team": "Sunderland",
-          "position": "GK",
+          "position": "MID",
           "difficulty": 2.33
         }
       ],
       "worst_runs": [
         {
-          "player": "Onyeka",
-          "team": "Coventry City",
-          "position": "MID",
-          "difficulty": 4.0
-        },
-        {
-          "player": "van Ewijk",
+          "player": "Bidwell",
           "team": "Coventry City",
           "position": "DEF",
           "difficulty": 4.0
         },
         {
-          "player": "Wright",
+          "player": "Latibeaudiere",
+          "team": "Coventry City",
+          "position": "DEF",
+          "difficulty": 4.0
+        },
+        {
+          "player": "Brau",
+          "team": "Coventry City",
+          "position": "DEF",
+          "difficulty": 4.0
+        },
+        {
+          "player": "Rudoni",
+          "team": "Coventry City",
+          "position": "MID",
+          "difficulty": 4.0
+        },
+        {
+          "player": "Bassette",
           "team": "Coventry City",
           "position": "FWD",
           "difficulty": 4.0
-        },
-        {
-          "player": "Mason-Clark",
-          "team": "Coventry City",
-          "position": "MID",
-          "difficulty": 4.0
-        },
-        {
-          "player": "Torp",
-          "team": "Coventry City",
-          "position": "MID",
-          "difficulty": 4.0
         }
       ],
-      "recommendation": "Lean toward players with easier opening runs when two picks are otherwise close."
+      "recommendation": "Lean toward players with a better short-term run when two picks are otherwise close."
     },
-    "scout": {
-      "best_players": [
+    "form": {
+      "hot": [
         {
           "player": "Haaland",
           "team": "Man City",
           "position": "FWD",
-          "price": 15.5,
-          "rating": 99.33038120219241
+          "form": 0.0,
+          "ppg": 6.8
         },
         {
           "player": "B.Fernandes",
           "team": "Man Utd",
           "position": "MID",
-          "price": 12.0,
-          "rating": 96.86388430666251
+          "form": 0.0,
+          "ppg": 6.7
         },
         {
           "player": "Semenyo",
           "team": "Man City",
           "position": "MID",
-          "price": 8.5,
-          "rating": 83.16476283869457
+          "form": 0.0,
+          "ppg": 5.5
         },
         {
           "player": "Gabriel",
           "team": "Arsenal",
           "position": "DEF",
-          "price": 8.0,
-          "rating": 81.05083907131629
+          "form": 0.0,
+          "ppg": 6.5
         },
         {
           "player": "Gu\u00e9hi",
           "team": "Man City",
           "position": "DEF",
-          "price": 6.0,
-          "rating": 79.6091896497067
+          "form": 0.0,
+          "ppg": 5.1
         }
       ],
-      "best_value": [
+      "cold": [
         {
-          "player": "Dubravka",
-          "team": "Spurs",
+          "player": "Hughes",
+          "team": "Hull City",
+          "position": "DEF",
+          "form": 0.0,
+          "ppg": 0.0
+        },
+        {
+          "player": "Cartwright",
+          "team": "Hull City",
           "position": "GK",
-          "price": 4.0,
-          "rating": 62.727884874072316,
-          "value_score": 15.681971218518079
+          "form": 0.0,
+          "ppg": 0.0
         },
         {
-          "player": "Shaw",
-          "team": "Man Utd",
-          "position": "DEF",
-          "price": 4.5,
-          "rating": 68.86525366635628,
-          "value_score": 15.303389703634728
+          "player": "Matusiwa",
+          "team": "Ipswich Town",
+          "position": "MID",
+          "form": 0.0,
+          "ppg": 0.0
         },
         {
-          "player": "Verbruggen",
-          "team": "Brighton",
-          "position": "GK",
-          "price": 4.5,
-          "rating": 67.3133151805565,
-          "value_score": 14.958514484568111
+          "player": "Taylor",
+          "team": "Ipswich Town",
+          "position": "MID",
+          "form": 0.0,
+          "ppg": 0.0
         },
         {
-          "player": "Kayode",
-          "team": "Brentford",
-          "position": "DEF",
-          "price": 4.5,
-          "rating": 64.57719680952091,
-          "value_score": 14.350488179893537
-        },
-        {
-          "player": "Van Hecke",
-          "team": "Spurs",
-          "position": "DEF",
-          "price": 5.0,
-          "rating": 71.6033687253558,
-          "value_score": 14.320673745071161
-        }
-      ],
-      "recommendation": "Prefer players who combine form, value, ownership, and weekly point potential."
-    },
-    "news": {
-      "headline": "56 players have news notes or flags.",
-      "mentions": [
-        {
-          "player": "\u0160e\u0161ko",
-          "team": "Man Utd",
+          "player": "Bassette",
+          "team": "Coventry City",
           "position": "FWD",
-          "note": "Shin injury - 75% chance of playing"
-        },
-        {
-          "player": "Darlow",
-          "team": "Man Utd",
-          "position": "GK",
-          "note": "Unspecified injury - 75% chance of playing"
-        },
-        {
-          "player": "Wharton",
-          "team": "Crystal Palace",
-          "position": "MID",
-          "note": "Ankle injury - 75% chance of playing"
-        },
-        {
-          "player": "Grealish",
-          "team": "Man City",
-          "position": "MID",
-          "note": "Foot injury - 75% chance of playing"
-        },
-        {
-          "player": "Murillo",
-          "team": "Nott'm Forest",
-          "position": "DEF",
-          "note": "Muscle injury - 75% chance of playing"
-        },
-        {
-          "player": "Kudus",
-          "team": "Spurs",
-          "position": "MID",
-          "note": "Thigh injury - 75% chance of playing"
-        },
-        {
-          "player": "Tielemans",
-          "team": "Man Utd",
-          "position": "MID",
-          "note": "Hamstring injury - 75% chance of playing"
-        },
-        {
-          "player": "Hudson-Odoi",
-          "team": "Nott'm Forest",
-          "position": "MID",
-          "note": "Thigh injury - 75% chance of playing"
+          "form": 0.0,
+          "ppg": 0.0
         }
       ],
-      "recommendation": "Check flagged players before locking the final XI."
+      "recommendation": "Current form matters, but only when it is backed by minutes and a real route to returns."
+    },
+    "ownership": {
+      "high": [
+        {
+          "player": "Haaland",
+          "team": "Man City",
+          "position": "FWD",
+          "ownership": 75.1
+        },
+        {
+          "player": "Jo\u00e3o Pedro",
+          "team": "Chelsea",
+          "position": "FWD",
+          "ownership": 54.7
+        },
+        {
+          "player": "B.Fernandes",
+          "team": "Man Utd",
+          "position": "MID",
+          "ownership": 48.6
+        },
+        {
+          "player": "Szoboszlai",
+          "team": "Liverpool",
+          "position": "MID",
+          "ownership": 48.2
+        },
+        {
+          "player": "Rogers",
+          "team": "Chelsea",
+          "position": "MID",
+          "ownership": 31.3
+        }
+      ],
+      "low": [
+        {
+          "player": "Uche",
+          "team": "Crystal Palace",
+          "position": "FWD",
+          "ownership": 0.0
+        },
+        {
+          "player": "Kulusevski",
+          "team": "Spurs",
+          "position": "MID",
+          "ownership": 0.0
+        },
+        {
+          "player": "Bajcetic",
+          "team": "Liverpool",
+          "position": "MID",
+          "ownership": 0.0
+        },
+        {
+          "player": "Ferguson",
+          "team": "Brighton",
+          "position": "FWD",
+          "ownership": 0.0
+        },
+        {
+          "player": "Matazo",
+          "team": "Hull City",
+          "position": "MID",
+          "ownership": 0.0
+        }
+      ],
+      "recommendation": "High ownership keeps a weekly call safer; low ownership is where the upside comes from."
+    },
+    "transfer": {
+      "watch": [
+        {
+          "sell": "Verbruggen",
+          "buy": "Raya",
+          "sell_team": "Brighton",
+          "buy_team": "Arsenal",
+          "position": "GK",
+          "sell_price": 4.5,
+          "buy_price": 6.0,
+          "why_sell": "Verbruggen is the lowest weekly return slot in this squad.",
+          "why_buy": "Raya adds a stronger weekly route at 6.0m.",
+          "expected_points_out": 6,
+          "expected_points_in": 7,
+          "sell_ownership": 16.7,
+          "buy_ownership": 30.6
+        },
+        {
+          "sell": "Calvert-Lewin",
+          "buy": "Haaland",
+          "sell_team": "Leeds",
+          "buy_team": "Man City",
+          "position": "FWD",
+          "sell_price": 6.0,
+          "buy_price": 15.5,
+          "why_sell": "Calvert-Lewin is the lowest weekly return slot in this squad.",
+          "why_buy": "Haaland adds a stronger weekly route at 15.5m.",
+          "expected_points_out": 6,
+          "expected_points_in": 8,
+          "sell_ownership": 18.3,
+          "buy_ownership": 75.1
+        },
+        {
+          "sell": "Roefs",
+          "buy": "Raya",
+          "sell_team": "Sunderland",
+          "buy_team": "Arsenal",
+          "position": "GK",
+          "sell_price": 5.0,
+          "buy_price": 6.0,
+          "why_sell": "Roefs is the lowest weekly return slot in this squad.",
+          "why_buy": "Raya adds a stronger weekly route at 6.0m.",
+          "expected_points_out": 7,
+          "expected_points_in": 7,
+          "sell_ownership": 5.4,
+          "buy_ownership": 30.6
+        },
+        {
+          "sell": "E.Le F\u00e9e",
+          "buy": "B.Fernandes",
+          "sell_team": "Sunderland",
+          "buy_team": "Man Utd",
+          "position": "MID",
+          "sell_price": 6.0,
+          "buy_price": 12.0,
+          "why_sell": "E.Le F\u00e9e is the lowest weekly return slot in this squad.",
+          "why_buy": "B.Fernandes adds a stronger weekly route at 12.0m.",
+          "expected_points_out": 7,
+          "expected_points_in": 8,
+          "sell_ownership": 11.9,
+          "buy_ownership": 48.6
+        }
+      ],
+      "recommendation": "If a transfer is used, keep the move budget-aware and make sure the replacement is a genuine weekly upgrade."
+    },
+    "captain": {
+      "player": "B.Fernandes",
+      "vice_player": "Jo\u00e3o Pedro",
+      "reason": "Best captain option. B.Fernandes combines the strongest weekly upside in the squad with the clearest route to a big return.",
+      "vice_reason": "Reliable vice-captain cover. Jo\u00e3o Pedro gives a strong fallback if the captain call changes late."
+    },
+    "chip": {
+      "triple_captain": {
+        "status": "watch",
+        "reason": "B.Fernandes has the best ceiling in the current XI, so this is the only chip that looks remotely interesting right now."
+      },
+      "bench_boost": {
+        "status": "ready",
+        "reason": "The bench averages 6.5 projected points, which is useful but not strong enough for a premium chip unless the week lines up perfectly."
+      },
+      "wildcard": {
+        "status": "not needed",
+        "reason": "Use a Wildcard only if multiple starters need a proper reset. Right now 0 starters are flagged."
+      },
+      "free_hit": {
+        "status": "not needed",
+        "reason": "Free Hit is for one awkward week with poor fixture shape or missing starters. This squad does not need it immediately."
+      }
+    },
+    "judge": {
+      "verdict": "Proceed with confidence",
+      "confidence": "High",
+      "reason": "The squad stays inside budget and the weekly structure is stable."
     }
   },
-  "judge": {
-    "verdict": "Proceed",
-    "confidence": "High",
-    "reason": "Weekly squad is within budget at \u00a3100.0m. 15 players are available, 0 doubtful, 0 unavailable. Captaincy is on Thiago with 5 projected points.",
-    "final_call": "Watch Mukiele \u2192 Van Hecke. Captain Thiago and keep Jo\u00e3o Pedro as vice captain."
-  },
   "player_cards": [
-    {
-      "player": "B.Fernandes",
-      "team": "Man Utd",
-      "position": "MID",
-      "price": 12.0,
-      "selection_rating": 91.48,
-      "expected_points": 6,
-      "medical": "Available",
-      "ownership": 48.7,
-      "ppg": 6.7,
-      "points": 235,
-      "minutes": 3065,
-      "starts": 35,
-      "goals": 9,
-      "assists": 24,
-      "clean_sheets": 7,
-      "recommendation": "Start",
-      "summary": "Goal involvement \u2022 Creative outlet \u2022 Consistent returns"
-    },
-    {
-      "player": "Semenyo",
-      "team": "Man City",
-      "position": "MID",
-      "price": 8.5,
-      "selection_rating": 71.09,
-      "expected_points": 5,
-      "medical": "Available",
-      "ownership": 21.5,
-      "ppg": 5.5,
-      "points": 202,
-      "minutes": 3200,
-      "starts": 37,
-      "goals": 17,
-      "assists": 6,
-      "clean_sheets": 12,
-      "recommendation": "Start",
-      "summary": "Goal involvement \u2022 Creative outlet \u2022 Consistent returns"
-    },
-    {
-      "player": "Gu\u00e9hi",
-      "team": "Man City",
-      "position": "DEF",
-      "price": 6.0,
-      "selection_rating": 61.4,
-      "expected_points": 5,
-      "medical": "Available",
-      "ownership": 24.1,
-      "ppg": 5.1,
-      "points": 179,
-      "minutes": 3150,
-      "starts": 35,
-      "goals": 3,
-      "assists": 5,
-      "clean_sheets": 14,
-      "recommendation": "Start",
-      "summary": "Clean-sheet threat \u2022 Set-piece threat \u2022 Trusted pick"
-    },
     {
       "player": "Thiago",
       "team": "Brentford",
       "position": "FWD",
       "price": 8.0,
-      "selection_rating": 63.67,
-      "expected_points": 5,
+      "selection_rating": 76.17,
+      "expected_points": 7,
       "medical": "Available",
       "ownership": 15.9,
       "ppg": 4.8,
@@ -1566,18 +1248,37 @@
       "goals": 22,
       "assists": 1,
       "clean_sheets": 10,
-      "recommendation": "Captain",
-      "summary": "Best captain option \u2022 Highest weekly upside"
+      "recommendation": "Start",
+      "summary": "Forward threat. Thiago remains a clean route to points through goals, shots, and a useful weekly ceiling."
+    },
+    {
+      "player": "Jo\u00e3o Pedro",
+      "team": "Chelsea",
+      "position": "FWD",
+      "price": 7.5,
+      "selection_rating": 72.04,
+      "expected_points": 7,
+      "medical": "Available",
+      "ownership": 54.7,
+      "ppg": 5.1,
+      "points": 177,
+      "minutes": 2658,
+      "starts": 31,
+      "goals": 15,
+      "assists": 9,
+      "clean_sheets": 10,
+      "recommendation": "Vice captain",
+      "summary": "Reliable vice-captain cover. Jo\u00e3o Pedro gives a strong fallback if the captain call changes late."
     },
     {
       "player": "Virgil",
       "team": "Liverpool",
       "position": "DEF",
       "price": 6.5,
-      "selection_rating": 62.86,
-      "expected_points": 4,
+      "selection_rating": 75.6,
+      "expected_points": 7,
       "medical": "Available",
-      "ownership": 16.3,
+      "ownership": 16.4,
       "ppg": 4.6,
       "points": 175,
       "minutes": 3420,
@@ -1586,15 +1287,15 @@
       "assists": 1,
       "clean_sheets": 10,
       "recommendation": "Start",
-      "summary": "Clean-sheet threat \u2022 Set-piece threat"
+      "summary": "Defensive value. Virgil mixes clean-sheet potential with 10 clean sheets already, and the ownership base keeps the pick sensible."
     },
     {
       "player": "Szoboszlai",
       "team": "Liverpool",
       "position": "MID",
       "price": 7.0,
-      "selection_rating": 59.5,
-      "expected_points": 5,
+      "selection_rating": 73.94,
+      "expected_points": 7,
       "medical": "Available",
       "ownership": 48.2,
       "ppg": 4.4,
@@ -1605,34 +1306,53 @@
       "assists": 7,
       "clean_sheets": 9,
       "recommendation": "Start",
-      "summary": "Creative outlet \u2022 Highly owned"
+      "summary": "Midfield output. Szoboszlai brings 4.4 PPG, 48.2% ownership, and enough attacking involvement to matter each week."
     },
     {
-      "player": "Senesi",
-      "team": "Spurs",
+      "player": "Gu\u00e9hi",
+      "team": "Man City",
       "position": "DEF",
       "price": 6.0,
-      "selection_rating": 59.6,
-      "expected_points": 4,
+      "selection_rating": 76.72,
+      "expected_points": 7,
       "medical": "Available",
-      "ownership": 10.9,
-      "ppg": 4.7,
-      "points": 175,
-      "minutes": 3288,
-      "starts": 37,
-      "goals": 0,
-      "assists": 6,
-      "clean_sheets": 11,
+      "ownership": 24.1,
+      "ppg": 5.1,
+      "points": 179,
+      "minutes": 3150,
+      "starts": 35,
+      "goals": 3,
+      "assists": 5,
+      "clean_sheets": 14,
       "recommendation": "Start",
-      "summary": "Clean-sheet threat \u2022 Strong value"
+      "summary": "Defensive value. Gu\u00e9hi mixes clean-sheet potential with 14 clean sheets already, and the ownership base keeps the pick sensible."
+    },
+    {
+      "player": "Semenyo",
+      "team": "Man City",
+      "position": "MID",
+      "price": 8.5,
+      "selection_rating": 81.07,
+      "expected_points": 7,
+      "medical": "Available",
+      "ownership": 21.6,
+      "ppg": 5.5,
+      "points": 202,
+      "minutes": 3200,
+      "starts": 37,
+      "goals": 17,
+      "assists": 6,
+      "clean_sheets": 12,
+      "recommendation": "Start",
+      "summary": "Midfield output. Semenyo brings 5.5 PPG, 21.6% ownership, and enough attacking involvement to matter each week."
     },
     {
       "player": "Anderson",
       "team": "Man City",
       "position": "MID",
       "price": 6.5,
-      "selection_rating": 59.59,
-      "expected_points": 4,
+      "selection_rating": 73.71,
+      "expected_points": 7,
       "medical": "Available",
       "ownership": 12.0,
       "ppg": 4.7,
@@ -1643,53 +1363,53 @@
       "assists": 5,
       "clean_sheets": 10,
       "recommendation": "Start",
-      "summary": "Midfield output"
+      "summary": "Midfield output. Anderson brings 4.7 PPG, 12.0% ownership, and enough attacking involvement to matter each week."
     },
     {
-      "player": "Jo\u00e3o Pedro",
-      "team": "Chelsea",
-      "position": "FWD",
-      "price": 7.5,
-      "selection_rating": 47.34,
-      "expected_points": 4,
+      "player": "B.Fernandes",
+      "team": "Man Utd",
+      "position": "MID",
+      "price": 12.0,
+      "selection_rating": 94.2,
+      "expected_points": 8,
       "medical": "Available",
-      "ownership": 54.6,
-      "ppg": 5.1,
-      "points": 177,
-      "minutes": 2658,
-      "starts": 31,
-      "goals": 15,
-      "assists": 9,
-      "clean_sheets": 10,
-      "recommendation": "Vice captain",
-      "summary": "Reliable fallback \u2022 Safe captain cover"
+      "ownership": 48.6,
+      "ppg": 6.7,
+      "points": 235,
+      "minutes": 3065,
+      "starts": 35,
+      "goals": 9,
+      "assists": 24,
+      "clean_sheets": 7,
+      "recommendation": "Captain",
+      "summary": "Best captain option. B.Fernandes combines the strongest weekly upside in the squad with the clearest route to a big return."
     },
     {
-      "player": "Mukiele",
-      "team": "Sunderland",
+      "player": "Senesi",
+      "team": "Spurs",
       "position": "DEF",
-      "price": 5.5,
-      "selection_rating": 43.94,
-      "expected_points": 4,
+      "price": 6.0,
+      "selection_rating": 74.81,
+      "expected_points": 7,
       "medical": "Available",
-      "ownership": 7.5,
+      "ownership": 10.9,
       "ppg": 4.7,
-      "points": 151,
-      "minutes": 2784,
-      "starts": 32,
-      "goals": 3,
-      "assists": 5,
-      "clean_sheets": 9,
+      "points": 175,
+      "minutes": 3288,
+      "starts": 37,
+      "goals": 0,
+      "assists": 6,
+      "clean_sheets": 11,
       "recommendation": "Start",
-      "summary": "Set-piece threat \u2022 Strong value"
+      "summary": "Defensive value. Senesi mixes clean-sheet potential with 11 clean sheets already, and the ownership base keeps the pick sensible."
     },
     {
       "player": "Roefs",
       "team": "Sunderland",
       "position": "GK",
       "price": 5.0,
-      "selection_rating": 45.55,
-      "expected_points": 4,
+      "selection_rating": 67.96,
+      "expected_points": 7,
       "medical": "Available",
       "ownership": 5.4,
       "ppg": 3.9,
@@ -1700,74 +1420,55 @@
       "assists": 0,
       "clean_sheets": 10,
       "recommendation": "Start",
-      "summary": "Safe goalkeeping slot \u2022 136 points \u2022 35 starts"
+      "summary": "Safe goalkeeping slot. Roefs offers steady starts and a reliable weekly floor with 5.4% ownership."
     },
     {
-      "player": "E.Le F\u00e9e",
+      "player": "Mukiele",
       "team": "Sunderland",
-      "position": "MID",
-      "price": 6.0,
-      "selection_rating": 44.84,
-      "expected_points": 5,
+      "position": "DEF",
+      "price": 5.5,
+      "selection_rating": 70.4,
+      "expected_points": 7,
       "medical": "Available",
-      "ownership": 11.8,
-      "ppg": 4.1,
-      "points": 147,
-      "minutes": 2930,
-      "starts": 33,
-      "goals": 5,
-      "assists": 6,
-      "clean_sheets": 10,
-      "recommendation": "Bench",
-      "summary": "Squad depth \u2022 Rotation cover"
+      "ownership": 7.6,
+      "ppg": 4.7,
+      "points": 151,
+      "minutes": 2784,
+      "starts": 32,
+      "goals": 3,
+      "assists": 5,
+      "clean_sheets": 9,
+      "recommendation": "Start",
+      "summary": "Defensive value. Mukiele mixes clean-sheet potential with 9 clean sheets already, and the ownership base keeps the pick sensible."
     },
     {
-      "player": "Kelleher",
-      "team": "Brentford",
+      "player": "Verbruggen",
+      "team": "Brighton",
       "position": "GK",
-      "price": 5.0,
-      "selection_rating": 47.26,
-      "expected_points": 4,
+      "price": 4.5,
+      "selection_rating": 63.46,
+      "expected_points": 6,
       "medical": "Available",
-      "ownership": 5.6,
-      "ppg": 3.9,
-      "points": 143,
-      "minutes": 3330,
-      "starts": 37,
+      "ownership": 16.7,
+      "ppg": 3.4,
+      "points": 130,
+      "minutes": 3420,
+      "starts": 38,
       "goals": 0,
       "assists": 0,
       "clean_sheets": 10,
       "recommendation": "Bench",
-      "summary": "Squad depth \u2022 Rotation cover"
-    },
-    {
-      "player": "Shaw",
-      "team": "Man Utd",
-      "position": "DEF",
-      "price": 4.5,
-      "selection_rating": 42.16,
-      "expected_points": 4,
-      "medical": "Available",
-      "ownership": 24.3,
-      "ppg": 3.0,
-      "points": 113,
-      "minutes": 3220,
-      "starts": 38,
-      "goals": 1,
-      "assists": 1,
-      "clean_sheets": 10,
-      "recommendation": "Bench",
-      "summary": "Squad depth \u2022 Rotation cover"
+      "summary": "Safe goalkeeping slot. Verbruggen offers steady starts and a reliable weekly floor with 16.7% ownership."
     },
     {
       "player": "Calvert-Lewin",
       "team": "Leeds",
       "position": "FWD",
       "price": 6.0,
-      "selection_rating": 32.81,
-      "expected_points": 4,
+      "selection_rating": 63.89,
+      "expected_points": 6,
       "medical": "Available",
-      "ownership": 18.2,
+      "ownership": 18.3,
       "ppg": 4.1,
       "points": 142,
       "minutes": 2721,
@@ -1776,7 +1477,45 @@
       "assists": 2,
       "clean_sheets": 8,
       "recommendation": "Bench",
-      "summary": "Squad depth \u2022 Rotation cover"
+      "summary": "Forward threat. Calvert-Lewin remains a clean route to points through goals, shots, and a useful weekly ceiling."
+    },
+    {
+      "player": "Van Hecke",
+      "team": "Spurs",
+      "position": "DEF",
+      "price": 5.0,
+      "selection_rating": 68.49,
+      "expected_points": 7,
+      "medical": "Available",
+      "ownership": 8.1,
+      "ppg": 4.1,
+      "points": 148,
+      "minutes": 3210,
+      "starts": 36,
+      "goals": 3,
+      "assists": 3,
+      "clean_sheets": 10,
+      "recommendation": "Bench",
+      "summary": "Defensive value. Van Hecke mixes clean-sheet potential with 10 clean sheets already, and the ownership base keeps the pick sensible."
+    },
+    {
+      "player": "E.Le F\u00e9e",
+      "team": "Sunderland",
+      "position": "MID",
+      "price": 6.0,
+      "selection_rating": 68.32,
+      "expected_points": 7,
+      "medical": "Available",
+      "ownership": 11.9,
+      "ppg": 4.1,
+      "points": 147,
+      "minutes": 2930,
+      "starts": 33,
+      "goals": 5,
+      "assists": 6,
+      "clean_sheets": 10,
+      "recommendation": "Bench",
+      "summary": "Midfield output. E.Le F\u00e9e brings 4.1 PPG, 11.9% ownership, and enough attacking involvement to matter each week."
     }
   ]
 }
