@@ -17,33 +17,28 @@ fetch('./dashboard.json', { cache: 'no-store' })
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#39;');
-
+ 
     const baseSquad = isObj(data.base_squad) ? data.base_squad : {};
     const weekly = isObj(data.weekly_advice) ? data.weekly_advice : {};
     const recommendation = isObj(data.recommendation) ? data.recommendation : {};
     const judge = isObj(data.judge) ? data.judge : {};
-
+ 
     const startingRaw = toArray(recommendation.starting_xi).length
       ? toArray(recommendation.starting_xi)
       : toArray(baseSquad.starting_xi);
-
+ 
     const benchRaw = toArray(recommendation.bench).length
       ? toArray(recommendation.bench)
       : toArray(baseSquad.bench);
-
-    const captain = isObj(recommendation.captain)
-      ? recommendation.captain
-      : (isObj(baseSquad.captain) ? baseSquad.captain : {});
-
-    const viceCaptain = isObj(recommendation.vice_captain)
-      ? recommendation.vice_captain
-      : (isObj(baseSquad.vice_captain) ? baseSquad.vice_captain : {});
-
+ 
+    const captain = isObj(recommendation.captain) ? recommendation.captain : (isObj(baseSquad.captain) ? baseSquad.captain : {});
+    const viceCaptain = isObj(recommendation.vice_captain) ? recommendation.vice_captain : (isObj(baseSquad.vice_captain) ? baseSquad.vice_captain : {});
+ 
     const formation = recommendation.formation || baseSquad.formation || '3-5-2';
     const squadCost = num(baseSquad.squad_cost, 100);
     const teamValueText = baseSquad.team_value || `£${squadCost.toFixed(1)}m`;
     const bankValue = Math.max(0, 100 - squadCost);
-
+ 
     const normalize = (p) => ({
       player: p.player || p.name || p.Player || 'Unknown',
       team: p.team || p.Team || '—',
@@ -61,20 +56,20 @@ fetch('./dashboard.json', { cache: 'no-store' })
       assists: num(p.assists ?? 0, 0),
       clean_sheets: num(p.clean_sheets ?? 0, 0)
     });
-
+ 
     const starting = startingRaw.map(normalize);
     const bench = benchRaw.map(normalize);
-
+ 
     const projectedTeamPoints = num(
       weekly.projected_team_points,
       Math.round(starting.reduce((sum, p) => sum + num(p.expected_points, 0), 0) + num(captain.expected_points, 0))
     );
-
+ 
     const weeklyCall = text(
       weekly.immediate_call,
       `Captain ${captain.player || 'your best attacker'} and keep ${viceCaptain.player || 'your best vice'} as vice captain.`
     );
-
+ 
     const whyBullets = toArray(weekly.why_this_works).length
       ? toArray(weekly.why_this_works)
       : [
@@ -82,9 +77,9 @@ fetch('./dashboard.json', { cache: 'no-store' })
           `Formation set to ${formation}.`,
           `Captain: ${captain.player || '—'}. Vice captain: ${viceCaptain.player || '—'}.`
         ];
-
+ 
     const currentSquadMap = new Map([...starting, ...bench].map(p => [p.player, p]));
-
+ 
     const transferWatch = toArray(weekly.transfer_watch).map(item => {
       const sell = item.sell || item.out || '';
       const buy = item.buy || item.in || '';
@@ -105,9 +100,10 @@ fetch('./dashboard.json', { cache: 'no-store' })
         buy_price: buyPrice
       };
     });
-
+ 
     const chipWatch = isObj(weekly.chip_watch) ? weekly.chip_watch : {};
-
+    const benchOrder = toArray(weekly.bench_order).length ? toArray(weekly.bench_order) : bench.map(p => p.player);
+ 
     document.getElementById('gwPill').textContent = `Gameweek ${num(data.metadata?.gameweek, 1)}`;
     document.getElementById('updatedText').textContent = `Updated: ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
     document.getElementById('teamValue').textContent = teamValueText;
@@ -117,11 +113,11 @@ fetch('./dashboard.json', { cache: 'no-store' })
     document.getElementById('nextMoveText').textContent = weeklyCall;
     document.getElementById('heroSub').textContent = `Base squad locked for the season. Weekly advice updates only.`;
     document.getElementById('callMeta').textContent = `Captain: ${captain.player || '—'} • Vice: ${viceCaptain.player || '—'}`;
-
+ 
     const pintLink = 'upi://pay?pa=dwarakhanath.sekar@ybl&pn=Dwarakhanath%20Sekar&am=2&cu=INR&tn=Buy%20me%20a%20pint';
     const pintBtn = document.getElementById('pintBtn');
     if (pintBtn) pintBtn.setAttribute('href', pintLink);
-
+ 
     const renderShirt = (team) => {
       const colors = {
         Arsenal: '#EF0107', 'Aston Villa': '#7B0033', Bournemouth: '#DA291C', Brentford: '#E30613',
@@ -133,11 +129,11 @@ fetch('./dashboard.json', { cache: 'no-store' })
       };
       return colors[team] || '#0f7a54';
     };
-
+ 
     const smartSummary = (p) => {
       const raw = String(p.summary || '').trim();
       if (raw && raw !== 'No extra note available.') return raw;
-
+ 
       const pos = String(p.position || '').toUpperCase();
       const own = num(p.ownership, 0);
       const ppg = num(p.ppg, 0);
@@ -145,7 +141,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
       const assists = num(p.assists, 0);
       const cs = num(p.clean_sheets, 0);
       const pts = Math.round(num(p.expected_points, 0));
-
+ 
       if (pos === 'GK') {
         const bits = ['Safe goalkeeping slot'];
         if (num(p.points, 0) > 0) bits.push(`${Math.round(num(p.points, 0))} season points`);
@@ -181,7 +177,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
       if (pts >= 6) return `Projected ${pts} pts • Solid weekly output`;
       return `Projected ${pts} pts`;
     };
-
+ 
     const getLayout = (form) => {
       const layouts = {
         '3-5-2': {
@@ -217,7 +213,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
       };
       return layouts[form] || layouts['3-5-2'];
     };
-
+ 
     const layout = getLayout(formation);
     const grouped = { GK: [], DEF: [], MID: [], FWD: [] };
     starting.forEach(p => {
@@ -226,7 +222,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
     Object.keys(grouped).forEach(pos => {
       grouped[pos].sort((a, b) => b.expected_points - a.expected_points || b.ownership - a.ownership);
     });
-
+ 
     const isMobile = window.matchMedia('(max-width: 760px)').matches;
     const pitchItems = [];
     ['GK', 'DEF', 'MID', 'FWD'].forEach(pos => {
@@ -235,12 +231,12 @@ fetch('./dashboard.json', { cache: 'no-store' })
         pitchItems.push({ ...p, coord });
       });
     });
-
+ 
     const pitchArea = document.getElementById('pitchArea');
     pitchArea.innerHTML = pitchItems.map(p => {
       const isCaptain = p.player === captain.player;
       const isVice = p.player === viceCaptain.player;
-
+ 
       if (isMobile) {
         return `
           <div class="slot" style="left:${p.coord.x}%; top:${p.coord.y}%; width:84px;">
@@ -257,7 +253,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
           </div>
         `;
       }
-
+ 
       return `
         <div class="slot" style="left:${p.coord.x}%; top:${p.coord.y}%;">
           <div class="shirt-wrap">
@@ -277,7 +273,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
         </div>
       `;
     }).join('');
-
+ 
     const subsRow = document.getElementById('subsRow');
     if (bench.length) {
       subsRow.innerHTML = bench.map((p, idx) => {
@@ -313,7 +309,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
     } else {
       subsRow.innerHTML = `<div class="empty-state">No bench players found in the JSON.</div>`;
     }
-
+ 
     const transferWatchEl = document.getElementById('transferWatch');
     if (transferWatch.length) {
       transferWatchEl.innerHTML = transferWatch.map(item => {
@@ -344,7 +340,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
     } else {
       transferWatchEl.innerHTML = `<div class="empty-state">No clear transfer move right now. Keep the base squad and hold the free transfer.</div>`;
     }
-
+ 
     const chipWatchEl = document.getElementById('chipWatch');
     const chipConfig = [
       {
@@ -368,7 +364,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
         reason: text(chipWatch.free_hit?.reason, 'Use for one awkward week when the normal squad shape breaks down.')
       }
     ];
-
+ 
     chipWatchEl.innerHTML = chipConfig.map(item => {
       const status = item.status.toLowerCase();
       const cls = status === 'ready' ? 'chip-ready' : status === 'watch' || status === 'consider' ? 'chip-watch' : 'chip-no';
@@ -380,7 +376,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
         </div>
       `;
     }).join('');
-
+ 
     const focusCardsEl = document.getElementById('focusCards');
     const focusCards = [
       {
@@ -396,7 +392,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
         meta: `${viceCaptain.team || '—'} • ${Math.round(num(viceCaptain.expected_points, 0))} pts`
       }
     ];
-
+ 
     if (transferWatch[0]) {
       focusCards.push({
         role: 'Transfer out',
@@ -411,7 +407,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
         meta: `${transferWatch[0].buy_team || 'Target'} • ${transferWatch[0].position || '—'}`
       });
     }
-
+ 
     focusCardsEl.innerHTML = focusCards.map(card => `
       <article class="focus-card">
         <div class="topline">
@@ -422,7 +418,7 @@ fetch('./dashboard.json', { cache: 'no-store' })
         <div class="meta">${esc(card.meta)}</div>
       </article>
     `).join('');
-
+ 
     document.getElementById('heroSub').textContent =
       `Base squad locked for the season. This week is only about transfers, captaincy, chips, and bench order.`;
   })
