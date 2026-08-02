@@ -5,11 +5,11 @@
     "bank": "\u00a30.0m",
     "rank": "-",
     "is_demo": true,
-    "team_name": "Dream Squad"
+    "team_name": "Demo Squad"
   },
   "current_team": {
     "team_id": "",
-    "team_name": "Dream Squad",
+    "team_name": "Demo Squad",
     "gameweek_last_updated": 1,
     "formation": "4-4-2",
     "squad_value": 100.0,
