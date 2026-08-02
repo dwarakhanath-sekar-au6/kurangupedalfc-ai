@@ -1,6 +1,6 @@
 (() => {
   const DASHBOARD_URLS = ['./dashboard.json', './docs/dashboard.json'];
-  const PINT_LINK = 'upi://pay?pa=dwarakhanath.sekar@ybl&pn=Dwarakhanath%20Sekar&cu=INR&tn=Help%20the%20engine%20run%20with%20a%20pint';
+  const PINT_LINK = 'upi://pay?pa=dwarakhanath.sekar@ybl&pn=Dwarakhanath%20Sekar&cu=INR&tn=Buy%20a%20pint';
 
   const isObj = (v) => v && typeof v === 'object' && !Array.isArray(v);
   const toArray = (v) => Array.isArray(v) ? v : [];
@@ -65,38 +65,21 @@
   };
 
   const shirtColor = (team) => teamColors[team] || '#0f7a54';
+  const isLightColor = (hex) => {
+    const c = String(hex || '').replace('#', '');
+    if (c.length !== 6) return false;
+    const r = parseInt(c.slice(0, 2), 16);
+    const g = parseInt(c.slice(2, 4), 16);
+    const b = parseInt(c.slice(4, 6), 16);
+    return (0.299 * r + 0.587 * g + 0.114 * b) > 200;
+  };
 
   const formationLayouts = {
-    '3-5-2': {
-      GK: [{ x: 50, y: 12 }],
-      DEF: [{ x: 22, y: 30 }, { x: 50, y: 30 }, { x: 78, y: 30 }],
-      MID: [{ x: 10, y: 58 }, { x: 30, y: 58 }, { x: 50, y: 58 }, { x: 70, y: 58 }, { x: 90, y: 58 }],
-      FWD: [{ x: 40, y: 84 }, { x: 60, y: 84 }]
-    },
-    '3-4-3': {
-      GK: [{ x: 50, y: 12 }],
-      DEF: [{ x: 20, y: 30 }, { x: 50, y: 30 }, { x: 80, y: 30 }],
-      MID: [{ x: 14, y: 58 }, { x: 38, y: 58 }, { x: 62, y: 58 }, { x: 86, y: 58 }],
-      FWD: [{ x: 25, y: 84 }, { x: 50, y: 84 }, { x: 75, y: 84 }]
-    },
-    '4-4-2': {
-      GK: [{ x: 50, y: 12 }],
-      DEF: [{ x: 16, y: 30 }, { x: 38, y: 30 }, { x: 62, y: 30 }, { x: 84, y: 30 }],
-      MID: [{ x: 16, y: 58 }, { x: 38, y: 58 }, { x: 62, y: 58 }, { x: 84, y: 58 }],
-      FWD: [{ x: 38, y: 84 }, { x: 62, y: 84 }]
-    },
-    '4-3-3': {
-      GK: [{ x: 50, y: 12 }],
-      DEF: [{ x: 16, y: 30 }, { x: 38, y: 30 }, { x: 62, y: 30 }, { x: 84, y: 30 }],
-      MID: [{ x: 20, y: 58 }, { x: 50, y: 58 }, { x: 80, y: 58 }],
-      FWD: [{ x: 25, y: 84 }, { x: 50, y: 84 }, { x: 75, y: 84 }]
-    },
-    '5-3-2': {
-      GK: [{ x: 50, y: 12 }],
-      DEF: [{ x: 10, y: 30 }, { x: 30, y: 30 }, { x: 50, y: 30 }, { x: 70, y: 30 }, { x: 90, y: 30 }],
-      MID: [{ x: 20, y: 58 }, { x: 50, y: 58 }, { x: 80, y: 58 }],
-      FWD: [{ x: 40, y: 84 }, { x: 60, y: 84 }]
-    }
+    '3-5-2': { GK: [{ x: 50, y: 12 }], DEF: [{ x: 22, y: 30 }, { x: 50, y: 30 }, { x: 78, y: 30 }], MID: [{ x: 10, y: 58 }, { x: 30, y: 58 }, { x: 50, y: 58 }, { x: 70, y: 58 }, { x: 90, y: 58 }], FWD: [{ x: 40, y: 84 }, { x: 60, y: 84 }] },
+    '3-4-3': { GK: [{ x: 50, y: 12 }], DEF: [{ x: 20, y: 30 }, { x: 50, y: 30 }, { x: 80, y: 30 }], MID: [{ x: 14, y: 58 }, { x: 38, y: 58 }, { x: 62, y: 58 }, { x: 86, y: 58 }], FWD: [{ x: 25, y: 84 }, { x: 50, y: 84 }, { x: 75, y: 84 }] },
+    '4-4-2': { GK: [{ x: 50, y: 12 }], DEF: [{ x: 16, y: 30 }, { x: 38, y: 30 }, { x: 62, y: 30 }, { x: 84, y: 30 }], MID: [{ x: 16, y: 58 }, { x: 38, y: 58 }, { x: 62, y: 58 }, { x: 84, y: 58 }], FWD: [{ x: 38, y: 84 }, { x: 62, y: 84 }] },
+    '4-3-3': { GK: [{ x: 50, y: 12 }], DEF: [{ x: 16, y: 30 }, { x: 38, y: 30 }, { x: 62, y: 30 }, { x: 84, y: 30 }], MID: [{ x: 20, y: 58 }, { x: 50, y: 58 }, { x: 80, y: 58 }], FWD: [{ x: 25, y: 84 }, { x: 50, y: 84 }, { x: 75, y: 84 }] },
+    '5-3-2': { GK: [{ x: 50, y: 12 }], DEF: [{ x: 10, y: 30 }, { x: 30, y: 30 }, { x: 50, y: 30 }, { x: 70, y: 30 }, { x: 90, y: 30 }], MID: [{ x: 20, y: 58 }, { x: 50, y: 58 }, { x: 80, y: 58 }], FWD: [{ x: 40, y: 84 }, { x: 60, y: 84 }] }
   };
 
   const normalizePlayer = (p) => ({
@@ -112,26 +95,23 @@
 
   const renderPitchSlot = (p, coord, isCaptain, isVice, isMobile = false) => {
     const color = shirtColor(p.team);
+    const light = isLightColor(color);
     const cls = isCaptain ? 'token-captain' : isVice ? 'token-vice' : '';
     const tokenSize = isMobile ? 'small-token' : '';
+    const meta = `£${num(p.price).toFixed(1)}m • 👥${num(p.ownership).toFixed(1)}%`;
     return `
-      <div class="slot" style="left:${coord.x}%; top:${coord.y}%; ${isMobile ? 'width:86px;' : ''}">
-        <div class="pitch-token ${cls} ${tokenSize}" style="background:${color}">
+      <div class="slot mobile-slot" style="left:${coord.x}%; top:${coord.y}%;">
+        <div class="pitch-token ${cls} ${tokenSize} ${light ? 'light-token' : ''}" style="background:${color}">
           <span class="pitch-token-letter">${esc((p.player || '?').slice(0,1).toUpperCase())}</span>
           ${isCaptain ? '<span class="token-badge">C</span>' : ''}
           ${isVice ? '<span class="token-badge token-badge-vc">VC</span>' : ''}
         </div>
-        <div class="pitch-card ${isMobile ? 'mobile-pitch-card' : ''}">
-    <div class="pitch-name">${esc(p.player)}</div>
-
-    <div class="pitch-club">
-        ${esc(p.team)}
-    </div>
-
-    <div class="pitch-meta">
-        £${num(p.price).toFixed(1)}m &nbsp; • &nbsp; 👥${num(p.ownership).toFixed(1)}%
-    </div>
-</div>
+        <div class="pitch-card mobile-pitch-card">
+          <div class="pitch-name">${esc(p.player)}</div>
+          <div class="pitch-club">${esc(p.team)}</div>
+          <div class="pitch-meta">${esc(meta)}</div>
+        </div>
+      </div>
     `;
   };
 
@@ -219,23 +199,14 @@
     const pitchPlayers = starting.map(p => ({ ...p, price: p.price, ownership: p.ownership }));
     const grouped = { GK: [], DEF: [], MID: [], FWD: [] };
     pitchPlayers.forEach(p => { if (grouped[p.position]) grouped[p.position].push(p); });
-    Object.keys(grouped).forEach(k => {
-      grouped[k].sort((a, b) => b.price - a.price || b.ownership - a.ownership);
-    });
+    Object.keys(grouped).forEach(k => grouped[k].sort((a, b) => b.price - a.price || b.ownership - a.ownership));
 
     const ordered = [];
-    ['GK', 'DEF', 'MID', 'FWD'].forEach(pos => {
-      grouped[pos].forEach((p, idx) => ordered.push({ p, coord: layout[pos][idx] }));
-    });
-
+    ['GK', 'DEF', 'MID', 'FWD'].forEach(pos => grouped[pos].forEach((p, idx) => ordered.push({ p, coord: layout[pos][idx] })));
     pitchArea.innerHTML = ordered.map(({ p, coord }) => renderPitchSlot(p, coord, p.player === captain.player, p.player === vice.player, isMobile)).join('');
 
     const focusCards = document.getElementById('focusCards');
-    const topNotes = [
-      captain,
-      vice,
-      ...starting.filter(p => p.player !== captain.player && p.player !== vice.player).slice(0, 2)
-    ];
+    const topNotes = [captain, vice, ...starting.filter(p => p.player !== captain.player && p.player !== vice.player).slice(0, 2)];
     focusCards.innerHTML = topNotes.map(p => buildBrief(p)).join('');
 
     const subsRow = document.getElementById('subsRow');
@@ -244,17 +215,13 @@
         <div class="sub-token" style="background:${shirtColor(p.team)}">${esc((p.player || '?').slice(0,1).toUpperCase())}</div>
         <div class="pitch-name">${esc(p.player)}</div>
         <div class="pitch-club">${esc(p.team)} • ${esc(p.position)}</div>
-        <div class="pitch-price">£${num(p.price).toFixed(1)}m</div>
+        <div class="pitch-meta">£${num(p.price).toFixed(1)}m • 👥${num(p.ownership).toFixed(1)}%</div>
         <div class="pitch-owned">${idx + 1}. Bench</div>
       </div>
     `).join('');
 
     const transferEl = document.getElementById('transferWatch');
-    if (transferWatch.length) {
-      transferEl.innerHTML = transferWatch.map(buildTransfer).join('');
-    } else {
-      transferEl.innerHTML = `<div class="empty-state">Hold transfer. No affordable upgrade stands out this week.</div>`;
-    }
+    transferEl.innerHTML = transferWatch.length ? transferWatch.map(buildTransfer).join('') : `<div class="empty-state">Hold transfer. No affordable upgrade stands out this week.</div>`;
 
     const chipEl = document.getElementById('chipWatch');
     chipEl.innerHTML = [
