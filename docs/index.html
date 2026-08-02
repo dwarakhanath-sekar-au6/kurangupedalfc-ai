@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,24 +21,36 @@
           <div class="brand-sub">Weekly FPL briefing</div>
         </div>
       </a>
-      <div class="top-actions">
-        <a class="ghost-link" href="rules.html" target="_blank" rel="noopener">How to play</a>
-      </div>
+
+      <a class="ghost-link" href="rules.html" target="_blank" rel="noopener">How to play</a>
     </header>
- 
+
+    <section class="access-card panel">
+      <div class="access-copy">
+        <div class="section-kicker">Team access</div>
+        <h2>Enter your FPL Team ID</h2>
+        <p>This page shows the recommended base squad for the gameweek until we receive your access. After that, the weekly advice switches to your own squad.</p>
+      </div>
+      <div class="access-controls">
+        <label class="sr-only" for="teamIdInput">FPL Team ID</label>
+        <input id="teamIdInput" class="team-input" type="text" placeholder="FPL Team ID" autocomplete="off" inputmode="numeric" />
+        <button id="teamIdSaveBtn" class="primary-btn" type="button">Save access</button>
+        <div id="teamIdStatus" class="access-status">No team ID saved yet.</div>
+      </div>
+    </section>
+
     <section class="hero-grid">
       <div class="panel hero-panel">
         <div class="hero-label">Projected team points</div>
         <div class="hero-points" id="projectedPoints">0</div>
-        <div class="hero-sub" id="heroSub">This week: loading...</div>
       </div>
- 
+
       <div class="panel call-panel">
         <div class="section-title">Immediate call</div>
         <div class="call-text" id="nextMoveText">Loading...</div>
         <div class="call-meta" id="callMeta">Base squad locked for the season.</div>
       </div>
- 
+
       <div class="panel stats-panel">
         <div class="mini-stat">
           <span>Team value</span>
@@ -55,76 +66,77 @@
         </div>
       </div>
     </section>
- 
+
     <main class="content-grid">
       <section class="panel pitch-panel">
         <div class="section-head">
           <div>
-            <h2>Locked squad</h2>
-            <p>Same skeleton team for the season. Weekly advice changes underneath.</p>
+            <h2>Recommended base squad for the gameweek</h2>
+            <p>This will start populating once we receive your access.</p>
           </div>
-          <div class="chip soft">Base squad</div>
+          <div class="chip soft">Gameweek view</div>
         </div>
         <div class="pitch" id="pitchArea"></div>
       </section>
- 
+
+      <section class="panel notes-panel">
+        <div class="section-head">
+          <div>
+            <h2>Why these picks matter</h2>
+            <p>Ownership, weekly upside, and the matchups that make the squad work.</p>
+          </div>
+          <div class="chip soft">Ownership</div>
+        </div>
+        <div id="focusCards" class="focus-grid"></div>
+      </section>
+
       <section class="panel subs-panel">
         <div class="section-head">
           <div>
             <h2>Substitutes</h2>
-            <p>Bench cover for this gameweek.</p>
+            <p>Bench order for the week.</p>
           </div>
-          <div class="chip soft">Subs</div>
+          <div class="chip soft">Bench</div>
         </div>
         <div id="subsRow" class="subs-row"></div>
       </section>
- 
+
       <section class="panel transfer-panel">
         <div class="section-head">
           <div>
             <h2>Transfer watch</h2>
-            <p>Only the moves that matter this week.</p>
+            <p>The best swaps within the budget.</p>
           </div>
           <div class="chip soft">Weekly</div>
         </div>
         <div id="transferWatch" class="transfer-list"></div>
       </section>
- 
+
       <section class="panel chip-panel">
         <div class="section-head">
           <div>
             <h2>Chip watch</h2>
-            <p>Bench boost, triple captain, wildcard, free hit.</p>
+            <p>Triple Captain, Bench Boost, Wildcard, and Free Hit.</p>
           </div>
           <div class="chip soft">Decision</div>
         </div>
         <div id="chipWatch" class="chip-grid"></div>
       </section>
- 
-      <section class="panel notes-panel">
-        <div class="section-head">
-          <div>
-            <h2>Player notes</h2>
-            <p>Short football lines only.</p>
-          </div>
-          <div class="chip soft">Focus</div>
-        </div>
-        <div id="focusCards" class="focus-grid"></div>
-      </section>
     </main>
- 
+
     <footer class="footer-card panel">
       <div class="footer-copy">
         <div class="footer-title">Like the work?</div>
-        <div class="footer-text">Keep the engine running with a small pint. It opens a UPI payment intent on supported devices.</div>
+        <div class="footer-text">Buy the manager a pint and keep the project moving.</div>
       </div>
       <a class="pint-btn" id="pintBtn" href="#" aria-label="Buy me a pint">
         <span class="beer-icon">🍺</span>
-        <span>Buy me a pint</span>
+        <span>Buy me a pint ₹119</span>
       </a>
     </footer>
   </div>
- 
+
   <script src="app.js"></script>
 </body>
 </html>
+```
