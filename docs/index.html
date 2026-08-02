@@ -1,707 +1,129 @@
-:root {
-  --bg: #f2f5f1;
-  --card: #ffffff;
-  --card-2: #f8faf7;
-  --line: #e2e8e0;
-  --text: #111827;
-  --muted: #64748b;
-  --accent: #0f7a54;
-  --accent-2: #1d4ed8;
-  --good: #15803d;
-  --warn: #b45309;
-  --bad: #b91c1c;
-  --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-  --radius: 24px;
-}
-
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
-
-body {
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: var(--text);
-  background:
-    radial-gradient(circle at top left, rgba(15, 122, 84, 0.08), transparent 32%),
-    linear-gradient(180deg, #f7f9f6 0%, var(--bg) 100%);
-}
-
-.app-shell {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 22px;
-}
-
-.topbar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  text-decoration: none;
-  color: inherit;
-}
-
-.brand-logo-wrap {
-  width: 74px;
-  height: 74px;
-  border-radius: 22px;
-  padding: 5px;
-  background: linear-gradient(135deg, rgba(15,122,84,.12), rgba(29,78,216,.08));
-  border: 1px solid rgba(15,122,84,.12);
-  box-shadow: var(--shadow);
-}
-
-.brand-logo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 18px;
-  display: block;
-}
-
-.brand-name {
-  font-family: Manrope, Inter, sans-serif;
-  font-size: 30px;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  font-weight: 800;
-}
-
-.brand-sub {
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.top-actions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-}
-
-.ghost-link {
-  text-decoration: none;
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 700;
-  padding: 10px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,0.8);
-}
-
-.pint-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 800;
-  padding: 10px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(15,122,84,.18);
-  background: linear-gradient(135deg, #0f7a54 0%, #0c5d41 100%);
-  box-shadow: 0 12px 24px rgba(15, 122, 84, 0.18);
-}
-
-.beer-icon { font-size: 15px; }
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.5fr 1.1fr 0.9fr;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.panel {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-.hero-panel, .call-panel, .stats-panel,
-.pitch-panel, .subs-panel, .transfer-panel, .chip-panel, .notes-panel {
-  padding: 20px;
-}
-
-.hero-label {
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.hero-points {
-  font-family: Manrope, Inter, sans-serif;
-  font-size: 62px;
-  line-height: 0.95;
-  letter-spacing: -0.06em;
-  font-weight: 800;
-  color: var(--text);
-}
-
-.hero-sub {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.45;
-}
-
-.section-title,
-.section-head h2 {
-  font-family: Manrope, Inter, sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-}
-
-.section-title {
-  font-size: 18px;
-  margin-bottom: 14px;
-}
-
-.call-text {
-  font-size: 20px;
-  line-height: 1.4;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.call-meta {
-  margin-top: 12px;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.stats-panel {
-  display: grid;
-  gap: 12px;
-  align-content: center;
-}
-
-.mini-stat {
-  padding: 14px 16px;
-  background: var(--card-2);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-}
-
-.mini-stat span {
-  display: block;
-  color: var(--muted);
-  font-size: 12px;
-  margin-bottom: 6px;
-}
-
-.mini-stat strong {
-  font-size: 20px;
-  letter-spacing: -0.03em;
-}
-
-.content-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.pitch-panel {
-  grid-column: 1 / -1;
-}
-
-.section-head {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.section-head h2 {
-  margin: 0;
-  font-size: 20px;
-}
-
-.section-head p {
-  margin: 6px 0 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 12px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  border: 1px solid var(--line);
-  background: #fafcfa;
-}
-
-.chip.soft {
-  color: var(--accent);
-  background: rgba(15, 122, 84, 0.08);
-  border-color: rgba(15, 122, 84, 0.16);
-}
-
-.pitch {
-  position: relative;
-  min-height: 720px;
-  border-radius: 22px;
-  border: 1px solid #d8e5d8;
-  overflow: hidden;
-  background:
-    linear-gradient(90deg, rgba(255,255,255,0.16) 0 50%, transparent 50% 100%),
-    linear-gradient(180deg, rgba(255,255,255,0.14) 0 50%, transparent 50% 100%),
-    radial-gradient(circle at center, rgba(255,255,255,0.24), transparent 56%),
-    linear-gradient(180deg, #dff0dd 0%, #cfe3cb 100%);
-}
-
-.pitch::before {
-  content: "";
-  position: absolute;
-  inset: 16px;
-  border: 2px solid rgba(255,255,255,0.7);
-  border-radius: 18px;
-}
-
-.pitch::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 176px;
-  height: 176px;
-  transform: translate(-50%, -50%);
-  border: 2px solid rgba(255,255,255,0.72);
-  border-radius: 999px;
-}
-
-.slot {
-  position: absolute;
-  width: 110px;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.shirt-wrap {
-  position: relative;
-  width: 60px;
-  height: 66px;
-  margin: 0 auto 8px;
-}
-
-.shirt-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  filter: drop-shadow(0 10px 16px rgba(15, 23, 42, 0.16));
-}
-
-.badge {
-  position: absolute;
-  right: -4px;
-  top: 2px;
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  color: white;
-  font-size: 10px;
-  font-weight: 800;
-  border: 2px solid rgba(255,255,255,0.7);
-}
-
-.badge-c { background: var(--accent); }
-.badge-vc { background: var(--accent-2); }
-
-.pitch-card {
-  display: inline-block;
-  min-width: 96px;
-  padding: 9px 10px 8px;
-  border-radius: 14px;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,0.95);
-  box-shadow: 0 10px 20px rgba(15,23,42,0.05);
-}
-
-.pitch-name {
-  font-size: 14px;
-  font-weight: 800;
-  line-height: 1.15;
-}
-
-.pitch-subline {
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.35;
-}
-
-.pitch-points {
-  margin-top: 6px;
-  color: var(--accent);
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.subs-row {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.sub-card {
-  padding: 14px;
-  border-radius: 18px;
-  border: 1px solid var(--line);
-  background: var(--card-2);
-  text-align: center;
-}
-
-.sub-card .pitch-card {
-  display: none;
-}
-
-.sub-card .shirt-wrap {
-  width: 52px;
-  height: 58px;
-}
-
-.sub-card .pitch-name {
-  margin-top: 2px;
-}
-
-.transfer-list {
-  display: grid;
-  gap: 12px;
-}
-
-.transfer-card {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 14px;
-  align-items: center;
-  padding: 14px;
-  border-radius: 18px;
-  border: 1px solid var(--line);
-  background: var(--card-2);
-}
-
-.transfer-side .label {
-  font-size: 11px;
-  font-weight: 800;
-  color: var(--muted);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.transfer-side .name {
-  margin-top: 4px;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-}
-
-.transfer-side .meta {
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.transfer-arrow {
-  font-size: 22px;
-  color: var(--accent);
-  font-weight: 900;
-  text-align: center;
-}
-
-.transfer-gain {
-  margin-top: 8px;
-  display: inline-flex;
-  align-items: center;
-  padding: 7px 10px;
-  border-radius: 999px;
-  background: rgba(15, 122, 84, 0.1);
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.chip-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.chip-item {
-  padding: 14px;
-  border-radius: 18px;
-  border: 1px solid var(--line);
-  background: var(--card-2);
-}
-
-.chip-item .chip-name {
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.chip-item .chip-status {
-  margin-top: 6px;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-}
-
-.chip-item .chip-reason {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.45;
-}
-
-.chip-ready { border-color: rgba(21,128,61,0.18); }
-.chip-ready .chip-status { color: var(--good); }
-.chip-watch { border-color: rgba(180,83,9,0.18); }
-.chip-watch .chip-status { color: var(--warn); }
-.chip-no { border-color: rgba(185,28,28,0.18); }
-.chip-no .chip-status { color: var(--bad); }
-
-.focus-grid {
-  display: grid;
-  gap: 12px;
-}
-
-.focus-card {
-  padding: 14px;
-  border-radius: 18px;
-  border: 1px solid var(--line);
-  background: var(--card-2);
-}
-
-.focus-card .topline {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.focus-card .name {
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-}
-
-.focus-card .role {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 9px;
-  border-radius: 999px;
-  background: rgba(15, 122, 84, 0.1);
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.focus-card .summary {
-  margin-top: 8px;
-  color: var(--text);
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.focus-card .meta {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.empty-state {
-  padding: 16px;
-  border-radius: 18px;
-  border: 1px dashed var(--line);
-  color: var(--muted);
-  background: rgba(255,255,255,0.55);
-  font-size: 13px;
-}
-
-.footer-card {
-  margin-top: 16px;
-  padding: 18px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.footer-title {
-  font-family: Manrope, Inter, sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-}
-
-.footer-text {
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-@media (max-width: 1100px) {
-  .hero-grid,
-  .content-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .pitch-panel {
-    grid-column: auto;
-  }
-}
-
-@media (max-width: 760px) {
-  .app-shell {
-    padding: 14px;
-  }
-
-  .topbar {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .top-actions {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .brand-name {
-    font-size: 26px;
-  }
-
-  .brand-logo-wrap {
-    width: 64px;
-    height: 64px;
-  }
-
-  .hero-points {
-    font-size: 50px;
-  }
-
-  .hero-panel, .call-panel, .stats-panel,
-  .pitch-panel, .subs-panel, .transfer-panel, .chip-panel, .notes-panel {
-    padding: 16px;
-  }
-
-  .pitch {
-    min-height: 420px;
-  }
-
-  .slot {
-    width: 92px;
-  }
-
-  .pitch-card {
-    min-width: 84px;
-    padding: 8px;
-  }
-
-  .pitch-name {
-    font-size: 13px;
-  }
-
-  .pitch-subline {
-    display: none;
-  }
-
-  .pitch-points {
-    font-size: 12px;
-  }
-
-  .subs-row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .transfer-card {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .transfer-arrow {
-    transform: rotate(90deg);
-  }
-
-  .chip-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .footer-card {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
-
-.button-token {
-  position: relative;
-  width: 58px;
-  height: 58px;
-  margin: 0 auto 8px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 10px 16px rgba(15, 23, 42, 0.16);
-  border: 1px solid rgba(255,255,255,0.65);
-}
-
-.button-token.small-token {
-  width: 46px;
-  height: 46px;
-  border-radius: 14px;
-}
-
-.button-token-letter {
-  color: #fff;
-  font-weight: 900;
-  font-size: 18px;
-  letter-spacing: -0.04em;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.25);
-}
-
-.button-badge {
-  position: absolute;
-  right: -5px;
-  top: -5px;
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  color: white;
-  font-size: 9px;
-  font-weight: 900;
-  border: 2px solid rgba(255,255,255,0.8);
-}
-
-.button-c { background: var(--accent); }
-.button-vc { background: var(--accent-2); }
-
-.sub-pill {
-  text-align: center;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KuranguPedalFC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="KuranguPedalFC home">
+        <div class="brand-logo-wrap">
+          <img class="brand-logo" src="assets/logo.jpg" alt="KuranguPedalFC logo" />
+        </div>
+        <div class="brand-copy">
+          <div class="brand-name">KuranguPedalFC</div>
+          <div class="brand-sub">Weekly FPL briefing</div>
+        </div>
+      </a>
+      <div class="top-actions">
+        <a class="ghost-link" href="rules.html" target="_blank" rel="noopener">How to play</a>
+      </div>
+    </header>
+
+    <section class="hero-grid">
+      <div class="panel hero-panel">
+        <div class="hero-label">Projected team points</div>
+        <div class="hero-points" id="projectedPoints">0</div>
+        <div class="hero-sub" id="heroSub">This week: loading...</div>
+      </div>
+
+      <div class="panel call-panel">
+        <div class="section-title">Immediate call</div>
+        <div class="call-text" id="nextMoveText">Loading...</div>
+        <div class="call-meta" id="callMeta">Base squad locked for the season.</div>
+      </div>
+
+      <div class="panel stats-panel">
+        <div class="mini-stat">
+          <span>Team value</span>
+          <strong id="teamValue">£0.0m</strong>
+        </div>
+        <div class="mini-stat">
+          <span>Bank</span>
+          <strong id="bankValue">£0.0m</strong>
+        </div>
+        <div class="mini-stat">
+          <span>Formation</span>
+          <strong id="formationValue">3-5-2</strong>
+        </div>
+      </div>
+    </section>
+
+    <main class="content-grid">
+      <section class="panel pitch-panel">
+        <div class="section-head">
+          <div>
+            <h2>Locked squad</h2>
+            <p>Same skeleton team for the season. Weekly advice changes underneath.</p>
+          </div>
+          <div class="chip soft">Base squad</div>
+        </div>
+        <div class="pitch" id="pitchArea"></div>
+      </section>
+
+      <section class="panel subs-panel">
+        <div class="section-head">
+          <div>
+            <h2>Substitutes</h2>
+            <p>Bench cover for this gameweek.</p>
+          </div>
+          <div class="chip soft">Subs</div>
+        </div>
+        <div id="subsRow" class="subs-row"></div>
+      </section>
+
+      <section class="panel transfer-panel">
+        <div class="section-head">
+          <div>
+            <h2>Transfer watch</h2>
+            <p>Only the moves that matter this week.</p>
+          </div>
+          <div class="chip soft">Weekly</div>
+        </div>
+        <div id="transferWatch" class="transfer-list"></div>
+      </section>
+
+      <section class="panel chip-panel">
+        <div class="section-head">
+          <div>
+            <h2>Chip watch</h2>
+            <p>Bench boost, triple captain, wildcard, free hit.</p>
+          </div>
+          <div class="chip soft">Decision</div>
+        </div>
+        <div id="chipWatch" class="chip-grid"></div>
+      </section>
+
+      <section class="panel notes-panel">
+        <div class="section-head">
+          <div>
+            <h2>Player notes</h2>
+            <p>Short football lines only.</p>
+          </div>
+          <div class="chip soft">Focus</div>
+        </div>
+        <div id="focusCards" class="focus-grid"></div>
+      </section>
+    </main>
+
+    <footer class="footer-card panel">
+      <div class="footer-copy">
+        <div class="footer-title">Like the work?</div>
+        <div class="footer-text">Keep the engine running with a small pint. It opens a UPI payment intent on supported devices.</div>
+      </div>
+      <a class="pint-btn" id="pintBtn" href="#" aria-label="Buy me a pint">
+        <span class="beer-icon">🍺</span>
+        <span>Buy me a pint</span>
+      </a>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
