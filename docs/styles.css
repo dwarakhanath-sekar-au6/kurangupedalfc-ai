@@ -1,4 +1,3 @@
-
 :root {
   --bg: #f2f5f1;
   --card: #ffffff;
@@ -19,7 +18,7 @@
 html, body { margin: 0; padding: 0; }
  
 body {
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--text);
   background:
     radial-gradient(circle at top left, rgba(15, 122, 84, 0.08), transparent 32%),
@@ -67,6 +66,8 @@ body {
   border-radius: 18px;
   display: block;
 }
+ 
+.brand-copy { text-align: left; }
  
 .brand-name {
   font-family: Manrope, Inter, sans-serif;
@@ -153,12 +154,7 @@ body {
   color: var(--text);
 }
  
-.hero-sub {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.45;
-}
+.hero-sub { display: none; }
  
 .section-title,
 .section-head h2 {
@@ -217,9 +213,7 @@ body {
   gap: 16px;
 }
  
-.pitch-panel {
-  grid-column: 1 / -1;
-}
+.pitch-panel { grid-column: 1 / -1; }
  
 .section-head {
   display: flex;
@@ -272,7 +266,7 @@ body {
 }
  
 .pitch::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 16px;
   border: 2px solid rgba(255,255,255,0.7);
@@ -280,7 +274,7 @@ body {
 }
  
 .pitch::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 50%;
   top: 50%;
@@ -353,6 +347,14 @@ body {
   line-height: 1.35;
 }
  
+.pitch-note {
+  margin-top: 6px;
+  color: var(--accent);
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+ 
 .pitch-points {
   margin-top: 6px;
   color: var(--accent);
@@ -374,17 +376,10 @@ body {
   text-align: center;
 }
  
-.sub-card .pitch-card {
-  display: none;
-}
- 
+.sub-card .pitch-card { display: none; }
 .sub-card .shirt-wrap {
   width: 52px;
   height: 58px;
-}
- 
-.sub-card .pitch-name {
-  margin-top: 2px;
 }
  
 .transfer-list {
@@ -567,98 +562,6 @@ body {
   line-height: 1.45;
 }
  
-@media (max-width: 1100px) {
-  .hero-grid,
-  .content-grid {
-    grid-template-columns: 1fr;
-  }
- 
-  .pitch-panel {
-    grid-column: auto;
-  }
-}
- 
-@media (max-width: 760px) {
-  .app-shell {
-    padding: 14px;
-  }
- 
-  .topbar {
-    align-items: center;
-    flex-direction: column;
-  }
- 
-  .top-actions {
-    width: 100%;
-    justify-content: center;
-  }
- 
-  .brand-name {
-    font-size: 26px;
-  }
- 
-  .brand-logo-wrap {
-    width: 64px;
-    height: 64px;
-  }
- 
-  .hero-points {
-    font-size: 50px;
-  }
- 
-  .hero-panel, .call-panel, .stats-panel,
-  .pitch-panel, .subs-panel, .transfer-panel, .chip-panel, .notes-panel {
-    padding: 16px;
-  }
- 
-  .pitch {
-    min-height: 420px;
-  }
- 
-  .slot {
-    width: 92px;
-  }
- 
-  .pitch-card {
-    min-width: 84px;
-    padding: 8px;
-  }
- 
-  .pitch-name {
-    font-size: 13px;
-  }
- 
-  .pitch-subline {
-    display: none;
-  }
- 
-  .pitch-points {
-    font-size: 12px;
-  }
- 
-  .subs-row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
- 
-  .transfer-card {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
- 
-  .transfer-arrow {
-    transform: rotate(90deg);
-  }
- 
-  .chip-grid {
-    grid-template-columns: 1fr 1fr;
-  }
- 
-  .footer-card {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
- 
 .button-token {
   position: relative;
   width: 58px;
@@ -703,7 +606,88 @@ body {
 .button-c { background: var(--accent); }
 .button-vc { background: var(--accent-2); }
  
-.sub-pill {
-  text-align: center;
+.mobile-chip {
+  display: none;
 }
-
+ 
+@media (max-width: 1100px) {
+  .hero-grid,
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+ 
+  .pitch-panel { grid-column: auto; }
+}
+ 
+@media (max-width: 760px) {
+  .app-shell { padding: 14px; }
+ 
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+ 
+  .top-actions {
+    width: 100%;
+    justify-content: center;
+  }
+ 
+  .brand-name { font-size: 26px; }
+  .brand-logo-wrap { width: 64px; height: 64px; }
+  .hero-points { font-size: 50px; }
+ 
+  .hero-panel, .call-panel, .stats-panel,
+  .pitch-panel, .subs-panel, .transfer-panel, .chip-panel, .notes-panel {
+    padding: 16px;
+  }
+ 
+  .pitch { min-height: 420px; }
+  .slot { width: 64px; }
+ 
+  .pitch-card { min-width: 0; padding: 0; border: 0; background: transparent; box-shadow: none; }
+  .pitch-name,
+  .pitch-subline,
+  .pitch-note,
+  .pitch-points { display: none; }
+ 
+  .button-token { width: 34px; height: 34px; border-radius: 12px; margin-bottom: 0; }
+  .button-token.small-token { width: 34px; height: 34px; border-radius: 12px; }
+  .button-token-letter { font-size: 13px; }
+  .button-badge { width: 16px; height: 16px; font-size: 8px; }
+ 
+  .mobile-chip {
+    display: block;
+    margin-top: 4px;
+    padding: 4px 6px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.92);
+    font-size: 10px;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+ 
+  .subs-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+ 
+  .sub-card {
+    padding: 10px;
+  }
+ 
+  .sub-card .pitch-name,
+  .sub-card .pitch-subline,
+  .sub-card .pitch-note,
+  .sub-card .pitch-points { display: none; }
+ 
+  .transfer-card {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+ 
+  .transfer-arrow { transform: rotate(90deg); }
+ 
+  .chip-grid { grid-template-columns: 1fr 1fr; }
+ 
+  .footer-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
