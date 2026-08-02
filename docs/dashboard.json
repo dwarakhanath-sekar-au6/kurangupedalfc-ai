@@ -4,7 +4,7 @@
     "team_value": "\u00a3100.0m",
     "bank": "\u00a30.0m",
     "rank": "-",
-    "source_mode": "best_squad",
+    "source_mode": "user_team",
     "team_name": "Best squad"
   },
   "current_team": {
@@ -14,8 +14,8 @@
     "formation": "4-4-2",
     "squad_value": 100.0,
     "bank": 0.0,
-    "is_demo": true,
-    "source_mode": "best_squad",
+    "is_demo": false,
+    "source_mode": "user_team",
     "players": [
       {
         "fpl_id": 106,
@@ -463,7 +463,7 @@
         "assists": 9,
         "clean_sheets": 10,
         "recommendation": "Vice captain",
-        "summary": "Reliable vice-captain cover. Jo\u00e3o Pedro gives a strong fallback if the captain call changes late."
+        "summary": "Jo\u00e3o Pedro is the best fallback option if the armband needs to move late. \u2022 Projected weekly points: 7. \u2022 Expected minutes: about 2658 per start. \u2022 Ownership: 54.7%, so this is a safe second choice. \u2022 Fixture profile: 3.3 average difficulty across the next three."
       },
       {
         "player": "Virgil",
@@ -577,7 +577,7 @@
         "assists": 24,
         "clean_sheets": 7,
         "recommendation": "Captain",
-        "summary": "Best captain option. B.Fernandes combines the strongest weekly upside in the squad with the clearest route to a big return."
+        "summary": "B.Fernandes is the best captain option in this XI. \u2022 Projected weekly points: 8. \u2022 Attacking involvement: 9 goals, 24 assists, 0.0 expected goal involvements. \u2022 Expected minutes: about 3065 per start. \u2022 Ownership: 48.6%, which makes the call credible rather than random. \u2022 Fixture profile: 2.3 average difficulty across the next three."
       },
       {
         "player": "Senesi",
@@ -732,7 +732,7 @@
       "assists": 24,
       "clean_sheets": 7,
       "recommendation": "Captain",
-      "summary": "Best captain option. B.Fernandes combines the strongest weekly upside in the squad with the clearest route to a big return."
+      "summary": "B.Fernandes is the best captain option in this XI. \u2022 Projected weekly points: 8. \u2022 Attacking involvement: 9 goals, 24 assists, 0.0 expected goal involvements. \u2022 Expected minutes: about 3065 per start. \u2022 Ownership: 48.6%, which makes the call credible rather than random. \u2022 Fixture profile: 2.3 average difficulty across the next three."
     },
     "vice_captain": {
       "player": "Jo\u00e3o Pedro",
@@ -751,7 +751,7 @@
       "assists": 9,
       "clean_sheets": 10,
       "recommendation": "Vice captain",
-      "summary": "Reliable vice-captain cover. Jo\u00e3o Pedro gives a strong fallback if the captain call changes late."
+      "summary": "Jo\u00e3o Pedro is the best fallback option if the armband needs to move late. \u2022 Projected weekly points: 7. \u2022 Expected minutes: about 2658 per start. \u2022 Ownership: 54.7%, so this is a safe second choice. \u2022 Fixture profile: 3.3 average difficulty across the next three."
     }
   },
   "weekly_advice": {
@@ -763,11 +763,11 @@
     },
     "captain_call": {
       "player": "B.Fernandes",
-      "reason": "Best captain option. B.Fernandes combines the strongest weekly upside in the squad with the clearest route to a big return."
+      "reason": "Projected 8 weekly points, the best in the squad. \u2022 Expected minutes: about 3065 per start. \u2022 Ownership: 48.6% \u2014 a trusted armband, not a punt. \u2022 Fixture profile: 2.3 average difficulty across the next three. \u2022 Attacking involvement: 9.0 goals, 24.0 assists, 0.0 expected goal involvements. \u2022 Alternative: Jo\u00e3o Pedro at 7 projected points and 54.7% ownership. \u2022 Clear weekly edge over the next-best captain option."
     },
     "vice_call": {
       "player": "Jo\u00e3o Pedro",
-      "reason": "Reliable vice-captain cover. Jo\u00e3o Pedro gives a strong fallback if the captain call changes late."
+      "reason": "Jo\u00e3o Pedro is the safest vice-captain fallback. \u2022 Projected 7 weekly points and about 2658 minutes per start. \u2022 Ownership: 54.7%, which keeps the fallback stable. \u2022 Alternative: B.Fernandes at 8 projected points."
     },
     "chip_call": {
       "chip": "Bench Boost",
@@ -869,14 +869,14 @@
     },
     "projected_team_points": 86,
     "projected_starting_xi_points": 78,
-    "access_note": "Best squad shown until access is connected."
+    "access_note": "Live squad connected for Best squad."
   },
   "manager_notes": {
-    "summary": "Recommended base squad for the gameweek. This will start populating your data once we receive your access.",
+    "summary": "Live squad loaded for Best squad. Weekly advice is now tied to this exact squad and the team value is kept inside budget.",
     "bullets": [
       "Team value: \u00a3100.0m with \u00a30.0m left.",
       "Formation set to 4-4-2.",
-      "Best squad shown until access is connected."
+      "Live squad connected for Best squad."
     ]
   },
   "connect": {
@@ -1099,7 +1099,7 @@
           "player": "Rogers",
           "team": "Chelsea",
           "position": "MID",
-          "ownership": 31.3
+          "ownership": 31.2
         }
       ],
       "low": [
@@ -1204,8 +1204,8 @@
     "captain": {
       "player": "B.Fernandes",
       "vice_player": "Jo\u00e3o Pedro",
-      "reason": "Best captain option. B.Fernandes combines the strongest weekly upside in the squad with the clearest route to a big return.",
-      "vice_reason": "Reliable vice-captain cover. Jo\u00e3o Pedro gives a strong fallback if the captain call changes late."
+      "reason": "B.Fernandes is the best captain option in this XI. \u2022 Projected weekly points: 8. \u2022 Attacking involvement: 9 goals, 24 assists, 0.0 expected goal involvements. \u2022 Expected minutes: about 3065 per start. \u2022 Ownership: 48.6%, which makes the call credible rather than random. \u2022 Fixture profile: 2.3 average difficulty across the next three.",
+      "vice_reason": "Jo\u00e3o Pedro is the best fallback option if the armband needs to move late. \u2022 Projected weekly points: 7. \u2022 Expected minutes: about 2658 per start. \u2022 Ownership: 54.7%, so this is a safe second choice. \u2022 Fixture profile: 3.3 average difficulty across the next three."
     },
     "chip": {
       "triple_captain": {
@@ -1268,7 +1268,7 @@
       "assists": 9,
       "clean_sheets": 10,
       "recommendation": "Vice captain",
-      "summary": "Reliable vice-captain cover. Jo\u00e3o Pedro gives a strong fallback if the captain call changes late."
+      "summary": "Jo\u00e3o Pedro is the best fallback option if the armband needs to move late. \u2022 Projected weekly points: 7. \u2022 Expected minutes: about 2658 per start. \u2022 Ownership: 54.7%, so this is a safe second choice. \u2022 Fixture profile: 3.3 average difficulty across the next three."
     },
     {
       "player": "Virgil",
@@ -1382,7 +1382,7 @@
       "assists": 24,
       "clean_sheets": 7,
       "recommendation": "Captain",
-      "summary": "Best captain option. B.Fernandes combines the strongest weekly upside in the squad with the clearest route to a big return."
+      "summary": "B.Fernandes is the best captain option in this XI. \u2022 Projected weekly points: 8. \u2022 Attacking involvement: 9 goals, 24 assists, 0.0 expected goal involvements. \u2022 Expected minutes: about 3065 per start. \u2022 Ownership: 48.6%, which makes the call credible rather than random. \u2022 Fixture profile: 2.3 average difficulty across the next three."
     },
     {
       "player": "Senesi",
