@@ -14,28 +14,27 @@
     <header class="topbar">
       <a class="brand" href="./" aria-label="KuranguPedalFC home">
         <div class="brand-logo-wrap">
-          <img class="brand-logo" src="./logo.jpg?v=4" alt="KuranguPedalFC logo" />
+          <img class="brand-logo" src="./logo.jpg?v=5" alt="KuranguPedalFC logo" />
         </div>
         <div class="brand-copy">
           <div class="brand-name">KuranguPedalFC</div>
           <div class="brand-sub">Weekly FPL briefing</div>
         </div>
       </a>
-
       <a class="ghost-link" href="rules.html" target="_blank" rel="noopener">How to play</a>
     </header>
 
     <section class="access-card panel">
       <div class="access-copy">
         <div class="section-kicker">Team access</div>
-        <h2>Enter your FPL Team ID</h2>
-        <p>This page shows the recommended base squad for the gameweek until we receive your access. After that, the weekly advice switches to your own squad.</p>
+        <h2>Enter your team access key</h2>
+        <p>When your access is added, the weekly advice switches to your live squad.</p>
       </div>
       <div class="access-controls">
-        <label class="sr-only" for="teamIdInput">FPL Team ID</label>
-        <input id="teamIdInput" class="team-input" type="text" placeholder="FPL Team ID" autocomplete="off" inputmode="numeric" />
+        <label class="sr-only" for="teamIdInput">Team access key</label>
+        <input id="teamIdInput" class="team-input" type="text" placeholder="Team access key" autocomplete="off" inputmode="numeric" />
         <button id="teamIdSaveBtn" class="primary-btn" type="button">Save access</button>
-        <div id="teamIdStatus" class="access-status">No team ID saved yet.</div>
+        <div id="teamIdStatus" class="access-status">No access saved yet.</div>
       </div>
     </section>
 
@@ -48,7 +47,7 @@
       <div class="panel call-panel">
         <div class="section-title">Immediate call</div>
         <div class="call-text" id="nextMoveText">Loading...</div>
-        <div class="call-meta" id="callMeta">Base squad locked for the season.</div>
+        <div class="call-meta" id="callMeta">Recommended base squad for the gameweek.</div>
       </div>
 
       <div class="panel stats-panel">
@@ -62,7 +61,7 @@
         </div>
         <div class="mini-stat">
           <span>Formation</span>
-          <strong id="formationValue">3-5-2</strong>
+          <strong id="formationValue">4-4-2</strong>
         </div>
       </div>
     </section>
@@ -74,7 +73,7 @@
             <h2>Recommended base squad for the gameweek</h2>
             <p>This will start populating once we receive your access.</p>
           </div>
-          <div class="chip soft">Gameweek view</div>
+          <div class="chip soft">Week view</div>
         </div>
         <div class="pitch" id="pitchArea"></div>
       </section>
@@ -82,8 +81,8 @@
       <section class="panel notes-panel">
         <div class="section-head">
           <div>
-            <h2>Why these picks matter</h2>
-            <p>Ownership, weekly upside, and the matchups that make the squad work.</p>
+            <h2>Key decisions</h2>
+            <p>Short, neat reasons that show why the squad holds together.</p>
           </div>
           <div class="chip soft">Ownership</div>
         </div>
@@ -105,7 +104,7 @@
         <div class="section-head">
           <div>
             <h2>Transfer watch</h2>
-            <p>The best swaps within the budget.</p>
+            <p>Only affordable swaps are shown.</p>
           </div>
           <div class="chip soft">Weekly</div>
         </div>
@@ -127,11 +126,11 @@
     <footer class="footer-card panel">
       <div class="footer-copy">
         <div class="footer-title">Like the work?</div>
-        <div class="footer-text">Buy the manager a pint and keep the project moving.</div>
+        <div class="footer-text">Help the engine run with a pint.</div>
       </div>
-      <a class="pint-btn" id="pintBtn" href="#" aria-label="Buy me a pint">
+      <a class="pint-btn" id="pintBtn" href="#" aria-label="Help the engine run with a pint">
         <span class="beer-icon">🍺</span>
-        <span>Buy me a pint ₹119</span>
+        <span>Help the engine run with a pint</span>
       </a>
     </footer>
   </div>
